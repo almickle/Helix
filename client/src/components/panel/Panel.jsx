@@ -82,7 +82,6 @@ export default function Panel ( { panelWidth, config, geneData, setGeneData, set
                     {libraryDirectories()}
                 <Bookmark label='Projects' handleClick={handleClick} />
             </div>
-            {/* <div style={{ height: '100%', width: `${borderWidth}%`, backgroundColor: 'aqua', cursor: 'e-resize' }}></div> */}
         </div>
     )
 }

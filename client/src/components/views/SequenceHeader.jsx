@@ -30,7 +30,7 @@ export default function SequenceHeader ( { geneData, annotations, annotationTogg
 
     function handleAddToLibrary() {
         if(inLibrary === true) {
-            fetch('https://fierce-springs-30684.herokuapp.com/removegene', {
+            fetch('https://calm-escarpment-52610.herokuapp.com/removegene', {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
@@ -44,7 +44,7 @@ export default function SequenceHeader ( { geneData, annotations, annotationTogg
             })
         }
         else {
-            fetch('https://fierce-springs-30684.herokuapp.com/addgene', {
+            fetch('https://calm-escarpment-52610.herokuapp.com/addgene', {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
@@ -62,7 +62,7 @@ export default function SequenceHeader ( { geneData, annotations, annotationTogg
     // get library
     useEffect(() => {
         const library = []
-        fetch('https://fierce-springs-30684.herokuapp.com/genelibrary', {
+        fetch('https://calm-escarpment-52610.herokuapp.com/genelibrary', {
             headers: {
                 "Content-Type": 'application/json'
             },

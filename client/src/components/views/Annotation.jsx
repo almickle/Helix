@@ -25,7 +25,7 @@ export default function Annotation ( { basepairs, transcriptIndex, isProtein, an
         else {
             setAnnotationText(null)
         }
-        fetch('https://fierce-springs-30684.herokuapp.com/newannotation', {
+        fetch('https://calm-escarpment-52610.herokuapp.com/newannotation', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

@@ -41,7 +41,7 @@ export default function LoginModal ( { loginModalVisible, setLoginModalVisible, 
 
     function handleLogin() {
         if(loginObject !== null) {
-                fetch('https://fierce-springs-30684.herokuapp.com/login', {
+                fetch('https://calm-escarpment-52610.herokuapp.com/login', {
                         method: 'POST',
                         credentials: 'include',
                         headers: {

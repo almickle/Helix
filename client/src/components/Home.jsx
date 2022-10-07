@@ -50,7 +50,7 @@ export default function Home () {
         const libraryGenes = []
         const configStateLoader = []
 
-        fetch('https://fierce-springs-30684.herokuapp.com/genelibrary', {
+        fetch('https://calm-escarpment-52610.herokuapp.com/genelibrary', {
             credentials: 'include'
         })
         .then(resp => resp.json())

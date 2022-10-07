@@ -108,7 +108,7 @@ export default function ViewProtein ( { geneData, annotationText, setAnnotationT
 
     // get annotations
     useEffect(() => {
-        fetch('https://fierce-springs-30684.herokuapp.com/annotations', {
+        fetch('https://calm-escarpment-52610.herokuapp.com/annotations', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

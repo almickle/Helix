@@ -43,7 +43,7 @@ export default function Signup ( { modalVisible, setModalVisible, setLoginModalV
     function handleSignup() {
         if(signupObject !== null) {
             setModalVisible(false)
-            fetch('https://fierce-springs-30684.herokuapp.com/signup', {
+            fetch('https://calm-escarpment-52610.herokuapp.com/signup', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -54,7 +54,7 @@ export default function Signup ( { modalVisible, setModalVisible, setLoginModalV
             .then(resp => resp.json())
             .then(user => {
                 if(user.id !== null) {
-                    fetch('https://fierce-springs-30684.herokuapp.com/login', {
+                    fetch('https://calm-escarpment-52610.herokuapp.com/login', {
                             method: 'POST',
                             credentials: 'include',
                             headers: {
