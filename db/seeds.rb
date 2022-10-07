@@ -16,10 +16,10 @@ puts "Complete"
 
 puts "Seeding genes"
 
-Gene.create(symbol: 'MIER1', taxon: 'human', library_id: almickle.id)
-Gene.create(symbol: 'OXT', taxon: 'human', library_id: almickle.id)
-Gene.create(symbol: 'FOXP2', taxon: 'human', library_id: almickle.id)
-gene = Gene.create(symbol: 'AKT1', taxon: 'human', library_id: almickle.id)
+Gene.create(symbol: 'MIER1', taxon: 'Homo sapiens', library_id: almickle.id)
+Gene.create(symbol: 'OXT', taxon: 'Homo sapiens', library_id: almickle.id)
+Gene.create(symbol: 'FOXP2', taxon: 'Homo sapiens', library_id: almickle.id)
+gene = Gene.create(symbol: 'AKT1', taxon: 'Homo sapiens', library_id: almickle.id)
 
 puts "Complete"
 
