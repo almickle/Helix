@@ -1,0 +1,50 @@
+import { useEffect, useState } from "react"
+
+
+export default function SearchOptions ( { searchOptionsVisible } ) {
+
+
+    const [modalVisibility, setModalVisibility] = useState('hidden')
+
+
+    useEffect(() => {
+        if(searchOptionsVisible === true) {
+            setModalVisibility('visible')
+        }
+        else {
+            setModalVisibility('hidden')
+        }
+      }, [searchOptionsVisible])
+
+    const modalStyle = {
+        visibility: modalVisibility, 
+        zIndex: 1, 
+        height: 300, width: 204, 
+        position: 'absolute', 
+        top: '1%', left: 18, 
+        marginRight: '-50%', 
+        backgroundColor: 'white', 
+        borderStyle: 'solid', borderWidth: 1, borderRadius: 18, borderColor: 'grey', 
+        display: 'flex', flexDirection: 'column',
+        justifyContent: 'center', alignItems: 'center',
+    }
+
+    function getValue(event) {
+        console.log(event.target.value)
+    }
+
+
+    return (
+        <form autoComplete="off">
+            <div style={modalStyle}>
+                <select id="species-select" onChange={getValue}>
+                    <option>Homo sapiens</option>
+                    <option>Mus musculus</option>
+                    <option>Pan troglodyte</option>
+                    <option>Danio rerio</option>
+                    <option>Arabidopsis thaliana</option>
+                </select>
+            </div>
+        </form>
+    )
+}

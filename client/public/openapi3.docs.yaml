@@ -1,0 +1,6140 @@
+openapi: 3.0.1
+info:
+  title: NCBI Datasets API
+  version: v1
+  description: '### NCBI Datasets is a resource that lets you easily gather data from
+      NCBI.
+
+      The Datasets API is still in alpha, and we''re updating it often to add new functionality,
+      iron out bugs and enhance usability.
+
+      For some larger downloads, you may want to download a [dehydrated bag](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/how-tos/genomes/large-download/),
+      and retrieve the individual data files at a later time.
+
+    '
+servers:
+- url: https://api.ncbi.nlm.nih.gov/datasets/v1
+- url: https://dev.ncbi.nlm.nih.gov/datasets/v1
+tags:
+- name: Genome
+  description: '#### Options to explore, summarize and download assembled genomes,
+    including the associated sequence, metadata and annotation.
+
+    These genome services allow you to explore [assembled genomes](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/reference-docs/gca-and-gcf-explained/).  For
+    a set of genomes of interest, identified by either assembly accession or taxonomic
+    subtree, you can generate a summary, determine the package size, and download.
+
+    '
+- name: Gene
+  description: '#### Options to explore, summarize and download sequences and metadata
+    for genes and their associated transcripts and proteins.
+
+    These gene services allow you explore [NCBI Gene](https://www.ncbi.nlm.nih.gov/gene/),
+    and for genes of interest, identified by either gene-id, symbol or RefSeq sequence
+    accession, download a data package including metadata (tabular and [JSON Lines](https://jsonlines.org/)
+    formats), transcript and protein sequence in FASTA format.
+
+    '
+- name: Prokaryote
+  description: '#### Options to explore, summarize and download sequences and metadata
+    for prokaryote genes and their associated proteins.
+
+    These gene services allow you to explore prokaryotic gene data by RefSeq protein
+    sequence accession and download a data package including metadata for the gene
+    including all genomic annotations as [JSON Lines](https://jsonlines.org/) format,
+    gene and protein sequences in FASTA format.
+
+    '
+- name: Virus
+  description: '#### Get metadata or a zip archive containing a coronavirus genome
+    or protein dataset.
+
+    The following files are optionally available for coronavirus genome and/or protein
+    datasets:
+
+    * genomic.fna (genomic sequences in FASTA format)
+
+    * cds.fna (nucleotide coding sequences in FASTA format)
+
+    * protein.faa (protein sequences in FASTA format)
+
+
+    The following files are always included in coronavirus genome and protein datasets:
+
+    * data_report.jsonl (data report with viral metadata in JSON lines format)
+
+    * virus_dataset.md (README containing details on sequence file data content and
+    other information)
+
+    * dataset_catalog.json (a list of files and file types included in the dataset)
+
+    You may also request a tab-delimited table of metadata that describes the available
+    coronavirus genome and protein data.
+
+    Coronavirus genome datasets are available for all taxa in the Coronaviridae family,
+    including SARS-CoV-2. Various parameters may be used for filtering and specifying
+    the contents of the genome dataset.
+
+    Protein datasets are available for SARS-CoV-2 only.
+
+    '
+
+- name: Version
+  description: "#### Retrieve the current version of all services.  \nServices follow\
+    \ [Semantic Versioning 2.0.0 Schema](https://semver.org/spec/v2.0.0.html).\n"
+
+
+- name: Taxonomy
+  description: '#### Options to explore taxonomic metadata and relationships.
+
+    These taxonomic services allow you to browse taxonomic metadata in addition to retrieving
+    parent lineages and filtered sets of child nodes for any given set of taxonomic identifiers.
+
+    '
+
+externalDocs:
+  description: Interactively explore genome assembly datasets
+  url: https://www.ncbi.nlm.nih.gov/datasets/genomes/
+security:
+- ApiKeyAuthHeader: []
+paths:
+  /genome/accession/{accessions}:
+    get:
+      summary: Get genome metadata by accession
+      description: 'Get detailed metadata for assembled genomes by accession in a JSON output format.'
+      tags:
+        - Genome
+      operationId: assembly_descriptors_by_accessions
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AssemblyMetadata'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - GCF_000001405.40
+              - GCF_000001635.27
+            summary: Human and Mouse
+          example-1:
+            value: GCF_000001405.40
+            summary: Human
+      - name: filters.reference_only
+        description: 'If true, only return reference and representative (GCF_ and GCA_) genome assemblies.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to reference & representative genomes
+          example-1:
+            value: false
+            summary: Include reference and non-reference genomes
+      - name: filters.assembly_source
+        description: 'Return only RefSeq (GCF_) or GenBank (GCA_) genome assemblies'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblySource'
+          default: all
+        examples:
+          example-0:
+            value: refseq
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: genbank
+            summary: Limit to GenBank genomes
+          example-2:
+            value: all
+            summary: All genomes
+      - name: filters.has_annotation
+        description: 'Return only annotated genome assemblies'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated assemblies
+          example-1:
+            value: false
+            summary: Return all assemblies
+      - name: filters.exclude_atypical
+        description: 'If true, exclude atypical genomes, i.e. genomes that have assembly issues or are otherwise atypical'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: false
+            summary: Return all selected genomes, including ones that are atypical
+          example-1:
+            value: true
+            summary: Only return genomes that have not been classified as atypical
+      - name: filters.assembly_level
+        description: 'Only return genome assemblies that have one of the specified assembly levels. By default, do not filter.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblyLevel'
+        examples:
+          example-0:
+            value:
+              - chromosome
+              - complete_genome
+            summary: Chromosome and complete genome
+          example-1:
+            value:
+              - scaffold
+              - chromosome
+              - complete_genome
+            summary: Scaffold and higher
+      - name: filters.first_release_date
+        description: 'Only return genome assemblies that were released on or after the specified date By default, do not filter.'
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 01/10/2015
+            summary: Jan 10, 2015
+      - name: filters.last_release_date
+        description: 'Only return genome assemblies that were released on or before to the specified date By default, do not filter.'
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 01/10/2021
+            summary: Jan 10, 2021
+      - name: filters.search_text
+        description: 'Only return results whose fields contain the specified search terms in their taxon, infraspecific, assembly name or submitter fields By default, do not filter'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: Genome Reference Consortium
+            summary: Genome Reference Consortium
+          example-1:
+            value: GRCh38
+            summary: GRCh38
+          example-2:
+            value: C57BL/6J
+            summary: C57BL/6J
+      - name: page_size
+        description: 'The maximum number of genome assemblies to return. Default is 20 and maximum is 1000. If the number of results exceeds the page size, `page_token` can be used to retrieve the remaining results.'
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: page_token
+        description: 'A page token is returned from an `AssemblyMetadataRequest` call with more than `page_size` results. Use this token, along with the previous `AssemblyMetadataRequest` parameters, to retrieve the next page of results. When `page_token` is empty, all results have been retrieved.'
+        in: query
+        required: false
+        schema:
+          type: string
+  /genome/taxon/{taxon}:
+    get:
+      summary: Get genome metadata by taxonomic identifier
+      description: 'Get detailed metadata on all assembled genomes for a specified NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank.'
+      tags:
+        - Genome
+      operationId: assembly_descriptors_by_taxon
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AssemblyMetadata'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: 9606
+            summary: NCBI Taxonomy Identifier
+          example-1:
+            value: human
+            summary: Common Name
+          example-2:
+            value: Homo sapiens
+            summary: Scientific Name
+      - name: filters.reference_only
+        description: 'If true, only return reference and representative (GCF_ and GCA_) genome assemblies.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to reference & representative genomes
+          example-1:
+            value: false
+            summary: Include reference and non-reference genomes
+      - name: filters.assembly_source
+        description: 'Return only RefSeq (GCF_) or GenBank (GCA_) genome assemblies'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblySource'
+          default: all
+        examples:
+          example-0:
+            value: refseq
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: genbank
+            summary: Limit to GenBank genomes
+          example-2:
+            value: all
+            summary: All genomes
+      - name: filters.has_annotation
+        description: 'Return only annotated genome assemblies'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated assemblies
+          example-1:
+            value: false
+            summary: Return all assemblies
+      - name: filters.exclude_paired_reports
+        description: 'For paired (GCA/GCF) records, only return the primary record'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: false
+            summary: Return all assemblies
+          example-1:
+            value: true
+            summary: Only return single record for GCA/GCF pairs
+      - name: filters.exclude_atypical
+        description: 'If true, exclude atypical genomes, i.e. genomes that have assembly issues or are otherwise atypical'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: false
+            summary: Return all selected genomes, including ones that are atypical
+          example-1:
+            value: true
+            summary: Only return genomes that have not been classified as atypical
+      - name: filters.assembly_version
+        description: 'Return all assemblies, including replaced and suppressed, or only current assemblies'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblyVersion'
+          default: current
+        examples:
+          example-0:
+            value: current
+            summary: Only return current assemblies
+          example-1:
+            value: all_assemblies
+            summary: Return all assemblies, including suppressed and replaced
+      - name: filters.assembly_level
+        description: 'Only return genome assemblies that have one of the specified assembly levels. By default, do not filter.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblyLevel'
+        examples:
+          example-0:
+            value:
+              - chromosome
+              - complete_genome
+            summary: Chromosome and complete genome
+          example-1:
+            value:
+              - scaffold
+              - chromosome
+              - complete_genome
+            summary: Scaffold and higher
+      - name: filters.first_release_date
+        description: 'Only return genome assemblies that were released on or after the specified date By default, do not filter.'
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 01/10/2015
+            summary: Jan 10, 2015
+      - name: filters.last_release_date
+        description: 'Only return genome assemblies that were released on or before to the specified date By default, do not filter.'
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 01/10/2021
+            summary: Jan 10, 2021
+      - name: filters.search_text
+        description: 'Only return results whose fields contain the specified search terms in their taxon, infraspecific, assembly name or submitter fields By default, do not filter'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: Genome Reference Consortium
+            summary: Genome Reference Consortium
+          example-1:
+            value: GRCh38
+            summary: GRCh38
+          example-2:
+            value: C57BL/6J
+            summary: C57BL/6J
+      - name: tax_exact_match
+        description: 'If true, only return assemblies with the given NCBI Taxonomy ID, or name. Otherwise, assemblies from taxonomy subtree are included, too. Ignored for assembly_accession request.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: returned_content
+        description: 'Return either assembly accessions, or entire assembly-metadata records'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1AssemblyMetadataRequestContentType'
+      - name: page_size
+        description: 'The maximum number of genome assemblies to return. Default is 20 and maximum is 1000. If the number of results exceeds the page size, `page_token` can be used to retrieve the remaining results.'
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: page_token
+        description: 'A page token is returned from an `AssemblyMetadataRequest` call with more than `page_size` results. Use this token, along with the previous `AssemblyMetadataRequest` parameters, to retrieve the next page of results. When `page_token` is empty, all results have been retrieved.'
+        in: query
+        required: false
+        schema:
+          type: string
+  /genome/bioproject/{accessions}:
+    get:
+      summary: Get genome metadata by bioproject accession
+      description: 'Get detailed metadata for assembled genomes by bioproject accession in a JSON output format.'
+      tags:
+        - Genome
+      operationId: assembly_descriptors_by_bioproject
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AssemblyMetadata'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: PRJNA489243
+            summary: Vertebrate Genomes Project
+          example-1:
+            value: PRJNA31257
+            summary: Human Genome Project
+      - name: filters.reference_only
+        description: 'If true, only return reference and representative (GCF_ and GCA_) genome assemblies.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to reference & representative genomes
+          example-1:
+            value: false
+            summary: Include reference and non-reference genomes
+      - name: filters.assembly_source
+        description: 'Return only RefSeq (GCF_) or GenBank (GCA_) genome assemblies'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblySource'
+          default: all
+        examples:
+          example-0:
+            value: refseq
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: genbank
+            summary: Limit to GenBank genomes
+          example-2:
+            value: all
+            summary: All genomes
+      - name: filters.has_annotation
+        description: 'Return only annotated genome assemblies'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated assemblies
+          example-1:
+            value: false
+            summary: Return all assemblies
+      - name: filters.exclude_paired_reports
+        description: 'For paired (GCA/GCF) records, only return the primary record'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: false
+            summary: Return all assemblies
+          example-1:
+            value: true
+            summary: Only return single record for GCA/GCF pairs
+      - name: filters.exclude_atypical
+        description: 'If true, exclude atypical genomes, i.e. genomes that have assembly issues or are otherwise atypical'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: false
+            summary: Return all selected genomes, including ones that are atypical
+          example-1:
+            value: true
+            summary: Only return genomes that have not been classified as atypical
+      - name: filters.assembly_version
+        description: 'Return all assemblies, including replaced and suppressed, or only current assemblies'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblyVersion'
+          default: current
+        examples:
+          example-0:
+            value: current
+            summary: Only return current assemblies
+          example-1:
+            value: all_assemblies
+            summary: Return all assemblies, including suppressed and replaced
+      - name: filters.assembly_level
+        description: 'Only return genome assemblies that have one of the specified assembly levels. By default, do not filter.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblyLevel'
+        examples:
+          example-0:
+            value:
+              - chromosome
+              - complete_genome
+            summary: Chromosome and complete genome
+          example-1:
+            value:
+              - scaffold
+              - chromosome
+              - complete_genome
+            summary: Scaffold and higher
+      - name: filters.first_release_date
+        description: 'Only return genome assemblies that were released on or after the specified date By default, do not filter.'
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 01/10/2015
+            summary: Jan 10, 2015
+      - name: filters.last_release_date
+        description: 'Only return genome assemblies that were released on or before to the specified date By default, do not filter.'
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 01/10/2021
+            summary: Jan 10, 2021
+      - name: filters.search_text
+        description: 'Only return results whose fields contain the specified search terms in their taxon, infraspecific, assembly name or submitter fields By default, do not filter'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: Genome Reference Consortium
+            summary: Genome Reference Consortium
+          example-1:
+            value: GRCh38
+            summary: GRCh38
+          example-2:
+            value: C57BL/6J
+            summary: C57BL/6J
+      - name: returned_content
+        description: 'Return either assembly accessions, or entire assembly-metadata records'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1AssemblyMetadataRequestContentType'
+      - name: page_size
+        description: 'The maximum number of genome assemblies to return. Default is 20 and maximum is 1000. If the number of results exceeds the page size, `page_token` can be used to retrieve the remaining results.'
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: page_token
+        description: 'A page token is returned from an `AssemblyMetadataRequest` call with more than `page_size` results. Use this token, along with the previous `AssemblyMetadataRequest` parameters, to retrieve the next page of results. When `page_token` is empty, all results have been retrieved.'
+        in: query
+        required: false
+        schema:
+          type: string
+  /genome:
+    post:
+      summary: Get genome metadata by variety of identifiers
+      description: 'Get detailed metadata for assembled genomes.'
+      tags:
+        - Genome
+      operationId: genome_metadata_by_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AssemblyMetadata'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AssemblyMetadataRequest'
+            example:
+              accessions:
+                accessions:
+                - GCF_000001405.40
+  /genome/taxon/{taxon}/tree:
+    get:
+      summary: Get a taxonomic subtree by taxonomic identifier
+      description: 'Using a NCBI Taxonomy ID or name (common or scientific) at any rank, get a subtree filtered for species with assembled genomes.'
+      tags:
+        - Genome
+      operationId: genome_tax_tree
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Organism'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: 9606
+            summary: NCBI Taxonomy Identifier
+          example-1:
+            value: human
+            summary: Common Name
+          example-2:
+            value: Homo sapiens
+            summary: Scientific Name
+      - name: children_only
+        description: 'Only report the children of the requested taxon and not their descendants'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+  /genome/taxon_suggest/{taxon_query}:
+    get:
+      summary: Get a list of taxonomy names and IDs found in the assembly dataset given a partial taxonomic name
+      description: 'This endpoint retrieves a list of taxonomy names and IDs found in the assembly dataset given a partial taxonomic name of any rank.'
+      tags:
+        - Genome
+      operationId: genome_tax_name_query
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SciNameAndIds'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon_query
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: hum
+            summary: hum
+      - name: tax_rank_filter
+        description: 'Set the scope of searched tax ranks'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1OrganismQueryRequestTaxRankFilter'
+          default: species
+  /genome/accession/{accessions}/download_summary:
+    get:
+      summary: Preview genome dataset download
+      description: 'Get a download summary by accession in a JSON output format.'
+      tags:
+        - Genome
+      operationId: genome_download_summary
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'NCBI genome assembly accessions'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - GCF_000001405.40
+              - GCF_000001635.27
+            summary: Human and Mouse
+          example-1:
+            value: GCF_000001405.40
+            summary: Human
+      - name: chromosomes
+        description: 'The default setting is all chromosome. Specify individual chromosome by string (1,2,MT or chr1,chr2.chrMT). Unplaced sequences are treated like their own chromosome (''Un''). The filter only applies to fasta sequence.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - 1
+              - 2
+              - 3
+              - X
+              - Y
+              - MT
+            summary: Selected chromosomes #1
+          example-1:
+            value:
+              - X
+              - Y
+            summary: Human sex chromosomes
+      - name: exclude_sequence
+        description: 'Set to true to omit the genomic sequence.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Exclude genomic sequence
+          example-1:
+            value: false
+            summary: Include genomic sequence
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForAssemblyType'
+        examples:
+          example-0:
+            value:
+              - PROT_FASTA
+              - RNA_FASTA
+            summary: Transcript & Protein Sequence
+          example-1:
+            value:
+              - GENOME_GFF
+              - GENOME_GBFF
+              - GENOME_GTF
+              - PROT_FASTA
+              - RNA_FASTA
+              - CDS_FASTA
+            summary: All
+  /genome/download_summary:
+    post:
+      summary: Preview genome dataset download by POST
+      description: 'The ''GET'' version of download summary is limited by the size of the GET URL (2KB, which works out to about 140 genomic accessions).  The POST operation is provided to allow users to supply a larger number of accessions in a single request.'
+      tags:
+        - Genome
+      operationId: genome_download_summary_by_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AssemblyDatasetRequest'
+            example:
+              accessions:
+              - GCF_000001405.40
+  /genome/accession/{accessions}/download:
+    get:
+      summary: Get a genome dataset by accession
+      description: 'Download a genome dataset including fasta sequence, annotation and a detailed data report by accession.'
+      tags:
+        - Genome
+      operationId: download_assembly_package
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'NCBI genome assembly accessions'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - GCF_000001405.40
+              - GCF_000001635.27
+            summary: Human and Mouse
+          example-1:
+            value: GCF_000001405.40
+            summary: Human
+      - name: chromosomes
+        description: 'The default setting is all chromosome. Specify individual chromosome by string (1,2,MT or chr1,chr2.chrMT). Unplaced sequences are treated like their own chromosome (''Un''). The filter only applies to fasta sequence.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - 1
+              - 2
+              - 3
+              - X
+              - Y
+              - MT
+            summary: Selected chromosomes #1
+          example-1:
+            value:
+              - X
+              - Y
+            summary: Human sex chromosomes
+      - name: exclude_sequence
+        description: 'Set to true to omit the genomic sequence.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Exclude genomic sequence
+          example-1:
+            value: false
+            summary: Include genomic sequence
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForAssemblyType'
+        examples:
+          example-0:
+            value:
+              - PROT_FASTA
+              - RNA_FASTA
+            summary: Transcript & Protein Sequence
+          example-1:
+            value:
+              - GENOME_GFF
+              - GENOME_GBFF
+              - GENOME_GTF
+              - PROT_FASTA
+              - RNA_FASTA
+              - CDS_FASTA
+            summary: All
+      - name: hydrated
+        description: 'Set to DATA_REPORT_ONLY, to only retrieve data-reports.'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1AssemblyDatasetRequestResolution'
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /genome/download:
+    post:
+      summary: Get a genome dataset by post
+      description: 'The ''GET'' version of download is limited by the size of the GET URL (2KB, which works out to about 140 genomic accessions).  The POST operation is provided to allow users to supply a larger number of accessions in a single request.'
+      tags:
+        - Genome
+      operationId: download_assembly_package_post
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AssemblyDatasetRequest'
+            example:
+              accessions:
+              - GCF_000001405.40
+      parameters:
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /gene/id/{gene_ids}/download:
+    get:
+      summary: Get a gene dataset by gene ID
+      description: 'Get a gene dataset including gene, transcript and protein fasta sequence, annotation and metadata by gene ID.'
+      tags:
+        - Gene
+      operationId: download_gene_package
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: gene_ids
+        description: 'NCBI gene ids'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: integer
+        examples:
+          example-0:
+            value: 59067
+            summary: IL21 GeneID
+          example-1:
+            value:
+              - 59067
+              - 50615
+            summary: IL21 & IL21R GeneIDs
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Fasta'
+      - name: fasta_filter
+        description: 'Limit the FASTA sequences in the datasets package to these transcript and protein accessions'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /gene/download:
+    post:
+      summary: Get a gene dataset by POST
+      description: 'Get a gene dataset including gene, transcript and protein fasta sequence, annotation and metadata by POST.'
+      tags:
+        - Gene
+      operationId: download_gene_package_post
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GeneDatasetRequest'
+            example:
+              gene_ids:
+              - 59067
+              - 50615
+      parameters:
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /protein/accession/{accessions}/download:
+    get:
+      summary: Get a prokaryote gene dataset by RefSeq protein accession
+      description: 'Get a prokaryote gene dataset including gene and protein fasta sequence, annotation and metadata by prokaryote protein accession.'
+      tags:
+        - Prokaryote
+      operationId: download_prokaryote_gene_package
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'WP prokaryote protein accession'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: WP_015878339.1
+            summary: DNA-deoxyinosine glycosylase
+          example-1:
+            value: WP_001040085.1
+            summary: type II CRISPR RNA-guided endonuclease Cas9
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Fasta'
+        examples:
+          example-0:
+            value: FASTA_GENE
+            summary: Gene range FASTA
+          example-1:
+            value:
+              - FASTA_RNA
+              - FASTA_PROTEIN
+            summary: Transcript & protein sequence FASTA
+          example-2:
+            value:
+              - FASTA_GENE
+              - FASTA_RNA
+              - FASTA_PROTEIN
+            summary: All annotation
+      - name: gene_flank_config.length
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: taxon
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank When specified, return data from this taxon and its subtree'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /protein/accession/download:
+    post:
+      summary: Get a prokaryote gene dataset by RefSeq protein accession by POST
+      description: 'Get a prokaryote gene dataset including gene and protein fasta sequence, annotation and metadata by prokaryote protein accession by POST.'
+      tags:
+        - Prokaryote
+      operationId: download_prokaryote_gene_package_post
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ProkaryoteGeneRequest'
+            example:
+              accessions:
+              - WP_000000001.1
+              - WP_000000002.1
+      parameters:
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /genome/accession/{accessions}/check:
+    get:
+      summary: Check the validity of genome accessions
+      description: 'The ''GET'' version of check is limited by the size of the GET URL (2KB, which works out to about 140 genomic accessions).  The POST operation is provided to allow users to supply a larger number of accessions in a single request.'
+      tags:
+        - Genome
+      operationId: check_assembly_availability
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AssemblyDatasetAvailability'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'NCBI genome assembly accessions'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - GCF_000001405.40
+              - GCF_000001635.27
+            summary: Human and Mouse
+          example-1:
+            value: GCF_000001405.40
+            summary: Human
+  /genome/check:
+    post:
+      summary: Check the validity of many genome accessions in a single request
+      description: 'The ''GET'' version of check is limited by the size of the GET URL (2KB, which works out to about 140 genomic accessions).  The POST operation is provided to allow users to supply a larger number of accessions in a single request.'
+      tags:
+        - Genome
+      operationId: check_assembly_availability_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AssemblyDatasetAvailability'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AssemblyDatasetRequest'
+            example:
+              accessions:
+              - GCF_000001405.40
+  /version:
+    get:
+      summary: Retrieve service version
+      description: 'Retrieve the latest version of the Datasets services.'
+      tags:
+        - Version
+      operationId: version
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1VersionReply'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+  /gene/id/{gene_ids}:
+    get:
+      summary: Get gene metadata by GeneID
+      description: 'Get detailed gene metadata by GeneID in a JSON output format.'
+      tags:
+        - Gene
+      operationId: gene_metadata_by_id
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GeneMetadata'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: gene_ids
+        description: 'NCBI gene ids'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: integer
+        examples:
+          example-0:
+            value: 59067
+            summary: IL21 GeneID
+          example-1:
+            value:
+              - 59067
+              - 50615
+            summary: IL21 & IL21R GeneIDs
+      - name: returned_content
+        description: 'Return either gene-ids, or entire gene metadata'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1GeneDatasetRequestContentType'
+      - name: sort_schema.field
+        description: 'Select a field to sort on.'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1GeneDatasetRequestSortField'
+      - name: sort_schema.direction
+        description: 'Select a direction for the sort.'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1SortDirection'
+      - name: limit
+        description: 'Limit the number of returned results ("all", "none", otherwise an integer value)'
+        in: query
+        required: false
+        schema:
+          type: string
+  /gene/accession/{accessions}:
+    get:
+      summary: Get gene metadata by RefSeq Accession
+      description: 'Get detailed gene metadata by RefSeq Accession in a JSON output format.'
+      tags:
+        - Gene
+      operationId: gene_metadata_by_accession
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GeneMetadata'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'RNA or Protein accessions.'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - NM_021803.4
+              - NM_181078.3
+            summary: RefSeq transcripts
+          example-1:
+            value:
+              - NP_068575.1
+              - NP_851564.1
+            summary: RefSeq proteins
+      - name: returned_content
+        description: 'Return either gene-ids, or entire gene metadata'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1GeneDatasetRequestContentType'
+      - name: sort_schema.field
+        description: 'Select a field to sort on.'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1GeneDatasetRequestSortField'
+      - name: sort_schema.direction
+        description: 'Select a direction for the sort.'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1SortDirection'
+      - name: limit
+        description: 'Limit the number of returned results ("all", "none", otherwise an integer value)'
+        in: query
+        required: false
+        schema:
+          type: string
+  /gene/symbol/{symbols}/taxon/{taxon}:
+    get:
+      summary: Get gene metadata by gene symbol
+      description: 'Get detailed gene metadata by gene symbol in a JSON output format.'
+      tags:
+        - Gene
+      operationId: gene_metadata_by_tax_and_symbol
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GeneMetadata'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'RNA or Protein accessions.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - NM_021803.4
+              - NM_181078.3
+            summary: RefSeq transcripts
+          example-1:
+            value:
+              - NP_068575.1
+              - NP_851564.1
+            summary: RefSeq proteins
+      - name: symbols
+        description: 'Gene symbol'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: GNAS
+            summary: GNAS
+      - name: taxon
+        description: 'Taxon for provided gene symbol'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: 9606
+            summary: NCBI Taxonomy Identifier
+          example-1:
+            value: human
+            summary: Common Name
+          example-2:
+            value: Homo sapiens
+            summary: Scientific Name
+      - name: returned_content
+        description: 'Return either gene-ids, or entire gene metadata'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1GeneDatasetRequestContentType'
+      - name: sort_schema.field
+        description: 'Select a field to sort on.'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1GeneDatasetRequestSortField'
+      - name: sort_schema.direction
+        description: 'Select a direction for the sort.'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1SortDirection'
+      - name: limit
+        description: 'Limit the number of returned results ("all", "none", otherwise an integer value)'
+        in: query
+        required: false
+        schema:
+          type: string
+  /gene:
+    post:
+      summary: Get gene metadata as JSON
+      description: 'Get detailed gene metadata in a JSON output format.'
+      tags:
+        - Gene
+      operationId: gene_metadata_by_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GeneMetadata'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GeneDatasetRequest'
+            example:
+              gene_ids:
+              - 59067
+              - 50615
+  /gene/stream:
+    post:
+      summary: Get gene metadata
+      description: 'Get detailed gene metadata in a streaming, JSON-lines output format.'
+      tags:
+        - Gene
+      operationId: gene_metadata_stream_by_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/v1GeneMatch'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GeneDatasetRequest'
+            example:
+              gene_ids:
+              - 59067
+              - 50615
+  /gene/id/{gene_ids}/download_summary:
+    get:
+      summary: Get gene download summary by GeneID
+      description: 'Get a download summary by GeneID in a JSON output format.'
+      tags:
+        - Gene
+      operationId: gene_download_summary_by_id
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: gene_ids
+        description: 'NCBI gene ids'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: integer
+        examples:
+          example-0:
+            value: 59067
+            summary: IL21 GeneID
+          example-1:
+            value:
+              - 59067
+              - 50615
+            summary: IL21 & IL21R GeneIDs
+      - name: fasta_filter
+        description: 'Limit the FASTA sequences in the datasets package to these transcript and protein accessions'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+  /gene/accession/{accessions}/download_summary:
+    get:
+      summary: Get gene download summary by RefSeq Accession
+      description: 'Get gene download summary by RefSeq Accession in a JSON output format.'
+      tags:
+        - Gene
+      operationId: gene_download_summary_by_accession
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'RNA or Protein accessions.'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - NM_021803.4
+              - NM_181078.3
+            summary: RefSeq transcripts
+          example-1:
+            value:
+              - NP_068575.1
+              - NP_851564.1
+            summary: RefSeq proteins
+      - name: fasta_filter
+        description: 'Limit the FASTA sequences in the datasets package to these transcript and protein accessions'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+  /gene/symbol/{symbols}/taxon/{taxon}/download_summary:
+    get:
+      summary: Get gene download summary by gene symbol
+      description: 'Get gene download summary by gene symbol in a JSON output format.'
+      tags:
+        - Gene
+      operationId: gene_download_summary_by_tax_and_symbol
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: symbols
+        description: 'Gene symbol'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: GNAS
+            summary: GNAS
+      - name: taxon
+        description: 'Taxon for provided gene symbol'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: 9606
+            summary: NCBI Taxonomy Identifier
+          example-1:
+            value: human
+            summary: Common Name
+          example-2:
+            value: Homo sapiens
+            summary: Scientific Name
+      - name: fasta_filter
+        description: 'Limit the FASTA sequences in the datasets package to these transcript and protein accessions'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+  /gene/download_summary:
+    post:
+      summary: Get gene download summary
+      description: 'Get gene download summary in a JSON output format.'
+      tags:
+        - Gene
+      operationId: gene_download_summary_by_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GeneDatasetRequest'
+            example:
+              gene_ids:
+              - 59067
+              - 50615
+  /gene/id/{gene_id}/orthologs:
+    get:
+      summary: Get gene orthologs by gene ID
+      description: 'Get detailed gene metadata for an ortholog set by gene ID in a JSON output format.'
+      tags:
+        - Gene
+      operationId: gene_orthologs_by_id
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OrthologSet'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: gene_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        examples:
+          example-0:
+            value: 2778
+            summary: GNAS
+          example-1:
+            value: 2
+            summary: A2M
+      - name: returned_content
+        description: 'Return either gene-ids, or entire gene metadata'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1OrthologRequestContentType'
+      - name: taxon_filter
+        description: 'Filter genes by taxa'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - 9606
+              - 10090
+            summary: NCBI Taxonomy Identifier
+          example-1:
+            value:
+              - human
+              - house mouse
+            summary: Common Name
+          example-2:
+            value:
+              - homo sapiens
+              - mus musculus
+            summary: Scientific Name
+  /gene/taxon/{taxon}/tree:
+    get:
+      summary: Get a taxonomic subtree by taxonomic identifier
+      description: 'Using an NCBI Taxonomy ID or name (common or scientific) at any rank, get a subtree filtered for species with assembled genomes.'
+      tags:
+        - Gene
+      operationId: gene_tax_tree
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Organism'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: 9606
+            summary: NCBI Taxonomy Identifier
+          example-1:
+            value: human
+            summary: Common Name
+          example-2:
+            value: Homo sapiens
+            summary: Scientific Name
+      - name: children_only
+        description: 'Only report the children of the requested taxon and not their descendants'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+  /gene/taxon_suggest/{taxon_query}:
+    get:
+      summary: Get a list of taxonomy names and IDs found in the gene dataset given a partial taxonomic name
+      description: 'This endpoint retrieves a list of taxonomy names and IDs found in the gene dataset given a partial taxonomic name of any rank.'
+      tags:
+        - Gene
+      operationId: gene_tax_name_query
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SciNameAndIds'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon_query
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: hum
+            summary: hum
+      - name: tax_rank_filter
+        description: 'Set the scope of searched tax ranks'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1OrganismQueryRequestTaxRankFilter'
+          default: species
+  /taxonomy/taxon/{taxons}:
+    get:
+      summary: Use taxonomic identifiers to get taxonomic metadata
+      description: 'Using NCBI Taxonomy IDs or names (common or scientific) at any rank, get metadata about a taxonomic node including taxonomic identifiers, lineage information, child nodes, and gene and genome counts in JSON format.'
+      tags:
+        - Taxonomy
+      operationId: taxonomy_metadata
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TaxonomyMetadataResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxons
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - 9606
+              - 10090
+            summary: NCBI Taxonomy Identifier
+          example-1:
+            value:
+              - human
+              - mouse
+            summary: Common Name
+          example-2:
+            value:
+              - Homo sapiens
+              - Mus musculus
+            summary: Scientific Name
+      - name: returned_content
+        description: 'Return either tax-ids alone, or entire taxononmy-metadata records'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1TaxonomyMetadataRequestContentType'
+  /taxonomy:
+    post:
+      summary: Use taxonomic identifiers to get taxonomic metadata by post
+      description: 'Using NCBI Taxonomy IDs or names (common or scientific) at any rank, get metadata about a taxonomic node including taxonomic identifiers, lineage information, child nodes, and gene and genome counts in JSON format.'
+      tags:
+        - Taxonomy
+      operationId: taxonomy_metadata_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TaxonomyMetadataResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1TaxonomyMetadataRequest'
+            example:
+              taxons:
+              - 9606
+              - mouse
+  /taxonomy/taxon/{taxons}/filtered_subtree:
+    get:
+      summary: Use taxonomic identifiers to get a filtered taxonomic subtree
+      description: 'Using NCBI Taxonomy IDs or names (common or scientific) at any rank, get a filtered taxonomic subtree that includes the full parent lineage and all immediate children from the selected taxonomic ranks in JSON format.'
+      tags:
+        - Taxonomy
+      operationId: taxonomy_filtered_subtree
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TaxonomyFilteredSubtreeResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxons
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - 9606
+              - 10090
+            summary: NCBI Taxonomy Identifier
+          example-1:
+            value:
+              - human
+              - mouse
+            summary: Common Name
+          example-2:
+            value:
+              - Homo sapiens
+              - Mus musculus
+            summary: Scientific Name
+      - name: specified_limit
+        description: 'Limit to specified species'
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: rank_limits
+        description: 'Limit to the provided ranks.  If empty, accept any rank.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1OrganismRankType'
+  /taxonomy/filtered_subtree:
+    post:
+      summary: Use taxonomic identifiers to get a filtered taxonomic subtree by post
+      description: 'Using NCBI Taxonomy IDs or names (common or scientific) at any rank, get a filtered taxonomic subtree that includes the full parent lineage and all immediate children from the selected taxonomic ranks in JSON format.'
+      tags:
+        - Taxonomy
+      operationId: taxonomy_filtered_subtree_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TaxonomyFilteredSubtreeResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1TaxonomyFilteredSubtreeRequest'
+  /taxonomy/taxon_suggest/{taxon_query}:
+    get:
+      summary: Get a list of taxonomy names and IDs given a partial taxonomic name
+      description: 'This endpoint retrieves a list of taxonomy names and IDs given a partial taxonomic name of any rank.'
+      tags:
+        - Taxonomy
+      operationId: tax_name_query
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SciNameAndIds'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon_query
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: hum
+            summary: hum
+      - name: tax_rank_filter
+        description: 'Set the scope of searched tax ranks'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1OrganismQueryRequestTaxRankFilter'
+          default: species
+  /virus/taxon/{taxon}/genome:
+    get:
+      summary: Get summary data for Coronaviridae genomes by taxon
+      description: 'Get summary data and download by command line instructions for Coronaviridae genomes by taxon.'
+      tags:
+        - Virus
+      operationId: virus_genome_summary
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: 2697049
+            summary: SARS-COV-2
+          example-1:
+            value: 11118
+            summary: Coronaviridae
+          example-2:
+            value: 1335626
+            summary: MERS
+      - name: refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: pangolin_classification
+        description: 'If set, limit results to genomes classified to this lineage by the PangoLearn tool.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: exclude_sequence
+        description: 'Set to true to omit the genomic sequence.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Exclude genomic sequence
+          example-1:
+            value: false
+            summary: Include genomic sequence
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForVirusType'
+        examples:
+          example-0:
+            value: CDS_FASTA
+            summary: Transcript sequence
+          example-1:
+            value:
+              - CDS_FASTA
+              - PROT_FASTA
+            summary: All annotation
+  /virus/accession/{accessions}/genome:
+    get:
+      summary: Get summary data for Coronaviridae genomes by accession
+      description: 'Get summary data for Coronaviridae genomes by accession'
+      tags:
+        - Virus
+      operationId: virus_genome_summary_accession
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'Accessions accessions = 16;'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: NC_045512.2
+            summary: SARS-COV-2 isolate Wuhan-Hu-1, complete genome
+      - name: refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: pangolin_classification
+        description: 'If set, limit results to genomes classified to this lineage by the PangoLearn tool.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: exclude_sequence
+        description: 'Set to true to omit the genomic sequence.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Exclude genomic sequence
+          example-1:
+            value: false
+            summary: Include genomic sequence
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForVirusType'
+        examples:
+          example-0:
+            value: CDS_FASTA
+            summary: Transcript sequence
+          example-1:
+            value:
+              - CDS_FASTA
+              - PROT_FASTA
+            summary: All annotation
+  /virus/genome:
+    post:
+      summary: Get summary data for Coronaviridae genomes by post
+      description: 'The ''GET'' version is limited by the size of the GET URL (2KB, which works out to about 140 genomic accessions).  The POST operation is provided to allow users to supply a larger number of accessions in a single request.'
+      tags:
+        - Virus
+      operationId: virus_genome_summary_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1VirusDatasetRequest'
+  /virus/taxon/sars2/protein/{proteins}:
+    get:
+      summary: Summary of SARS-CoV-2 protein and CDS datasets by protein name
+      description: 'Download a summary of available SARS-CoV-2 protein datasets'
+      tags:
+        - Virus
+      operationId: sars2_protein_summary
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DownloadSummary'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: proteins
+        description: 'Which proteins to retrieve in the data package'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: spike protein
+            summary: Spike Protein
+          example-1:
+            value:
+              - spike protein
+              - envelope protein
+              - RdRp
+            summary: SARS-CoV-2 proteins
+      - name: refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForVirusType'
+        examples:
+          example-0:
+            value: CDS_FASTA
+            summary: Transcript sequence
+          example-1:
+            value:
+              - CDS_FASTA
+              - PROT_FASTA
+            summary: All annotation
+  /virus/taxon/{taxon}/genome/table:
+    get:
+      summary: Get viral genomic metadata in a tabular format.
+      description: 'Get viral genomic metadata in tabular format for Coronaviridae genomes by taxon.'
+      tags:
+        - Virus
+      operationId: virus_genome_table
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TabularOutput'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: 2697049
+            summary: SARS-COV-2
+          example-1:
+            value: 11118
+            summary: Coronaviridae
+          example-2:
+            value: 1335626
+            summary: MERS
+      - name: refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: pangolin_classification
+        description: 'If set, limit results to genomes classified to this lineage by the PangoLearn tool.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: table_fields
+        description: 'Specify which fields to include in the tabular report'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1VirusTableField'
+        examples:
+          example-0:
+            value:
+              - nucleotide_accession
+              - nucleotide_length
+              - nuc_completeness
+            summary: Assembly Fields
+      - name: format
+        description: 'Choose download format (tsv, csv or jsonl)'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1TableFormat'
+          default: tsv
+        examples:
+          example-0:
+            value: tsv
+            summary: TSV
+          example-1:
+            value: csv
+            summary: CSV
+          example-2:
+            value: jsonl
+            summary: JSON Lines
+  /virus/taxon/sars2/protein/{proteins}/table:
+    get:
+      summary: Get SARS-CoV-2 protein metadata in a tabular format.
+      description: 'Get protein metadata in tabular format for SARS-CoV-2 genomes.'
+      tags:
+        - Virus
+      operationId: sars2_protein_table
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TabularOutput'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: proteins
+        description: 'Which proteins to retrieve in the data package'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: spike protein
+            summary: Spike Protein
+          example-1:
+            value:
+              - spike protein
+              - envelope protein
+              - RdRp
+            summary: SARS-CoV-2 proteins
+      - name: refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: table_fields
+        description: 'Specify which fields to include in the tabular report'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1VirusTableField'
+        examples:
+          example-0:
+            value:
+              - nucleotide_accession
+              - nucleotide_length
+              - nuc_completeness
+            summary: Assembly Fields
+      - name: format
+        description: 'Choose download format (tsv, csv or jsonl)'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1TableFormat'
+          default: tsv
+        examples:
+          example-0:
+            value: tsv
+            summary: TSV
+          example-1:
+            value: csv
+            summary: CSV
+          example-2:
+            value: jsonl
+            summary: JSON Lines
+  /virus/taxon/{taxon}/dataset_report:
+    get:
+      summary: Get virus metadata by taxon
+      description: 'Get virus metadata by taxon. By default, in paged JSON format, but also available as tabular (accept: x-tabular) or json-lines (accept: x-jsonlines)'
+      tags:
+        - Virus
+      operationId: virus_reports_by_taxon
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1reportsVirusDataReportPage'
+            text/tab-separated-values:
+              schema:
+                type: string
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: 2697049
+            summary: SARS-COV-2
+          example-1:
+            value: 11118
+            summary: Coronaviridae
+          example-2:
+            value: 1335626
+            summary: MERS
+      - name: filter.refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: filter.annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: filter.released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: filter.updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: filter.host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: filter.pangolin_classification
+        description: 'If set, limit results to genomes classified to this lineage by the PangoLearn tool.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filter.geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: filter.complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: returned_content
+        description: 'Return either virus genome accessions, or complete virus metadata'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1VirusDataReportRequestContentType'
+      - name: table_fields
+        description: 'Specify which fields to include in the tabular report'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - accession
+              - is-complete
+              - is-annotated
+            summary: Virus Genome Fields
+      - name: page_size
+        description: 'The maximum number of virus data reports to return. Default is 20 and maximum is 1000. If the number of results exceeds the page size, `page_token` can be used to retrieve the remaining results.'
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: page_token
+        description: 'A page token is returned from a `GetVirusDataReports` call with more than `page_size` results. Use this token, along with the previous `VirusDataReportRequest` parameters, to retrieve the next page of results. When `page_token` is empty, all results have been retrieved.'
+        in: query
+        required: false
+        schema:
+          type: string
+  /virus/accession/{accessions}/dataset_report:
+    get:
+      summary: Get virus metadata by accession
+      description: 'Get virus metadata by accesion. By default, in paged JSON format, but also available as tabular (accept: x-tabular) or json-lines (accept: x-jsonlines)'
+      tags:
+        - Virus
+      operationId: virus_reports_by_acessions
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1reportsVirusDataReportPage'
+            text/tab-separated-values:
+              schema:
+                type: string
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'genome sequence accessions'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: NC_045512.2,NC_038294.1
+            summary: SARS-COV-2 isolate Wuhan-Hu-1 and Middle East respiratory syndrome-related coronavirus, complete genomes
+      - name: filter.refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: filter.annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: filter.released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: filter.updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: filter.host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: filter.pangolin_classification
+        description: 'If set, limit results to genomes classified to this lineage by the PangoLearn tool.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filter.geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: filter.complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: returned_content
+        description: 'Return either virus genome accessions, or complete virus metadata'
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/v1VirusDataReportRequestContentType'
+      - name: table_fields
+        description: 'Specify which fields to include in the tabular report'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value:
+              - accession
+              - is-complete
+              - is-annotated
+            summary: Virus Genome Fields
+      - name: page_size
+        description: 'The maximum number of virus data reports to return. Default is 20 and maximum is 1000. If the number of results exceeds the page size, `page_token` can be used to retrieve the remaining results.'
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: page_token
+        description: 'A page token is returned from a `GetVirusDataReports` call with more than `page_size` results. Use this token, along with the previous `VirusDataReportRequest` parameters, to retrieve the next page of results. When `page_token` is empty, all results have been retrieved.'
+        in: query
+        required: false
+        schema:
+          type: string
+  /virus:
+    post:
+      summary: Get virus metadata by POST
+      description: 'Get virus metadata. By default, in paged JSON format, but also available as tabular (accept: x-tabular) or json-lines (accept: x-jsonlines)'
+      tags:
+        - Virus
+      operationId: virus_reports_by_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1reportsVirusDataReportPage'
+            text/tab-separated-values:
+              schema:
+                type: string
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1VirusDataReportRequest'
+            example:
+              taxon: 2697049
+              refseq_only: true
+  /virus/accession/{accessions}/check:
+    get:
+      summary: Check available viruses by accession GET
+      description: 'Check available viruses GET'
+      tags:
+        - Virus
+      operationId: virus_accession_availability
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1VirusAvailability'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'virus sequence accessions'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: NC_045512.2,NC_038294.1
+            summary: SARS-COV-2 isolate Wuhan-Hu-1 and Middle East respiratory syndrome-related coronavirus, complete genomes
+  /virus/check:
+    post:
+      summary: Check available viruses by accession POST
+      description: 'Check available viruses POST'
+      tags:
+        - Virus
+      operationId: virus_accession_availability_post
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1VirusAvailability'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1VirusAvailabilityRequest'
+  /virus/taxon/{taxon}/genome/download:
+    get:
+      summary: Download a coronavirus genome dataset by taxon
+      description: 'Download a coronavirus genome dataset by taxon'
+      tags:
+        - Virus
+      operationId: virus_genome_download
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: taxon
+        description: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: 2697049
+            summary: SARS-COV-2
+          example-1:
+            value: 11118
+            summary: Coronaviridae
+          example-2:
+            value: 1335626
+            summary: MERS
+      - name: refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: pangolin_classification
+        description: 'If set, limit results to genomes classified to this lineage by the PangoLearn tool.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: exclude_sequence
+        description: 'Set to true to omit the genomic sequence.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Exclude genomic sequence
+          example-1:
+            value: false
+            summary: Include genomic sequence
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForVirusType'
+        examples:
+          example-0:
+            value: CDS_FASTA
+            summary: Transcript sequence
+          example-1:
+            value:
+              - CDS_FASTA
+              - PROT_FASTA
+            summary: All annotation
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /virus/accession/{accessions}/genome/download:
+    get:
+      summary: Download a coronavirus genome dataset by accession
+      description: 'Download a coronavirus genome dataset by accession'
+      tags:
+        - Virus
+      operationId: virus_genome_download_accession
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: accessions
+        description: 'Accessions accessions = 16;'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: NC_045512.2
+            summary: SARS-COV-2 isolate Wuhan-Hu-1, complete genome
+      - name: refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: pangolin_classification
+        description: 'If set, limit results to genomes classified to this lineage by the PangoLearn tool.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: exclude_sequence
+        description: 'Set to true to omit the genomic sequence.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Exclude genomic sequence
+          example-1:
+            value: false
+            summary: Include genomic sequence
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForVirusType'
+        examples:
+          example-0:
+            value: CDS_FASTA
+            summary: Transcript sequence
+          example-1:
+            value:
+              - CDS_FASTA
+              - PROT_FASTA
+            summary: All annotation
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /virus/genome/download:
+    post:
+      summary: Get a coronavirus genome dataset by post
+      description: 'The ''GET'' version of download is limited by the size of the GET URL (2KB, which works out to about 140 genomic accessions).  The POST operation is provided to allow users to supply a larger number of accessions in a single request.'
+      tags:
+        - Virus
+      operationId: virus_genome_download_post
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1VirusDatasetRequest'
+      parameters:
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /virus/taxon/sars2/protein/{proteins}/download:
+    get:
+      summary: Download SARS-CoV-2 protein and CDS datasets by protein name
+      description: 'Download SARS-CoV-2 protein datasets'
+      tags:
+        - Virus
+      operationId: sars2_protein_download
+      responses:
+        '200':
+          description: Download selected genome assemblies and associated annotation data as a zip file
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+      - name: proteins
+        description: 'Which proteins to retrieve in the data package'
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: spike protein
+            summary: Spike Protein
+          example-1:
+            value:
+              - spike protein
+              - envelope protein
+              - RdRp
+            summary: SARS-CoV-2 proteins
+      - name: refseq_only
+        description: 'If true, limit results to RefSeq genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to RefSeq genomes
+          example-1:
+            value: false
+            summary: Both GenBank & RefSeq genomes
+      - name: annotated_only
+        description: 'If true, limit results to annotated genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to annotated genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: released_since
+        description: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2020-08-01
+            summary: August 1, 2020
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          example-0:
+            value: 2021-07-18
+            summary: July 18, 2021
+      - name: host
+        description: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: human
+            summary: human
+      - name: geo_location
+        description: 'Assemblies from this location (country and state, or continent)'
+        in: query
+        required: false
+        schema:
+          type: string
+        examples:
+          example-0:
+            value: USA
+            summary: USA
+          example-1:
+            value: TX
+            summary: Texas
+      - name: complete_only
+        description: 'only include complete genomes.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        examples:
+          example-0:
+            value: true
+            summary: Limit to complete genomes
+          example-1:
+            value: false
+            summary: All genomes
+      - name: include_annotation_type
+        description: 'Select additional types of annotation to include in the data package.  If unset, no annotation is provided.'
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForVirusType'
+        examples:
+          example-0:
+            value: CDS_FASTA
+            summary: Transcript sequence
+          example-1:
+            value:
+              - CDS_FASTA
+              - PROT_FASTA
+            summary: All annotation
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+    ApiKeyAuthHeader:
+      type: apiKey
+      in: header
+      name: api-key
+  schemas:
+    v1Accessions:
+      type: object
+      properties:
+        accessions:
+          type: array
+          items:
+            type: string
+    v1AnnotatedAssemblies:
+      type: object
+      properties:
+        accession:
+          type: string
+        name:
+          type: string
+    v1Annotation:
+      type: object
+      properties:
+        release_name:
+          type: string
+        release_date:
+          type: string
+        assemblies_in_scope:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotatedAssemblies'
+    v1AnnotationForAssembly:
+      type: object
+      properties:
+        name:
+          type: string
+          title: 'Annotation name'
+        source:
+          type: string
+          title: 'Source of the annotation.  Possibly from a submitter.'
+        release_number:
+          type: string
+          title: 'NCBI Annotation release number, if one exists.'
+        release_date:
+          type: string
+          title: 'The date the annotation was released'
+        report_url:
+          type: string
+          title: 'NCBI annotation report website'
+        file:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForAssemblyFile'
+        stats:
+          $ref: '#/components/schemas/v1FeatureCounts'
+          title: 'Feature statistics'
+        busco:
+          $ref: '#/components/schemas/v1BuscoStat'
+          title: 'BUSCO statistics'
+    v1AnnotationForAssemblyFile:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/v1AnnotationForAssemblyType'
+        estimated_size:
+          type: string
+          format: uint64
+    v1AssemblyDatasetAvailability:
+      type: object
+      properties:
+        valid_assemblies:
+          type: array
+          items:
+            type: string
+        invalid_assemblies:
+          type: array
+          items:
+            type: string
+        reason:
+          type: string
+    v1AssemblyDatasetDescriptor:
+      type: object
+      properties:
+        assembly_accession:
+          type: string
+          title: 'The GenColl assembly accession (e.g. GCF_000001405.40)'
+        paired_assembly_accession:
+          type: string
+          title: 'The GenBank or RefSeq assembly accession paired with this assembly'
+        bioproject_lineages:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1BioProjectLineage'
+        display_name:
+          type: string
+          title: 'The name of the Assembly dataset to be displayed in a user interface.'
+        org:
+          $ref: '#/components/schemas/v1Organism'
+          title: 'Organism information'
+        chromosomes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AssemblyDatasetDescriptorChromosome'
+        assembly_category:
+          type: string
+          title: 'Category of assembly, like reference.'
+        annotation_metadata:
+          $ref: '#/components/schemas/v1AnnotationForAssembly'
+          title: 'Annotation available for this assembly'
+        assembly_level:
+          type: string
+          title: 'The level of the assembly, e.g. Chromosome, Scaffold, Contig or Complete Genome'
+        submitter:
+          type: string
+          title: 'The submitting consortium or organization. Full submitter information is available in the BioProject'
+        submission_date:
+          type: string
+          title: 'Date the assembly was provided to NCBI'
+        contig_n50:
+          type: integer
+          title: 'Minimum contig length needed to cover 50% of the genome'
+        estimated_size:
+          type: string
+          format: uint64
+          title: 'Estimated size of all annotation and sequence files in download'
+        seq_length:
+          type: string
+          format: uint64
+          title: 'Combined length of all sequence data'
+        biosample_accession:
+          type: string
+          title: 'NCBI BioSample Accession for the BioSample from which the sequences in the genome assembly were obtained.'
+        biosample:
+          $ref: '#/components/schemas/v1reportsBioSampleDescriptor'
+          title: 'NCBI BioSample from which the sequences in the genome assembly were obtained.'
+        blast_url:
+          type: string
+          title: 'Link to assembly-specific blast page'
+        gc_count:
+          type: string
+          format: uint64
+          title: 'The number of GC base-pairs in the assembly'
+    v1AssemblyDatasetDescriptorChromosome:
+      type: object
+      properties:
+        name:
+          type: string
+        length:
+          type: string
+          format: uint64
+        accession_version:
+          type: string
+        gc_count:
+          type: string
+          format: uint64
+          title: 'The number of GC base-pairs in the assembly'
+    v1AssemblyDatasetDescriptors:
+      type: object
+      properties:
+        datasets:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AssemblyDatasetDescriptor'
+        total_count:
+          type: integer
+          title: 'The total count of available datasets (ignoring the cutoff parameter).'
+    v1AssemblyDatasetDescriptorsFilter:
+      type: object
+      properties:
+        reference_only:
+          type: boolean
+          title: 'If true, only return reference and representative (GCF_ and GCA_) genome assemblies.'
+        refseq_only:
+          type: boolean
+          title: 'If true, only return RefSeq (GCF_) genome assemblies. Deprecated - use assembly_source instead.'
+        assembly_source:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblySource'
+          title: 'Return only RefSeq (GCF_) or GenBank (GCA_) genome assemblies'
+        has_annotation:
+          type: boolean
+          title: 'Return only annotated genome assemblies'
+        exclude_paired_reports:
+          type: boolean
+          title: 'For paired (GCA/GCF) records, only return the primary record'
+        exclude_atypical:
+          type: boolean
+          title: 'If true, exclude atypical genomes, i.e. genomes that have assembly issues or are otherwise atypical'
+        assembly_version:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblyVersion'
+          title: 'Return all assemblies, including replaced and suppressed, or only current assemblies'
+        assembly_level:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilterAssemblyLevel'
+        first_release_date:
+          type: string
+          format: date-time
+          title: 'Only return genome assemblies that were released on or after the specified date By default, do not filter.'
+        last_release_date:
+          type: string
+          format: date-time
+          title: 'Only return genome assemblies that were released on or before to the specified date By default, do not filter.'
+        search_text:
+          type: array
+          items:
+            type: string
+    v1AssemblyDatasetDescriptorsRequest:
+      type: object
+      properties:
+        tax_id:
+          type: integer
+          title: 'NCBI Taxonomy ID'
+        org_name:
+          type: string
+          title: 'Common or scientific name at any taxonomic rank'
+        tax_name:
+          type: string
+        assembly_accession:
+          type: string
+          title: 'NCBI Assembly accession'
+        cutoff:
+          type: integer
+          title: 'Limit the number of results for the above query term.'
+        limit:
+          type: string
+          title: 'Limit the number of returned results ("all", "none", otherwise an integer value)'
+        filters:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilter'
+        tax_exact_match:
+          type: boolean
+          title: 'If true, only return assemblies with the given NCBI Taxonomy ID, or name. Otherwise, assemblies from taxonomy subtree are included, too. Ignored for assembly_accession request.'
+        returned_content:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsRequestContentType'
+          title: 'Return either assembly accessions, or entire assembly-metadata records'
+    v1AssemblyDatasetRequest:
+      type: object
+      properties:
+        assembly_accessions:
+          type: array
+          items:
+            type: string
+        accessions:
+          type: array
+          items:
+            type: string
+        chromosomes:
+          type: array
+          items:
+            type: string
+        include_annotation:
+          type: boolean
+        exclude_sequence:
+          type: boolean
+          title: 'Set to true to omit the genomic sequence.'
+        include_annotation_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForAssemblyType'
+        hydrated:
+          $ref: '#/components/schemas/v1AssemblyDatasetRequestResolution'
+          title: 'Set to DATA_REPORT_ONLY, to only retrieve data-reports.'
+        include_tsv:
+          type: boolean
+          title: 'Set to true to include a TSV representation of the data-report.'
+    v1AssemblyMatch:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Message'
+        assembly:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptor'
+    v1AssemblyMetadata:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Message'
+        assemblies:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AssemblyMatch'
+        total_count:
+          type: integer
+          title: 'The total count of available datasets (ignoring the cutoff parameter). Only provided for the first page of results (when `page_token` is empty in the request).'
+        next_page_token:
+          type: string
+          title: 'A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.'
+    v1AssemblyMetadataRequest:
+      type: object
+      properties:
+        taxon:
+          type: string
+          title: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        accessions:
+          $ref: '#/components/schemas/v1Accessions'
+          title: 'NCBI assembly accession'
+        bioprojects:
+          $ref: '#/components/schemas/v1AssemblyMetadataRequestBioprojects'
+          title: 'NCBI bioproject accessions'
+        filters:
+          $ref: '#/components/schemas/v1AssemblyDatasetDescriptorsFilter'
+        tax_exact_match:
+          type: boolean
+          title: 'If true, only return assemblies with the given NCBI Taxonomy ID, or name. Otherwise, assemblies from taxonomy subtree are included, too. Ignored for assembly_accession request.'
+        returned_content:
+          $ref: '#/components/schemas/v1AssemblyMetadataRequestContentType'
+          title: 'Return either assembly accessions, or entire assembly-metadata records'
+        limit:
+          type: string
+          title: 'Deprecated - Limit the number of returned results ("all", "none", otherwise an integer value)'
+        page_size:
+          type: integer
+          title: 'The maximum number of genome assemblies to return. Default is 20 and maximum is 1000. If the number of results exceeds the page size, `page_token` can be used to retrieve the remaining results.'
+        page_token:
+          type: string
+          title: 'A page token is returned from an `AssemblyMetadataRequest` call with more than `page_size` results. Use this token, along with the previous `AssemblyMetadataRequest` parameters, to retrieve the next page of results. When `page_token` is empty, all results have been retrieved.'
+    v1AssemblyMetadataRequestBioprojects:
+      type: object
+      properties:
+        accessions:
+          type: array
+          items:
+            type: string
+    v1BioProject:
+      type: object
+      properties:
+        accession:
+          type: string
+        title:
+          type: string
+        parent_accession:
+          type: string
+        parent_accessions:
+          type: array
+          items:
+            type: string
+    v1BioProjectLineage:
+      type: object
+      properties:
+        bioprojects:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1BioProject'
+    v1BuscoStat:
+      type: object
+      properties:
+        busco_lineage:
+          type: string
+        busco_ver:
+          type: string
+        complete:
+          type: number
+          format: float
+        single_copy:
+          type: number
+          format: float
+        duplicated:
+          type: number
+          format: float
+        fragmented:
+          type: number
+          format: float
+        missing:
+          type: number
+          format: float
+        total_count:
+          type: string
+          format: uint64
+    v1DatasetRequest:
+      type: object
+      properties:
+        genome_v1:
+          $ref: '#/components/schemas/v1AssemblyDatasetRequest'
+        gene_v1:
+          $ref: '#/components/schemas/v1GeneDatasetRequest'
+        virus_v1:
+          $ref: '#/components/schemas/v1VirusDatasetRequest'
+    v1DownloadSummary:
+      type: object
+      properties:
+        record_count:
+          type: integer
+          title: 'The number of records for the requested filter.'
+        assembly_count:
+          type: integer
+          title: 'For backwards compatability with old VirusDatasetSummary'
+        resource_updated_on:
+          type: string
+          format: date-time
+          title: 'The latest date on which the resource was updated.'
+        hydrated:
+          $ref: '#/components/schemas/v1DownloadSummaryHydrated'
+        dehydrated:
+          $ref: '#/components/schemas/v1DownloadSummaryDehydrated'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Error'
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Message'
+        available_files:
+          $ref: '#/components/schemas/v1DownloadSummaryAvailableFiles'
+    v1DownloadSummaryAvailableFiles:
+      type: object
+      properties:
+        all_genomic_fasta:
+          $ref: '#/components/schemas/v1DownloadSummaryFileSummary'
+        genome_gff:
+          $ref: '#/components/schemas/v1DownloadSummaryFileSummary'
+        genome_gbff:
+          $ref: '#/components/schemas/v1DownloadSummaryFileSummary'
+        rna_fasta:
+          $ref: '#/components/schemas/v1DownloadSummaryFileSummary'
+        prot_fasta:
+          $ref: '#/components/schemas/v1DownloadSummaryFileSummary'
+        genome_gtf:
+          $ref: '#/components/schemas/v1DownloadSummaryFileSummary'
+        cds_fasta:
+          $ref: '#/components/schemas/v1DownloadSummaryFileSummary'
+    v1DownloadSummaryDehydrated:
+      type: object
+      properties:
+        estimated_file_size_mb:
+          type: integer
+        url:
+          type: string
+        cli_download_command_line:
+          type: string
+        cli_rehydrate_command_line:
+          type: string
+    v1DownloadSummaryFileSummary:
+      type: object
+      properties:
+        file_count:
+          type: integer
+        size_mb:
+          type: number
+          format: float
+    v1DownloadSummaryHydrated:
+      type: object
+      properties:
+        estimated_file_size_mb:
+          type: integer
+        url:
+          type: string
+        cli_download_command_line:
+          type: string
+    v1ElementFlankConfig:
+      type: object
+      properties:
+        length:
+          type: integer
+    v1Error:
+      type: object
+      properties:
+        assembly_error_code:
+          $ref: '#/components/schemas/v1ErrorAssemblyErrorCode'
+        gene_error_code:
+          $ref: '#/components/schemas/v1ErrorGeneErrorCode'
+        virus_error_code:
+          $ref: '#/components/schemas/v1ErrorVirusErrorCode'
+        reason:
+          type: string
+        message:
+          type: string
+        valid_identifiers:
+          type: array
+          items:
+            type: string
+        invalid_identifiers:
+          type: array
+          items:
+            type: string
+    v1FeatureCounts:
+      type: object
+      properties:
+        gene_counts:
+          $ref: '#/components/schemas/v1GeneCounts'
+          title: 'Counts of gene types'
+    v1GeneCounts:
+      type: object
+      properties:
+        total:
+          type: integer
+          title: 'Total number of annotated genes'
+        protein_coding:
+          type: integer
+          title: 'Count of annotated genes that encode a protein'
+    v1GeneDatasetRequest:
+      type: object
+      properties:
+        gene_ids:
+          type: array
+          items:
+            type: integer
+        accessions:
+          type: array
+          items:
+            type: string
+        symbols_for_taxon:
+          $ref: '#/components/schemas/v1GeneDatasetRequestSymbolsForTaxon'
+        taxon:
+          type: string
+          title: 'NCBI Taxonomy ID or name (common or scientific) that the genes are annotated at  }'
+        include_annotation_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Fasta'
+        returned_content:
+          $ref: '#/components/schemas/v1GeneDatasetRequestContentType'
+          title: 'Return either gene-ids, or entire gene metadata'
+        sort_schema:
+          $ref: '#/components/schemas/v1GeneDatasetRequestSort'
+        limit:
+          type: string
+          title: 'Limit the number of returned results ("all", "none", otherwise an integer value)'
+        fasta_filter:
+          type: array
+          items:
+            type: string
+    v1GeneDatasetRequestSort:
+      type: object
+      properties:
+        field:
+          $ref: '#/components/schemas/v1GeneDatasetRequestSortField'
+          title: 'Select a field to sort on.'
+        direction:
+          $ref: '#/components/schemas/v1SortDirection'
+          title: 'Select a direction for the sort.'
+    v1GeneDatasetRequestSymbolsForTaxon:
+      type: object
+      properties:
+        symbols:
+          type: array
+          items:
+            type: string
+        taxon:
+          type: string
+          title: 'Taxon for provided gene symbol'
+    v1GeneDescriptor:
+      type: object
+      properties:
+        gene_id:
+          type: string
+          format: uint64
+          title: 'mongo-required'
+        symbol:
+          type: string
+        description:
+          type: string
+        tax_id:
+          type: string
+          format: uint64
+        taxname:
+          type: string
+        type:
+          $ref: '#/components/schemas/v1GeneDescriptorGeneType'
+        rna_type:
+          $ref: '#/components/schemas/v1GeneDescriptorRnaType'
+        orientation:
+          $ref: '#/components/schemas/v1Orientation'
+        genomic_ranges:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SeqRangeSet'
+        reference_standards:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GenomicRegion'
+        genomic_regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GenomicRegion'
+        transcripts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Transcript'
+        proteins:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Protein'
+        common_name:
+          type: string
+          title: 'Species common-name'
+        chromosome:
+          type: string
+          title: 'See chromosomes'
+        chromosomes:
+          type: array
+          items:
+            type: string
+        nomenclature_authority:
+          $ref: '#/components/schemas/v1NomenclatureAuthority'
+        swiss_prot_accessions:
+          type: array
+          items:
+            type: string
+        ensembl_gene_ids:
+          type: array
+          items:
+            type: string
+        omim_ids:
+          type: array
+          items:
+            type: string
+        synonyms:
+          type: array
+          items:
+            type: string
+        replaced_gene_ids:
+          type: array
+          items:
+            type: string
+            format: uint64
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Annotation'
+        gene_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GeneGroup'
+    v1GeneDescriptors:
+      type: object
+      properties:
+        genes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GeneDescriptor'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Error'
+    v1GeneGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        method:
+          type: string
+    v1GeneMatch:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Message'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Warning'
+        query:
+          type: array
+          items:
+            type: string
+        gene:
+          $ref: '#/components/schemas/v1GeneDescriptor'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Error'
+    v1GeneMetadata:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Message'
+        genes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GeneMatch'
+        total_count:
+          type: integer
+          title: 'The total count of available datasets (ignoring the cutoff parameter).'
+    v1GenomicLocation:
+      type: object
+      properties:
+        genomic_accession_version:
+          type: string
+        sequence_name:
+          type: string
+        genomic_range:
+          $ref: '#/components/schemas/v1Range'
+        exons:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Range'
+    v1GenomicRegion:
+      type: object
+      properties:
+        gene_range:
+          $ref: '#/components/schemas/v1SeqRangeSet'
+          title: 'The range of this Gene record on this genomic region.'
+        type:
+          $ref: '#/components/schemas/v1GenomicRegionGenomicRegionType'
+    v1MaturePeptide:
+      type: object
+      properties:
+        accession_version:
+          type: string
+        name:
+          type: string
+        length:
+          type: integer
+    v1Message:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/v1Error'
+        warning:
+          $ref: '#/components/schemas/v1Warning'
+    v1MethodPayloadRequest:
+      type: object
+      properties:
+        method:
+          type: string
+          title: 'These are a special form of base64 + special encoding to be suitable for a URI.'
+        payload:
+          type: string
+    v1MicroBiggeDatasetRequest:
+      type: object
+      properties:
+        opaque_solr_query:
+          type: string
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1MicroBiggeDatasetRequestFileType'
+        element_flank_config:
+          $ref: '#/components/schemas/v1ElementFlankConfig'
+    v1NomenclatureAuthority:
+      type: object
+      properties:
+        authority:
+          type: string
+        identifier:
+          type: string
+    v1Organism:
+      type: object
+      properties:
+        tax_id:
+          type: string
+          format: uint64
+          title: 'NCBI Taxonomy ID'
+        sci_name:
+          type: string
+          title: 'Scientific Name'
+        common_name:
+          type: string
+          title: 'Common Name of the organism'
+        blast_node:
+          type: boolean
+          title: 'True if a blast nodes'
+        breed:
+          type: string
+          title: 'Infraspecies breed'
+        cultivar:
+          type: string
+          title: 'Infraspecies cultivar'
+        ecotype:
+          type: string
+          title: 'Infraspecies ecotype'
+        isolate:
+          type: string
+          title: 'Infraspecies isolate'
+        sex:
+          type: string
+          title: 'Infraspecies sex'
+        strain:
+          type: string
+          title: 'Infraspecies strain'
+        search_text:
+          type: array
+          items:
+            type: string
+        rank:
+          $ref: '#/components/schemas/v1OrganismRankType'
+          title: 'The rank of the tax node.'
+        parent_tax_id:
+          type: string
+          format: uint64
+          title: 'The parent taxnode ID'
+        assembly_count:
+          type: string
+          format: uint64
+          title: 'The number of assemblies at this node, and all children.'
+        assembly_counts:
+          $ref: '#/components/schemas/v1OrganismCounts'
+          title: 'assembly_counts will soon be deprecated'
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1OrganismCountByType'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Organism'
+        merged:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Organism'
+        merged_tax_ids:
+          type: array
+          items:
+            type: string
+            format: uint64
+        min_ord:
+          type: integer
+          title: 'ordinal values for any node are the full range of the ordinal values in the subtree underneath this node, and are used for faster range-based lookups'
+        max_ord:
+          type: integer
+        weight:
+          type: integer
+          title: 'More frequently searched taxons will have a higher weight.'
+        key:
+          type: string
+          format: uint64
+        title:
+          type: string
+        icon:
+          type: boolean
+    v1OrganismCountByType:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/v1CountType'
+        counts:
+          $ref: '#/components/schemas/v1OrganismCounts'
+    v1OrganismCounts:
+      type: object
+      properties:
+        node:
+          type: integer
+          title: 'The number of assemblies at this node only'
+        subtree:
+          type: integer
+          title: 'The number of assemblies at this node and all children.'
+    v1OrganismQueryRequest:
+      type: object
+      properties:
+        organism_query:
+          type: string
+        taxon_query:
+          type: string
+          title: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        tax_rank_filter:
+          $ref: '#/components/schemas/v1OrganismQueryRequestTaxRankFilter'
+          title: 'Set the scope of searched tax ranks'
+    v1OrthologRequest:
+      type: object
+      properties:
+        gene_id:
+          type: integer
+        returned_content:
+          $ref: '#/components/schemas/v1OrthologRequestContentType'
+          title: 'Return either gene-ids, or entire gene metadata'
+        taxon_filter:
+          type: array
+          items:
+            type: string
+    v1OrthologSet:
+      type: object
+      properties:
+        ortholog_set_id:
+          type: integer
+        method:
+          type: string
+        genes:
+          $ref: '#/components/schemas/v1GeneMetadata'
+    v1ProkaryoteGeneRequest:
+      type: object
+      properties:
+        accessions:
+          type: array
+          items:
+            type: string
+        include_annotation_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Fasta'
+        gene_flank_config:
+          $ref: '#/components/schemas/v1ProkaryoteGeneRequestGeneFlankConfig'
+        taxon:
+          type: string
+          title: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank When specified, return data from this taxon and its subtree'
+    v1ProkaryoteGeneRequestGeneFlankConfig:
+      type: object
+      properties:
+        length:
+          type: integer
+    v1Protein:
+      type: object
+      properties:
+        accession_version:
+          type: string
+        name:
+          type: string
+        length:
+          type: integer
+        isoform_name:
+          type: string
+        ensembl_protein:
+          type: string
+        mature_peptides:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1MaturePeptide'
+    v1Range:
+      type: object
+      properties:
+        begin:
+          type: string
+          format: uint64
+        end:
+          type: string
+          format: uint64
+        orientation:
+          $ref: '#/components/schemas/v1Orientation'
+        order:
+          type: integer
+          title: 'When an ordering is desired, fill out the order in the range.'
+        ribosomal_slippage:
+          type: integer
+          title: 'When ribosomal slippage is desired, fill out slippage amount between this and previous range.'
+    v1RefGeneCatalogDatasetRequest:
+      type: object
+      properties:
+        opaque_solr_query:
+          type: string
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1RefGeneCatalogDatasetRequestFileType'
+        element_flank_config:
+          $ref: '#/components/schemas/v1ElementFlankConfig'
+    v1Sars2ProteinDatasetRequest:
+      type: object
+      properties:
+        proteins:
+          type: array
+          items:
+            type: string
+        refseq_only:
+          type: boolean
+          title: 'If true, limit results to RefSeq genomes.'
+        annotated_only:
+          type: boolean
+          title: 'If true, limit results to annotated genomes.'
+        released_since:
+          type: string
+          format: date-time
+          title: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        updated_since:
+          type: string
+          format: date-time
+        host:
+          type: string
+          title: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        geo_location:
+          type: string
+          title: 'Assemblies from this location (country and state, or continent)'
+        complete_only:
+          type: boolean
+          title: 'only include complete genomes.'
+        table_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1VirusTableField'
+        exclude_sequence:
+          type: boolean
+          title: 'Set to true to omit the genomic sequence.'
+        include_annotation_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForVirusType'
+        format:
+          $ref: '#/components/schemas/v1TableFormat'
+          title: 'Choose download format (tsv, csv or jsonl)'
+    v1SciNameAndIds:
+      type: object
+      properties:
+        sci_name_and_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SciNameAndIdsSciNameAndId'
+    v1SciNameAndIdsSciNameAndId:
+      type: object
+      properties:
+        sci_name:
+          type: string
+          title: 'Scientific name'
+        tax_id:
+          type: string
+          format: uint64
+          title: 'NCBI Taxonomy ID'
+        common_name:
+          type: string
+          title: 'Common name'
+        matched_term:
+          type: string
+          title: 'Matched term'
+    v1SeqRangeSet:
+      type: object
+      properties:
+        accession_version:
+          type: string
+          title: 'NCBI Accession.version of the sequence'
+        range:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Range'
+    v1SleepReply:
+      type: object
+      properties:
+        reply:
+          type: string
+    v1SleepRequest:
+      type: object
+      properties:
+        sleep_msec:
+          type: integer
+        error_rate:
+          type: number
+          format: float
+          title: 'From 0 to 100, chance of an error'
+    v1TabularOutput:
+      type: object
+      properties:
+        data:
+          type: string
+    v1TaxTreeRequest:
+      type: object
+      properties:
+        tax_id:
+          type: string
+          format: uint64
+        tax_token:
+          type: string
+        taxon:
+          type: string
+          title: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        children_only:
+          type: boolean
+          title: 'Only report the children of the requested taxon and not their descendants'
+    v1TaxidReply:
+      type: object
+      properties:
+        tax_id:
+          type: integer
+    v1TaxidRequest:
+      type: object
+      properties:
+        org_name:
+          type: string
+    v1TaxonomyFilteredSubtreeRequest:
+      type: object
+      properties:
+        taxons:
+          type: array
+          items:
+            type: string
+        specified_limit:
+          type: boolean
+          title: 'Limit to specified species'
+        rank_limits:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1OrganismRankType'
+    v1TaxonomyFilteredSubtreeResponse:
+      type: object
+      properties:
+        root_nodes:
+          type: array
+          items:
+            type: integer
+        edges:
+          $ref: '#/components/schemas/v1TaxonomyFilteredSubtreeResponseEdgesEntry'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Warning'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Error'
+    v1TaxonomyFilteredSubtreeResponseEdge:
+      type: object
+      properties:
+        visible_children:
+          type: array
+          items:
+            type: integer
+        children_status:
+          $ref: '#/components/schemas/v1TaxonomyFilteredSubtreeResponseEdgeChildStatus'
+    v1TaxonomyFilteredSubtreeResponseEdgesEntry:
+      description: A map.
+      properties:
+        default:
+          $ref: '#/components/schemas/v1TaxonomyFilteredSubtreeResponseEdge'
+      additionalProperties:
+        $ref: '#/components/schemas/v1TaxonomyFilteredSubtreeResponseEdge'
+    v1TaxonomyMatch:
+      type: object
+      properties:
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Warning'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Error'
+        query:
+          type: array
+          items:
+            type: string
+        taxonomy:
+          $ref: '#/components/schemas/v1TaxonomyNode'
+    v1TaxonomyMetadataRequest:
+      type: object
+      properties:
+        taxons:
+          type: array
+          items:
+            type: string
+        returned_content:
+          $ref: '#/components/schemas/v1TaxonomyMetadataRequestContentType'
+          title: 'Return either tax-ids alone, or entire taxononmy-metadata records'
+    v1TaxonomyMetadataResponse:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Message'
+        taxonomy_nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1TaxonomyMatch'
+    v1TaxonomyNode:
+      type: object
+      properties:
+        tax_id:
+          type: integer
+          title: 'NCBI Taxonomy identifier'
+        organism_name:
+          type: string
+          title: 'Scientific name'
+        common_name:
+          type: string
+          title: 'Common name'
+        lineage:
+          type: array
+          items:
+            type: integer
+        children:
+          type: array
+          items:
+            type: integer
+        descendent_with_described_species_names_count:
+          type: integer
+          title: 'The number of descendants (grand total) that are specified.'
+        rank:
+          $ref: '#/components/schemas/v1OrganismRankType'
+          title: 'The rank of the organism.  An enumerated set of values.'
+        has_described_species_name:
+          type: boolean
+          title: 'If the taxonomy node has a proper species name'
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1TaxonomyNodeCountByType'
+        min_ord:
+          type: integer
+          title: 'ordinal values for any node are the full range of the ordinal values in the subtree underneath this node, and are used for faster range-based lookups'
+        max_ord:
+          type: integer
+        _indexed_names:
+          type: array
+          items:
+            type: string
+    v1TaxonomyNodeCountByType:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/v1CountType'
+        count:
+          type: integer
+    v1Transcript:
+      type: object
+      properties:
+        accession_version:
+          type: string
+          title: 'Transcript accession-version'
+        name:
+          type: string
+        length:
+          type: integer
+        genomic_range:
+          $ref: '#/components/schemas/v1SeqRangeSet'
+        exons:
+          $ref: '#/components/schemas/v1SeqRangeSet'
+        cds:
+          $ref: '#/components/schemas/v1SeqRangeSet'
+        genomic_locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GenomicLocation'
+        ensembl_transcript:
+          type: string
+        protein:
+          $ref: '#/components/schemas/v1Protein'
+          title: 'Protein, if coding transcript'
+        type:
+          $ref: '#/components/schemas/v1TranscriptTranscriptType'
+    v1VersionReply:
+      type: object
+      properties:
+        version:
+          type: string
+        major_ver:
+          type: integer
+        minor_ver:
+          type: integer
+        patch_ver:
+          type: integer
+    v1VirusAvailability:
+      type: object
+      properties:
+        valid_accessions:
+          type: array
+          items:
+            type: string
+        invalid_accessions:
+          type: array
+          items:
+            type: string
+        message:
+          type: string
+    v1VirusAvailabilityRequest:
+      type: object
+      properties:
+        accessions:
+          type: array
+          items:
+            type: string
+    v1VirusDataReportRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1VirusDatasetFilter'
+          title: 'All the supported filters for virus requests'
+        returned_content:
+          $ref: '#/components/schemas/v1VirusDataReportRequestContentType'
+          title: 'Return either virus genome accessions, or complete virus metadata'
+        table_fields:
+          type: array
+          items:
+            type: string
+        page_size:
+          type: integer
+          title: 'The maximum number of virus data reports to return. Default is 20 and maximum is 1000. If the number of results exceeds the page size, `page_token` can be used to retrieve the remaining results.'
+        page_token:
+          type: string
+          title: 'A page token is returned from a `GetVirusDataReports` call with more than `page_size` results. Use this token, along with the previous `VirusDataReportRequest` parameters, to retrieve the next page of results. When `page_token` is empty, all results have been retrieved.'
+    v1VirusDatasetFilter:
+      type: object
+      properties:
+        accessions:
+          type: array
+          items:
+            type: string
+        taxon:
+          type: string
+          title: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        refseq_only:
+          type: boolean
+          title: 'If true, limit results to RefSeq genomes.'
+        annotated_only:
+          type: boolean
+          title: 'If true, limit results to annotated genomes.'
+        released_since:
+          type: string
+          format: date-time
+          title: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        updated_since:
+          type: string
+          format: date-time
+        host:
+          type: string
+          title: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        pangolin_classification:
+          type: string
+          title: 'If set, limit results to genomes classified to this lineage by the PangoLearn tool.'
+        geo_location:
+          type: string
+          title: 'Assemblies from this location (country and state, or continent)'
+        complete_only:
+          type: boolean
+          title: 'only include complete genomes.'
+    v1VirusDatasetRequest:
+      type: object
+      properties:
+        tax_id:
+          type: integer
+          title: 'NCBI Taxonomy ID'
+        tax_name:
+          type: string
+          title: 'Common or scientific name at any taxonomic rank'
+        accession:
+          type: string
+          title: 'genome sequence accession'
+        accessions:
+          type: array
+          items:
+            type: string
+        taxon:
+          type: string
+          title: 'NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank'
+        refseq_only:
+          type: boolean
+          title: 'If true, limit results to RefSeq genomes.'
+        annotated_only:
+          type: boolean
+          title: 'If true, limit results to annotated genomes.'
+        released_since:
+          type: string
+          format: date-time
+          title: 'If set, limit results to viral genomes that have been released after a specified date (and optionally, time). April 1, 2020 midnight UTC should be formatted as ''2020-04-01T00:00:00.000Z'''
+        updated_since:
+          type: string
+          format: date-time
+        host:
+          type: string
+          title: 'If set, limit results to genomes extracted from this host (Taxonomy ID or name) All hosts by default'
+        pangolin_classification:
+          type: string
+          title: 'If set, limit results to genomes classified to this lineage by the PangoLearn tool.'
+        geo_location:
+          type: string
+          title: 'Assemblies from this location (country and state, or continent)'
+        complete_only:
+          type: boolean
+          title: 'only include complete genomes.'
+        table_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1VirusTableField'
+        exclude_sequence:
+          type: boolean
+          title: 'Set to true to omit the genomic sequence.'
+        include_annotation_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AnnotationForVirusType'
+        format:
+          $ref: '#/components/schemas/v1TableFormat'
+          title: 'Choose download format (tsv, csv or jsonl)'
+    v1Warning:
+      type: object
+      properties:
+        gene_warning_code:
+          $ref: '#/components/schemas/v1WarningGeneWarningCode'
+        reason:
+          type: string
+        message:
+          type: string
+        replaced_id:
+          $ref: '#/components/schemas/v1WarningReplacedId'
+        unrecognized_identifier:
+          type: string
+    v1WarningReplacedId:
+      type: object
+      properties:
+        requested:
+          type: string
+        returned:
+          type: string
+    v1reportsBioProject:
+      type: object
+      properties:
+        accession:
+          type: string
+          title: 'BioProject accession'
+        title:
+          type: string
+          title: 'Title of the BioProject provided by the submitter'
+        parent_accession:
+          type: string
+        parent_accessions:
+          type: array
+          items:
+            type: string
+    v1reportsBioSampleAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    v1reportsBioSampleContact:
+      type: object
+      properties:
+        lab:
+          type: string
+    v1reportsBioSampleDescription:
+      type: object
+      properties:
+        title:
+          type: string
+        organism:
+          $ref: '#/components/schemas/v1reportsOrganism'
+        comment:
+          type: string
+    v1reportsBioSampleDescriptor:
+      type: object
+      properties:
+        accession:
+          type: string
+        last_updated:
+          type: string
+        publication_date:
+          type: string
+        submission_date:
+          type: string
+        sample_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsBioSampleId'
+        description:
+          $ref: '#/components/schemas/v1reportsBioSampleDescription'
+        owner:
+          $ref: '#/components/schemas/v1reportsBioSampleOwner'
+        models:
+          type: array
+          items:
+            type: string
+        bioprojects:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsBioProject'
+        package:
+          type: string
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsBioSampleAttribute'
+        status:
+          $ref: '#/components/schemas/v1reportsBioSampleStatus'
+    v1reportsBioSampleId:
+      type: object
+      properties:
+        db:
+          type: string
+        label:
+          type: string
+        value:
+          type: string
+    v1reportsBioSampleOwner:
+      type: object
+      properties:
+        name:
+          type: string
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsBioSampleContact'
+    v1reportsBioSampleStatus:
+      type: object
+      properties:
+        status:
+          type: string
+        when:
+          type: string
+    v1reportsConservedDomain:
+      type: object
+      properties:
+        accession:
+          type: string
+          title: 'cdd accession'
+        name:
+          type: string
+        range:
+          $ref: '#/components/schemas/v1reportsRange'
+          title: 'range on the protein'
+    v1reportsLineageOrganism:
+      type: object
+      properties:
+        tax_id:
+          type: integer
+          title: 'NCBI Taxonomy identifier'
+        name:
+          type: string
+          title: 'Scientific name'
+    v1reportsOrganism:
+      type: object
+      properties:
+        tax_id:
+          type: integer
+          title: 'NCBI Taxonomy identifier'
+        sci_name:
+          type: string
+          title: 'Scientific name'
+        organism_name:
+          type: string
+          title: 'Scientific name'
+        common_name:
+          type: string
+          title: 'Common name'
+        lineage:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsLineageOrganism'
+        strain:
+          type: string
+        pangolin_classification:
+          type: string
+    v1reportsRange:
+      type: object
+      properties:
+        begin:
+          type: string
+          format: uint64
+        end:
+          type: string
+          format: uint64
+        orientation:
+          $ref: '#/components/schemas/v1reportsOrientation'
+        order:
+          type: integer
+    v1reportsSeqRangeSetFasta:
+      type: object
+      properties:
+        seq_id:
+          type: string
+          title: 'Seq_id may include location info in addition to a sequence accession'
+        accession_version:
+          type: string
+          title: 'Accession and version of the viral nucleotide sequence'
+        title:
+          type: string
+        sequence_hash:
+          type: string
+          title: 'Unique identifier for identical sequences'
+        range:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsRange'
+    v1reportsVirusAnnotation:
+      type: object
+      properties:
+        genes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsVirusGene'
+    v1reportsVirusAssembly:
+      type: object
+      properties:
+        accession:
+          type: string
+          title: 'The accession.version of the viral nucleotide sequence. Includes both GenBank and RefSeq accessions'
+        is_complete:
+          type: boolean
+        is_annotated:
+          type: boolean
+          title: 'The viral genome has been annotated by either the submitter (GenBank) or by NCBI (RefSeq)'
+        isolate:
+          $ref: '#/components/schemas/v1reportsVirusAssemblyIsolate'
+        source_database:
+          type: string
+          title: 'Indicates if the source of the viral nucleotide record is from a GenBank submitter or from NCBI-derived curation (RefSeq)'
+        protein_count:
+          type: integer
+          title: 'The total count of annotated proteins including both proteins and polyproteins but not processed mature peptides'
+        host:
+          $ref: '#/components/schemas/v1reportsOrganism'
+          title: 'Taxon from which the virus sample was isolated'
+        virus:
+          $ref: '#/components/schemas/v1reportsOrganism'
+          title: 'Viral taxon'
+        bioprojects:
+          type: array
+          items:
+            type: string
+        location:
+          $ref: '#/components/schemas/v1reportsVirusAssemblyCollectionLocation'
+        update_date:
+          type: string
+          title: 'Date the viral nucleotide accession was last updated in NCBI Virus'
+        release_date:
+          type: string
+          title: 'Date the viral nucleotide accession was first released in NCBI Virus'
+        nucleotide_completeness:
+          type: string
+          title: 'Value describing if the of the viral nucleotide sequence represents a complete or partial genome'
+        completeness:
+          $ref: '#/components/schemas/v1reportsVirusAssemblyCompleteness'
+        length:
+          type: integer
+          title: 'Length of the viral nucleotide sequence'
+        gene_count:
+          type: integer
+          title: 'Total count of genes annotated on the viral nucleotide sequence'
+        mature_peptide_count:
+          type: integer
+          title: 'Total count of processed mature peptides annotated on the viral nucleotide sequence'
+        biosample:
+          type: string
+          title: 'Associated Biosample accessions'
+        mol_type:
+          type: string
+          title: 'ICTV (International Committee on Taxonomy of Viruses) viral classification based on nucleic acid composition, strandedness and method of replication'
+        annotation:
+          $ref: '#/components/schemas/v1reportsVirusAnnotation'
+        nucleotide:
+          $ref: '#/components/schemas/v1reportsSeqRangeSetFasta'
+          title: 'The whole genomic nucleotide record of the CDS feature.'
+        purpose_of_sampling:
+          $ref: '#/components/schemas/v1reportsPurposeOfSampling'
+        sra_accessions:
+          type: array
+          items:
+            type: string
+    v1reportsVirusAssemblyCollectionLocation:
+      type: object
+      properties:
+        geographic_location:
+          type: string
+          title: 'Country of virus specimen collection'
+        geographic_region:
+          type: string
+          title: 'Region of virus specimen collection'
+    v1reportsVirusAssemblyIsolate:
+      type: object
+      properties:
+        name:
+          type: string
+          title: 'BioSample harmonized attribute names https://www.ncbi.nlm.nih.gov/biosample/docs/attributes/'
+        source:
+          type: string
+          title: 'Source material from which the viral specimen was isolated'
+        collection_date:
+          type: string
+          title: 'The collection date for the sample from which the viral nucleotide sequence was derived'
+    v1reportsVirusDataReportPage:
+      type: object
+      properties:
+        reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsVirusAssembly'
+        total_count:
+          type: integer
+          title: 'The total count of available assemblies (ignoring the page_size parameter).'
+        next_page_token:
+          type: string
+          title: 'A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.'
+        _report_type:
+          type: string
+        _report_fields:
+          type: array
+          items:
+            type: string
+        _first_page:
+          type: boolean
+    v1reportsVirusGene:
+      type: object
+      properties:
+        name:
+          type: string
+        gene_id:
+          type: integer
+        nucleotide:
+          $ref: '#/components/schemas/v1reportsSeqRangeSetFasta'
+          title: 'The interval on the genomic nucleotide record of the CDS feature.'
+        cds:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsVirusPeptide'
+    v1reportsVirusPeptide:
+      type: object
+      properties:
+        accession:
+          type: string
+          title: 'Protein accession and version'
+        name:
+          type: string
+          title: 'Protein name'
+        other_names:
+          type: array
+          items:
+            type: string
+        nucleotide:
+          $ref: '#/components/schemas/v1reportsSeqRangeSetFasta'
+          title: 'The interval on the genomic nucleotide record of this mature-peptide feature'
+        protein:
+          $ref: '#/components/schemas/v1reportsSeqRangeSetFasta'
+          title: 'The full polyprotein record or interval on the polyprotein for mature-peptide features'
+        pdb_ids:
+          type: array
+          items:
+            type: string
+        cdd:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsConservedDomain'
+        uni_prot_kb:
+          $ref: '#/components/schemas/v1reportsVirusPeptideUniProtId'
+          title: 'UniProt identifier'
+        mature_peptide:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1reportsVirusPeptide'
+        protein_completeness:
+          $ref: '#/components/schemas/v1reportsVirusAssemblyCompleteness'
+          title: 'Protein completeness'
+    v1reportsVirusPeptideUniProtId:
+      type: object
+      properties:
+        id:
+          type: string
+          title: 'UniProt ID'
+        name:
+          type: string
+          title: 'UniProt name'
+    
+    v1AnnotationForAssemblyType:
+      type: string
+      enum:
+        - DEFAULT
+        - GENOME_GFF
+        - GENOME_GBFF
+        - GENOME_GB
+        - RNA_FASTA
+        - PROT_FASTA
+        - GENOME_GTF
+        - CDS_FASTA
+        - ASM_STRUCT
+        - GENOME_FASTA
+      default: DEFAULT
+    
+    v1AnnotationForVirusType:
+      type: string
+      enum:
+        - DEFAULT
+        - CDS_FASTA
+        - PROT_FASTA
+        - GENOME_GBFF
+        - GENOME_GPFF
+        - PDB_FILES
+      default: DEFAULT
+    
+    v1AssemblyDatasetDescriptorsFilterAssemblyLevel:
+      type: string
+      enum:
+        - chromosome
+        - scaffold
+        - contig
+        - complete_genome
+      default: chromosome
+      title: 'The level of the genome assembly: Chromosome, Scaffold, Contig or Complete Genome'
+    
+    v1AssemblyDatasetDescriptorsFilterAssemblySource:
+      type: string
+      enum:
+        - all
+        - refseq
+        - genbank
+      default: all
+    
+    v1AssemblyDatasetDescriptorsFilterAssemblyVersion:
+      type: string
+      enum:
+        - current
+        - all_assemblies
+      default: current
+      title: 'The assembly status - current (includes latest and retired), or all assemblies, which adds replaced and suppressed'
+    
+    v1AssemblyDatasetDescriptorsRequestContentType:
+      type: string
+      enum:
+        - COMPLETE
+        - ASSM_ACC
+        - COUNTS
+      default: COMPLETE
+    
+    v1AssemblyDatasetRequestResolution:
+      type: string
+      enum:
+        - FULLY_HYDRATED
+        - DATA_REPORT_ONLY
+      default: FULLY_HYDRATED
+    
+    v1AssemblyMetadataRequestContentType:
+      type: string
+      enum:
+        - COMPLETE
+        - ASSM_ACC
+      default: COMPLETE
+    
+    v1CountType:
+      type: string
+      enum:
+        - COUNT_TYPE_UNSPECIFIED
+        - COUNT_TYPE_ASSEMBLY
+        - COUNT_TYPE_GENE
+        - COUNT_TYPE_tRNA
+        - COUNT_TYPE_rRNA
+        - COUNT_TYPE_snRNA
+        - COUNT_TYPE_scRNA
+        - COUNT_TYPE_snoRNA
+        - COUNT_TYPE_PROTEIN_CODING
+        - COUNT_TYPE_PSEUDO
+        - COUNT_TYPE_TRANSPOSON
+        - COUNT_TYPE_miscRNA
+        - COUNT_TYPE_ncRNA
+        - COUNT_TYPE_BIOLOGICAL_REGION
+        - COUNT_TYPE_OTHER
+      default: COUNT_TYPE_UNSPECIFIED
+    
+    v1ErrorAssemblyErrorCode:
+      type: string
+      enum:
+        - UNKNOWN_ASSEMBLY_ERROR_CODE
+        - INVALID_BIOPROJECT_IDS
+        - NO_ASSEMBLIES_FOR_BIOPROJECTS
+        - INVALID_TAXON
+      default: UNKNOWN_ASSEMBLY_ERROR_CODE
+    
+    v1ErrorGeneErrorCode:
+      type: string
+      enum:
+        - UNKNOWN_GENE_ERROR_CODE
+        - INCOMPLETE_LOOKUP_SYMBOL
+      default: UNKNOWN_GENE_ERROR_CODE
+    
+    v1ErrorVirusErrorCode:
+      type: string
+      enum:
+        - UNKNOWN_VIRUS_ERROR_CODE
+      default: UNKNOWN_VIRUS_ERROR_CODE
+    
+    v1Fasta:
+      type: string
+      enum:
+        - FASTA_UNSPECIFIED
+        - FASTA_GENE
+        - FASTA_RNA
+        - FASTA_PROTEIN
+        - FASTA_GENE_FLANK
+        - FASTA_CDS
+        - FASTA_5P_UTR
+        - FASTA_3P_UTR
+      default: FASTA_UNSPECIFIED
+    
+    v1GeneDatasetRequestContentType:
+      type: string
+      enum:
+        - COMPLETE
+        - IDS_ONLY
+      default: COMPLETE
+    
+    v1GeneDatasetRequestSortField:
+      type: string
+      enum:
+        - SORT_FIELD_UNSPECIFIED
+        - SORT_FIELD_GENE_ID
+        - SORT_FIELD_GENE_TYPE
+        - SORT_FIELD_GENE_SYMBOL
+      default: SORT_FIELD_UNSPECIFIED
+    
+    v1GeneDescriptorGeneType:
+      type: string
+      enum:
+        - UNKNOWN
+        - tRNA
+        - rRNA
+        - snRNA
+        - scRNA
+        - snoRNA
+        - PROTEIN_CODING
+        - PSEUDO
+        - TRANSPOSON
+        - miscRNA
+        - ncRNA
+        - BIOLOGICAL_REGION
+        - OTHER
+      default: UNKNOWN
+    
+    v1GeneDescriptorRnaType:
+      type: string
+      enum:
+        - rna_UNKNOWN
+        - premsg
+        - tmRna
+      default: rna_UNKNOWN
+    
+    v1GenomicRegionGenomicRegionType:
+      type: string
+      enum:
+        - UNKNOWN
+        - REFSEQ_GENE
+        - PSEUDOGENE
+        - BIOLOGICAL_REGION
+        - OTHER
+      default: UNKNOWN
+    
+    v1MicroBiggeDatasetRequestFileType:
+      type: string
+      enum:
+        - FILE_TYPE_UNSPECIFIED
+        - element_fasta
+        - element_flank_fasta
+        - contig_fasta
+        - protein_fasta
+      default: FILE_TYPE_UNSPECIFIED
+    
+    v1OrganismRankType:
+      type: string
+      enum:
+        - NO_RANK
+        - SUPERKINGDOM
+        - KINGDOM
+        - SUBKINGDOM
+        - SUPERPHYLUM
+        - SUBPHYLUM
+        - PHYLUM
+        - CLADE
+        - SUPERCLASS
+        - CLASS
+        - SUBCLASS
+        - INFRACLASS
+        - COHORT
+        - SUBCOHORT
+        - SUPERORDER
+        - ORDER
+        - SUBORDER
+        - INFRAORDER
+        - PARVORDER
+        - SUPERFAMILY
+        - FAMILY
+        - SUBFAMILY
+        - GENUS
+        - SUBGENUS
+        - SPECIES_GROUP
+        - SPECIES_SUBGROUP
+        - SPECIES
+        - SUBSPECIES
+        - TRIBE
+        - SUBTRIBE
+        - FORMA
+        - VARIETAS
+        - STRAIN
+        - SECTION
+        - SUBSECTION
+        - PATHOGROUP
+        - SUBVARIETY
+        - GENOTYPE
+        - SEROTYPE
+        - ISOLATE
+        - MORPH
+        - SERIES
+        - FORMA_SPECIALIS
+        - SEROGROUP
+        - BIOTYPE
+      default: NO_RANK
+    
+    v1OrganismQueryRequestTaxRankFilter:
+      type: string
+      enum:
+        - species
+        - higher_taxon
+      default: species
+    
+    v1Orientation:
+      type: string
+      enum:
+        - none
+        - plus
+        - minus
+      default: none
+    
+    v1OrthologRequestContentType:
+      type: string
+      enum:
+        - COMPLETE
+        - IDS_ONLY
+      default: COMPLETE
+    
+    v1RefGeneCatalogDatasetRequestFileType:
+      type: string
+      enum:
+        - FILE_TYPE_UNSPECIFIED
+        - FILE_TYPE_NUCLEOTIDE
+        - FILE_TYPE_NUCLEOTIDE_WITH_FLANK
+        - FILE_TYPE_PROTEIN
+      default: FILE_TYPE_UNSPECIFIED
+    
+    v1SortDirection:
+      type: string
+      enum:
+        - SORT_DIRECTION_UNSPECIFIED
+        - SORT_DIRECTION_ASCENDING
+        - SORT_DIRECTION_DESCENDING
+      default: SORT_DIRECTION_UNSPECIFIED
+    
+    v1TableFormat:
+      type: string
+      enum:
+        - tsv
+        - csv
+        - jsonl
+      default: tsv
+    
+    v1TaxonomyFilteredSubtreeResponseEdgeChildStatus:
+      type: string
+      enum:
+        - UNSPECIFIED
+        - HAS_MORE_CHILDREN
+        - NO_VISIBLE_CHILDREN
+      default: UNSPECIFIED
+    
+    v1TaxonomyMetadataRequestContentType:
+      type: string
+      enum:
+        - COMPLETE
+        - TAXIDS
+      default: COMPLETE
+    
+    v1TranscriptTranscriptType:
+      type: string
+      enum:
+        - UNKNOWN
+        - PROTEIN_CODING
+        - NON_CODING
+        - PROTEIN_CODING_MODEL
+        - NON_CODING_MODEL
+      default: UNKNOWN
+    
+    v1VirusDataReportRequestContentType:
+      type: string
+      enum:
+        - COMPLETE
+        - ACCESSIONS_ONLY
+      default: COMPLETE
+      title: 'Specify a specific group of values to be returned, currently either all fields or accessions only'
+    
+    v1VirusTableField:
+      type: string
+      enum:
+        - unspecified
+        - nucleotide_accession
+        - species_tax_id
+        - species_name
+        - genus
+        - family
+        - nucleotide_length
+        - isolate_name
+        - sequence_type
+        - nuc_completeness
+        - geo_location
+        - us_state
+        - host_name
+        - host_tax_id
+        - collection_date
+        - bioproject
+        - biosample
+        - polyprotein_name
+        - protein_name
+        - protein_accession
+        - protein_synonym
+        - cds_span
+      default: unspecified
+    
+    v1WarningGeneWarningCode:
+      type: string
+      enum:
+        - UNKNOWN_GENE_WARNING_CODE
+        - ACCESSION_VERSION_MISMATCH
+        - REPLACED_GENE_ID
+        - DISCONTINUED_GENE_ID
+        - UNRECOGNIZED_GENE_ID
+        - UNRECOGNIZED_GENE_SYMBOL
+        - UNRECOGNIZED_ACCESSION
+        - UNRECOGNIZED_TAX_TOKEN
+      default: UNKNOWN_GENE_WARNING_CODE
+    
+    v1reportsAssemblyStatus:
+      type: string
+      enum:
+        - ASSEMBLY_STATUS_UNKNOWN
+        - current
+        - previous
+        - suppressed
+        - retired
+      default: ASSEMBLY_STATUS_UNKNOWN
+    
+    v1reportsGeneDescriptorGeneType:
+      type: string
+      enum:
+        - UNKNOWN
+        - tRNA
+        - rRNA
+        - snRNA
+        - scRNA
+        - snoRNA
+        - PROTEIN_CODING
+        - PSEUDO
+        - TRANSPOSON
+        - miscRNA
+        - ncRNA
+        - BIOLOGICAL_REGION
+        - OTHER
+      default: UNKNOWN
+      title: 'NB: GeneType values match Entrez Gene'
+    
+    v1reportsGeneDescriptorRnaType:
+      type: string
+      enum:
+        - rna_UNKNOWN
+        - premsg
+        - tmRna
+      default: rna_UNKNOWN
+    
+    v1reportsGenomicRegionGenomicRegionType:
+      type: string
+      enum:
+        - UNKNOWN
+        - REFSEQ_GENE
+        - PSEUDOGENE
+        - BIOLOGICAL_REGION
+        - OTHER
+      default: UNKNOWN
+    
+    v1reportsLinkedAssemblyLinkedAssemblyType:
+      type: string
+      enum:
+        - LINKED_ASSEMBLY_TYPE_UNKNOWN
+        - alternate_pseudohaplotype
+        - haploid_principal_pseudohaplotype_of_diploid
+      default: LINKED_ASSEMBLY_TYPE_UNKNOWN
+    
+    v1reportsOrientation:
+      type: string
+      enum:
+        - none
+        - plus
+        - minus
+      default: none
+    
+    v1reportsProkaryoteGeneLocationCompleteness:
+      type: string
+      enum:
+        - complete
+        - partial
+      default: complete
+    
+    v1reportsPurposeOfSampling:
+      type: string
+      enum:
+        - PURPOSE_OF_SAMPLING_UNKNOWN
+        - PURPOSE_OF_SAMPLING_BASELINE_SURVEILLANCE
+      default: PURPOSE_OF_SAMPLING_UNKNOWN
+    
+    v1reportsTranscriptTranscriptType:
+      type: string
+      enum:
+        - UNKNOWN
+        - PROTEIN_CODING
+        - NON_CODING
+        - PROTEIN_CODING_MODEL
+        - NON_CODING_MODEL
+      default: UNKNOWN
+    
+    v1reportsVirusAssemblyCompleteness:
+      type: string
+      enum:
+        - UNKNOWN
+        - COMPLETE
+        - PARTIAL
+      default: UNKNOWN
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
+    rpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'

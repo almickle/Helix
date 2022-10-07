@@ -1,0 +1,138 @@
+ // // ensembl
+    // useEffect(() => {
+    //     // max length: 10,000,000
+    //     fetch("http://rest.ensembl.org/info/genomes/human", {
+    //         headers: {
+    //             "content-type": "application/json",
+    //             "accept": "application/json"
+    //         }
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(data => {
+    //         console.log("ensembl")
+    //         console.log(data)
+    //     })
+    // }, [])
+
+    // // ncbi
+    // useEffect(() => {
+    //     fetch("https://api.ncbi.nlm.nih.gov/datasets/v1/genome/accession/GCF_000001405.28", {
+    //         headers: {
+    //             "content-type": "application/json",
+    //             "accept": "application/json"
+    //         }
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(data => {
+    //         console.log("ncbi")
+    //         console.log(data)
+    //     })
+    // }, [])
+
+    // // entrez
+    // useEffect(() => {
+    //     fetch("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=nuccore&id=NC_000021.9&retmode=json", {
+    //         // headers: {
+    //         //     "Content-Type": "application/json",
+    //         //     "Accept": "application/json"
+    //         // }
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(data => {
+    //         console.log("entrez")
+    //         console.log(data)
+    //     })
+    // }, [])
+
+    // const screenHeight = document.getElementById('home').clientHeight
+
+    // useEffect(() => {
+    //     console.log(screenHeight)
+    // }, [screenHeight])
+
+    useEffect(() => {
+        fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/id/93986')
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+    }, [])
+
+    // ENSG00000128573
+    // useEffect(() => {
+    //     fetch("http://rest.ensembl.org/sequence/id/ENSG00000128573", {
+    //         headers: {
+    //             "content-type": "application/json",
+    //             "accept": "application/json"
+    //         }
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(data => console.log(data))
+    // }, [])
+
+     useEffect(() => {
+        fetch("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=nuccore&id=NC_000007.14&retmode=json")
+        .then(resp => resp.json())
+        .then(data => {
+            console.log("entrez")
+            console.log(data)
+        })
+    }, [])
+
+    https://api.ncbi.nlm.nih.gov/datasets/v1/gene/id/5020
+
+        // useEffect(() => {
+    //     fetch('https://rest.ensembl.org/xrefs/symbol/homo_sapiens/' + inputData + '?external_db=ncbi', {
+    //         headers: {
+    //             "content-type":" application/json"
+    //         }
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(data => console.log(data))
+    // }, [inputData])
+
+    // useEffect(() => {
+    //     if(inputData) {
+    //     fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/symbol/' + inputData + '/taxon/human')
+    //     .then(resp => resp.json())
+    //     .then(data => console.log(data))
+    //     }
+    // }, [inputData])
+
+
+
+
+    // fetch('https://rest.ensembl.org/sequence/id/' + data.genes[0].gene.ensembl_gene_ids[0], {
+            //     headers: {
+            //         "content-type": "application/json",
+            //         "accept": "application/json"
+            //     }
+            // })
+            // .then(resp => resp.json())
+            // .then(data => setSequence(data.seq))
+
+
+             // useEffect(() => {
+    //     if(sequenceID.includes('ENSG')) {
+    //         fetch('https://rest.ensembl.org/sequence/id/' + sequenceID, {
+    //             headers: {
+    //                 "content-type": "application/json",
+    //                 "accept": "application/json"
+    //             }
+    //         })
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             setRawSequence(data.seq)
+    //             setSequenceArray(data.seq.split(''))
+    //         })
+    //     }
+    //     // eslint-disable-next-line
+    // }, [sequenceID])
+
+
+    useEffect(() => {
+        
+        fetch('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_000013.11&strand=1&seq_start=32315508&seq_stop=32400268&rettype=fasta&retmode=xml')
+        .then(resp => resp.text())
+        .then(data => {
+                        const seq = new XMLParser().parseFromString(data).children[0].children[0].children[6].value
+                    })
+    }, [])

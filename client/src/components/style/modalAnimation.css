@@ -1,0 +1,12 @@
+
+@keyframes modalEnter {
+    from {top: 0;}
+}
+
+@keyframes modalLeave {
+    to {opacity: 0%}
+}
+
+@keyframes sideEnter {
+    from {left: 0}
+}

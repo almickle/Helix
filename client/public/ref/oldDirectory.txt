@@ -1,0 +1,78 @@
+import { useState } from "react"
+import Icon from "./Icon"
+import NaviLines from "./NaviLines"
+import Transcript from "./Transcript"
+
+export default function Directory ( { geneData, setSequenceID, setReload, reload, setPresentView, setTranscriptIndex } ) {
+    
+    const initialNaviLineHeight = 24
+    const dotSize = 6
+    const margin = 0
+    // const height = 24
+    const { transcripts, symbol } = geneData
+
+    const [expandedDirectory, setExpandedDirectory] = useState(true)
+    const [naviLineHeights, setNaviLineHeight] = useState([initialNaviLineHeight])
+
+    
+    const naviLineElements = transcripts.map((transcript, index) => {
+        return (
+            <NaviLines key={index} height={naviLineHeights[index]} id={`NaviLine ${index}`}/>
+        )
+    })
+
+
+    const transcriptElements = transcripts.map((transcript, index) => {
+
+        let transcriptColor
+
+        if(transcript.protein) {
+            transcriptColor = 'black'
+        } else { transcriptColor = 'red' }
+
+        return (
+            <Transcript key={index} label={`Transcript ${index+1}`} dotSize={dotSize} margin={margin} index={index} transcripts={transcripts} setSequenceID={setSequenceID} setPresentView={setPresentView} setTranscriptIndex={setTranscriptIndex} transcriptColor={transcriptColor} setNaviLineHeight={setNaviLineHeight} />
+        )   // height={height}
+    })
+
+
+    const directoryContent = () => {
+        if(expandedDirectory === true) {
+            return (
+                <div style={{ display: 'flex', flexDirection: 'row', height: 'fit-content' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', height: 'fit-content', justifyContent: 'flex-start', marginLeft: (dotSize/2-1), marginTop: margin }}>
+                        {naviLineElements}
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', height: 'fit-content', marginTop: 11 }}>
+                        {transcriptElements}
+                    </div>
+                </div>
+            )
+        }
+        else {
+            return <div></div>
+        }
+    }
+
+    function handleClickGene() {
+        setExpandedDirectory(!expandedDirectory)
+    }
+
+    function handleDoubleClickGene() {
+        setSequenceID(geneData.ensembl_gene_ids[0])
+        setPresentView('DNA')
+    }
+
+
+    
+        return (
+            <div style={{ height: 'fit-content', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', marginLeft: 40, marginBottom: 10, marginTop: 7, fontSize: 16 }}>
+                <div onClick={handleClickGene} onDoubleClick={handleDoubleClickGene} style={{ height: 20, width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', fontSize: 15, cursor: 'pointer' }}>
+                    <Icon />
+                    <span>{symbol}</span>
+                </div>
+                {directoryContent()}
+            </div>
+        )
+      
+}

@@ -1,0 +1,275 @@
+function handleDragHorizontal(event) {
+        const wWidth = document.getElementById('window').getBoundingClientRect().width
+        const pWidth = document.getElementById('panel').getBoundingClientRect().width
+        const resize = document.getElementById('panel').getBoundingClientRect().right - event.clientX
+
+        if ((pWidth - resize) !== 0) {
+            setPanelWidth(`${pWidth - resize}px`)
+            setWindowWidth(`${wWidth + resize}px`)
+        }
+    }
+
+ function handleDragVertical(event) {
+        const mHeight = document.getElementById('main').getBoundingClientRect().height
+        const wHeight = document.getElementById('window').getBoundingClientRect().height
+        const resizeW = document.getElementById('window').getBoundingClientRect().top - event.clientY
+        const resizeM = document.getElementById('main').getBoundingClientRect().bottom - event.clientY
+        if ((mHeight - resizeM) !== 0){
+            setWindowHeight(`${wHeight + resizeW}px`)
+            setMainHeight(`${mHeight - resizeM}px`)
+        }
+    }
+
+    const [windowHeight, setWindowHeight] = useState(`${defaultHeight}%`)
+    const [windowWidth, setWindowWidth] = useState(`${defaultWidth}%`)
+    const [panelWidth, setPanelWidth] = useState(`${100-defaultWidth}%`)
+    const [mainHeight, setMainHeight] = useState(`${100-defaultHeight}%`)
+
+        // const currentContent = () => {
+    //     if(showCurrent === true) {
+    //         return (
+    //             <div style={{ height: '30%', width: '100%', backgroundColor: 'white', display: 'flex', flexDirection: 'column' }}>
+
+    //             </div>
+    //         )
+    //     }
+    //     else {
+    //         return (
+    //             <div></div>
+    //         )
+    //     }
+    // }
+
+    // const libraryContent = () => {
+    //     if(showLibrary === true) {
+    //         return (
+    //             <div style={{ height: '30%', width: '100%', backgroundColor: 'white', display: 'flex', flexDirection: 'column' }}>
+
+    //             </div>
+    //         )
+    //     }
+    //     else {
+    //         return (
+    //             <div></div>
+    //         )
+    //     }
+    // }
+
+
+    function processSequence() {
+        const exonRanges = []
+        exonRanges.splice(0, exonRanges.length)
+        exons.forEach((exon) => {
+            exonRanges.push([parseInt(exon.begin), parseInt(exon.end)])
+        })
+
+        console.log(exonRanges)
+        
+        const raw = rawSequence.split('')
+        const xxx = []
+        const yyy = []
+        xxx.splice(0, xxx.length)
+        exons.forEach((exon, index) => {
+            xxx.push(raw.slice(exonRanges[index][0]-genomicRange[0], exonRanges[index][1]-genomicRange[0]+1))
+        })
+        xxx.forEach((exon) => {
+            yyy.push(...exon)
+        })
+
+        console.log('yyy')
+        console.log(yyy)
+
+        setSequenceArray(yyy)
+    }
+
+                // const raw = rawSequence.split('')
+            // const xxx = []
+            // const yyy = []
+            // exons.forEach((exon, index) => {
+            //     xxx.push(raw.slice(exonRanges[index][0]-genomicRange[0], exonRanges[index][1]-genomicRange[0]+1))
+            // })
+            // xxx.forEach((exon) => {
+            //     yyy.push(...exon)
+            // })
+
+
+            // {/* <div id="header" style={{ zIndex: 2, position: 'fixed', height: headerSize, width: '80%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgb(220, 220, 220)' }}>
+//                 <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row' }}>Species: {geneData.taxname} </span>
+//                 <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Gene: {geneData.symbol}</span>
+//                 <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Length: {sequenceArray.length.toLocaleString("en-US")} bp </span>
+//                 <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Transcripts: {geneData.transcripts.length}</span>
+//                 <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Assembly: {geneData.annotations[0].assemblies_in_scope[0].name}</span>
+//                 <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Chromosome: {geneData.chromosomes[0]}</span>
+//                 <span onClick={setStyling} style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Style</span>
+//             </div> */}
+
+// {/* <div id="container" style={{ zIndex: 0, height: `fit-content`, width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: headerMargin, overflowX: 'clip' }}>
+//                 <div id="column" style={{ visibility: visibility, height: '100%', width: `${(100 - dnaContainerSize) / 2}%`, display: 'flex', flexDirection: 'column', alignItems: 'center', userSelect: 'none' }}>{leftCounters}</div>
+//                 <div id="dna" style={{ visibility: visibility, width: `${dnaContainerSize}%`, height: '100%', justifyContent: 'center', marginBottom: marginBottom }}>
+//                     {rowElements}
+//                 </div>
+//                 <div id="column" style={{ visibility: visibility, height: '100%', width: `${(100 - dnaContainerSize) / 2}%`, display: 'flex', flexDirection: 'column', alignItems: 'center', userSelect: 'none' }}>{rightCounters}</div>
+//             </div> */}
+
+//               // resize handling
+//     // window.addEventListener('resize', () => {
+//     //     setTimeout(() => {
+//     //         const width = document.getElementById('dna').offsetWidth
+//     //         setContainerWidth(width)
+//     //     }, 700)
+//     // })
+
+
+            // useEffect(() => {
+            //     setSequenceArray(sequence.split(''))
+            // }, [sequence])
+        
+            // useEffect(() => {
+            //     setRenderSequence(sequenceArray.slice(selectedRegion[0], selectedRegion[1]))
+            // }, [sequenceArray, selectedRegion])
+        
+        
+            // // container formatting
+            // useEffect(() => {
+            //     setContainerWidth(document.getElementById('dna').offsetWidth)
+            // }, [])
+        
+            // useEffect(() => {
+            //     setCellsPerRow(Math.floor(containerWidth / 20))
+            // }, [containerWidth])
+        
+            // useEffect(() => {
+            //     setRowCount(Math.ceil(renderSequence.length / cellsPerRow))
+            // }, [cellsPerRow, renderSequence])
+        
+            // useEffect(() => {
+            //     const rows = [1]
+            //     for(let i = 1; i < rowCount; i++) {
+            //         rows.push((i*cellsPerRow)+1)
+            //     }
+            //     setRowMarkersLeft(rows)
+            //     const right = rows.map((num) => num = (num + cellsPerRow - 1))
+            //     right.pop()
+            //     right.push(renderSequence.length)
+            //     setRowMarkersRight(right)
+            //     const cells = []
+            //     for(let i = 0; i < renderSequence.length; i++) {
+            //         cells.push((i))
+            //     }
+            //     setBasePairs(cells)
+            // }, [rowCount, cellsPerRow, renderSequence])
+        
+        
+            // // building blocks
+            // const leftCounters = rowMarkersLeft.map((num) => {
+            //     return (
+            //         <span key={num} style={{height: rowSize, width: 'fit-content', textAlign: 'center', marginBottom: rowMargin }}>{num}</span>
+            //     )
+            // })
+        
+            // const rightCounters = rowMarkersRight.map((num) => {
+            //     return (
+            //         <span key={num} style={{height: rowSize, width: 'fit-content', textAlign: 'center', marginBottom: rowMargin }}>{num}</span>
+            //     )
+            // })
+        
+            // const basePairElements = basePairs.map((bp, index) => {
+            //     let color 
+            //     switch (renderSequence[index]) {
+            //         case 'A':
+            //             color = basePairColors.A
+            //             break
+        
+            //         case 'T':
+            //             color = basePairColors.T
+            //             break
+        
+            //         case 'G':
+            //             color = basePairColors.G
+            //             break
+        
+            //         case 'C':
+            //             color = basePairColors.C
+            //             break;
+        
+            //         default:
+            //             break
+            //     }
+            //     return (
+            //         <span key={index} className='bp' id={bp} style={{ height: rowSize, width: rowSize, justifyContent: 'center', display: 'flex', color: color }}>{renderSequence[index]}</span>
+            //     )
+            // })
+        
+            // const rowElements = rowMarkersLeft.map((row, index, array) => {
+            //     if (index === (rowMarkersLeft.length - 1)) {
+            //         return (
+            //             <div key={array[index]} style={{ width: '100%', height: rowSize, marginBottom: rowMargin, display: 'flex', flexDirection: 'row' }}>
+            //                 {basePairElements.slice((array[index]-1), (renderSequence.length))}
+            //             </div>
+            //         )} 
+            //     else {
+            //         return (
+            //             <div key={array[index]} style={{ width: '100%', height: rowSize, marginBottom: rowMargin, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+            //                 {basePairElements.slice((array[index]-1), (array[index+1]-1))}
+            //             </div>
+            //         )
+            //     }
+            // })
+
+            // useEffect(() => {
+
+    //     if (geneData.transcripts[transcriptIndex].exons) {
+
+    //         const genomicRange = [parseInt(geneData.genomic_ranges[0].range[0].begin), parseInt(geneData.genomic_ranges[0].range[0].end)]
+    //         const transcriptRange = [parseInt(geneData.transcripts[transcriptIndex].genomic_range.range[0].begin), parseInt(geneData.transcripts[transcriptIndex].genomic_range.range[0].end)]
+    //         const cdsRange = [parseInt(geneData.transcripts[transcriptIndex].cds.range[0].begin), parseInt(geneData.transcripts[transcriptIndex].cds.range[0].end)]
+    //         const exons = geneData.transcripts[transcriptIndex].exons.range
+    //         const exonRanges = []
+    //         exonRanges.splice(0, exonRanges.length)
+    //         exons.forEach((exon) => {
+    //             exonRanges.push([parseInt(exon.begin), parseInt(exon.end)])
+    //         })
+
+    //         console.log('geneData')
+    //         console.log(geneData)
+    //         console.log('transcriptData')
+    //         console.log(geneData.transcripts[transcriptIndex])
+    //         console.log('genomicRange')
+    //         console.log(genomicRange)
+    //         console.log('transcriptRange')
+    //         console.log(transcriptRange)
+    //         console.log('exonRanges')
+    //         console.log(exonRanges)
+    //         console.log('cdsRange')
+    //         console.log(cdsRange);
+
+    //         setSequenceArray(rawSequence.split(''))
+    //     }
+    //     else {
+    //         setSequenceArray(rawSequence.split(''))
+    //     }
+    //     //eslint-disable-next-line
+    // }, [rawSequence])
+
+
+    {/* <span style={{ display: 'flex', flexDirection: 'row' }}>Species: {geneData.taxname} </span>
+            <span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>{infoPanelLabels.type}: {geneData.symbol}</span>
+            <span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Length: {sequenceArray.length.toLocaleString("en-US")} {infoPanelLabels.unit} </span>
+            <span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>{infoPanelLabels.info[0]}: {infoPanelLabels.info[1]}</span>
+            <span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Assembly: {geneData.annotations[0].assemblies_in_scope[0].name}</span>
+            <span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Chromosome: {geneData.chromosomes[0]}</span> */}
+
+
+
+             // fetch('https://fierce-springs-30684.herokuapp.com/login', {
+            //     method: 'POST',
+            //     credentials: 'include',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({ username: 'almickle' })
+            // })
+            // .then(resp => resp.json())
+            // .then(user => setUser(user))
+
+            // <img onClick={handleShowOptions} src={RefineIcon} style={{ height: '90%', marginTop: 1.05, cursor: 'pointer' }} alt='refine icon: refine search options'/>

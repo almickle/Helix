@@ -1,0 +1,9 @@
+
+export default function NaviLines ( { height, id} ) {
+
+    return (
+        <div id={id} style={{ display: 'flex', flexDirection: 'column', width: 'fit-content', height: height }}>
+            <span style={{ display: 'flex', height: '100%', width: 1, backgroundColor: 'black' }}></span>
+        </div>
+    )
+}

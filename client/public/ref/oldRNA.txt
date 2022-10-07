@@ -1,0 +1,319 @@
+import { useState } from "react"
+import { useEffect } from "react"
+
+export default function ViewRNA ( { reload, geneData, sequenceID, transcriptIndex } ) {
+
+    const rowSize = 20
+    const rowMargin = 10
+    const dnaContainerSize = 90
+    const labelMargin = 7
+    const marginBottom = 20
+    const headerSize = 60
+    const headerMargin = 90
+
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [bpPresent, setbpPresent] = useState([])
+    const [visibility, setVisibility] = useState('hidden')
+    const [iconVisibility, setIconVisibility] = useState('visible')
+
+    const [rawSequence, setRawSequence] = useState('')
+    const [sequenceArray, setSequenceArray] = useState([])
+    const [renderSequence, setRenderSequence] = useState([])
+
+    const [containerWidth, setContainerWidth] = useState()
+    const [cellsPerRow, setCellsPerRow] = useState()
+    const [rowCount, setRowCount] = useState()
+    const [rowMarkersLeft, setRowMarkersLeft] = useState([])
+    const [rowMarkersRight, setRowMarkersRight] = useState([])
+    const [basePairs, setBasePairs] = useState([])
+    const [selectedRegion, setSelectedRegion] = useState([0, 10000])
+ 
+    const [sequenceStyle, setSequenceStyle] = useState(false)
+    const [basePairColors, setBasePairColors] = useState({A: 'black', T: 'black', G: 'black', C: 'black'})
+
+
+    // const transcripts = geneData.transcripts
+    const genomicRange = [parseInt(geneData.genomic_ranges[0].range[0].begin), parseInt(geneData.genomic_ranges[0].range[0].end)]
+    const transcriptRange = [parseInt(geneData.transcripts[transcriptIndex].genomic_range.range[0].begin), parseInt(geneData.transcripts[transcriptIndex].genomic_range.range[0].end)]
+    const cdsRange = [parseInt(geneData.transcripts[transcriptIndex].cds.range[0].begin), parseInt(geneData.transcripts[transcriptIndex].cds.range[0].end)]
+    const exons = geneData.transcripts[transcriptIndex].exons.range
+    const exonRanges = []
+    
+    useEffect(() => {
+        exonRanges.splice(0, exonRanges.length)
+        exons.forEach((exon) => {
+            exonRanges.push([parseInt(exon.begin), parseInt(exon.end)])
+        })
+        console.log(exonRanges)
+        // eslint-disable-next-line
+    }, [transcriptIndex])
+
+    useEffect(() => {
+        console.log('geneData')
+        console.log(geneData);
+        console.log('genomicRange')
+        console.log(genomicRange)
+        console.log('transcriptRange')
+        console.log(transcriptRange)
+        console.log('cdsRange')
+        console.log(cdsRange);
+        // console.log('exonRanges')
+        // console.log(exonRanges)
+        // console.log('localRange');
+        // console.log([exonRanges[0][0]-genomicRange[0], exonRanges[0][1]-genomicRange[0]])
+        // eslint-disable-next-line
+    }, [transcriptIndex])
+
+
+    useEffect(() => {
+        fetch('https://rest.ensembl.org/sequence/id/' + sequenceID, {
+                headers: {
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                }
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                setRawSequence(data.seq)
+                processSequence(data)})
+            // eslint-disable-next-line
+    }, [sequenceID])
+
+    function processSequence(data) {
+        const raw = data.seq.split('')
+        const xxx = []
+        const yyy = []
+        xxx.splice(0, xxx.length)
+        exons.forEach((exon, index) => {
+            xxx.push(raw.slice(exonRanges[index][0]-genomicRange[0], exonRanges[index][1]-genomicRange[0]+1))
+        })
+        xxx.forEach((exon) => {
+            yyy.push(...exon)
+        })
+        
+        console.log('yyy')
+        console.log(yyy)
+        setSequenceArray(yyy)
+    }
+
+     // resize handling
+     window.addEventListener('resize', () => {
+        setTimeout(() => {
+            const width = document.getElementById('dna').offsetWidth
+            setContainerWidth(width)
+        }, 700)
+    })
+
+    useEffect(() => {
+        setRenderSequence(sequenceArray.slice(selectedRegion[0], selectedRegion[1]))
+    }, [sequenceArray, selectedRegion])
+
+
+    // container formatting
+    useEffect(() => {
+        setContainerWidth(document.getElementById('dna').offsetWidth)
+    }, [])
+
+    useEffect(() => {
+        setCellsPerRow(Math.floor(containerWidth / 20))
+    }, [containerWidth])
+
+    useEffect(() => {
+        setRowCount(Math.ceil(renderSequence.length / cellsPerRow))
+    }, [cellsPerRow, renderSequence])
+
+    useEffect(() => {
+        const rows = [1]
+        for(let i = 1; i < rowCount; i++) {
+            rows.push((i*cellsPerRow)+1)
+        }
+        setRowMarkersLeft(rows)
+        const right = rows.map((num) => num = (num + cellsPerRow - 1))
+        right.pop()
+        right.push(renderSequence.length)
+        setRowMarkersRight(right)
+        const cells = []
+        for(let i = 0; i < renderSequence.length; i++) {
+            cells.push((i))
+        }
+        setBasePairs(cells)
+    }, [rowCount, cellsPerRow, renderSequence])
+
+
+    // building blocks
+    const leftCounters = rowMarkersLeft.map((num) => {
+        return (
+            <span key={num} style={{height: rowSize, width: 'fit-content', textAlign: 'center', marginBottom: rowMargin }}>{num}</span>
+        )
+    })
+
+    const rightCounters = rowMarkersRight.map((num) => {
+        return (
+            <span key={num} style={{height: rowSize, width: 'fit-content', textAlign: 'center', marginBottom: rowMargin }}>{num}</span>
+        )
+    })
+
+    const basePairElements = basePairs.map((bp, index) => {
+        let color 
+        switch (renderSequence[index]) {
+            case 'A':
+                color = basePairColors.A
+                break
+
+            case 'T':
+                color = basePairColors.T
+                break
+
+            case 'G':
+                color = basePairColors.G
+                break
+
+            case 'C':
+                color = basePairColors.C
+                break;
+
+            default:
+                break
+        }
+        return (
+            <span key={index} className='bp' id={bp} style={{ height: rowSize, width: rowSize, justifyContent: 'center', display: 'flex', color: color }}>{renderSequence[index]}</span>
+        )
+    })
+
+    const rowElements = rowMarkersLeft.map((row, index, array) => {
+        if (index === (rowMarkersLeft.length - 1)) {
+            return (
+                <div key={array[index]} style={{ width: '100%', height: rowSize, marginBottom: rowMargin, display: 'flex', flexDirection: 'row' }}>
+                    {basePairElements.slice((array[index]-1), (renderSequence.length))}
+                </div>
+            )} 
+        else {
+            return (
+                <div key={array[index]} style={{ width: '100%', height: rowSize, marginBottom: rowMargin, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                    {basePairElements.slice((array[index]-1), (array[index+1]-1))}
+                </div>
+            )
+        }
+    })
+
+    // stylization
+    function setStyling() {
+        setSequenceStyle(!sequenceStyle)
+    }
+
+    useEffect(() => {
+        switch (sequenceStyle) {
+            case false:
+                setBasePairColors({A: 'black', T: 'black', G: 'black', C: 'black'})
+                break;
+
+            case true:
+                setBasePairColors({A: 'blue', T: 'yellow', G: 'green', C: 'red'})
+                break
+
+            default:
+                break
+        }
+    }, [sequenceStyle])
+
+    useEffect(() => {
+        document.querySelectorAll('.bp').forEach((element) => {
+            const bp = element.textContent
+            switch (bp) {
+                case 'A':
+                    element.style.color = basePairColors.A
+                    break
+    
+                case 'T':
+                    element.style.color = basePairColors.T
+                    break
+    
+                case 'G':
+                    element.style.color = basePairColors.G
+                    break
+    
+                case 'C':
+                    element.style.color = basePairColors.C
+                    break;
+    
+                default:
+                    break
+            }
+        })
+    }, [basePairColors])
+
+    // loading
+    useEffect(() => {
+        setbpPresent(document.querySelectorAll('.bp').length)
+    }, [basePairElements])
+
+    useEffect(() => {
+        if(bpPresent === renderSequence.length && bpPresent > 1) {
+            setIsLoaded(true)
+        }
+        else {
+            setIsLoaded(false)
+        }
+    }, [bpPresent, renderSequence])
+
+    useEffect(() => {
+        if (isLoaded === true) {
+            setVisibility('visible')
+            setIconVisibility('hidden')
+        } 
+        else {
+            setVisibility('hidden')
+            setIconVisibility('visible')
+        }
+    }, [isLoaded])
+
+    useEffect(() => {
+        setIsLoaded(!isLoaded)
+    // eslint-disable-next-line
+    }, [reload])
+
+
+    // event handling
+    function handleShowMore() {
+        setSelectedRegion([0, selectedRegion[1]+10000])
+    }
+
+
+
+
+    return (
+        <div id="workspace" style={{ height: 'fit-content', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'white' }}>
+            <div id="header" style={{ zIndex: 2, position: 'fixed', height: headerSize, width: '80%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgb(220, 220, 220)' }}>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row' }}>Species: {geneData.taxname} </span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>mRNA: {geneData.symbol}</span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Length: {sequenceArray.length.toLocaleString("en-US")} bp </span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Transcripts: {geneData.transcripts.length}</span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Assembly: {geneData.annotations[0].assemblies_in_scope[0].name}</span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Chromosome: {geneData.chromosomes[0]}</span>
+                <span onClick={setStyling} style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Style</span>
+            </div>
+            <div id="container" style={{ zIndex: 0, height: `fit-content`, width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: headerMargin, overflowX: 'clip' }}>
+                <div id="column" style={{ visibility: visibility, height: '100%', width: `${(100 - dnaContainerSize) / 2}%`, display: 'flex', flexDirection: 'column', alignItems: 'center', userSelect: 'none' }}>{leftCounters}</div>
+                <div id="dna" style={{ visibility: visibility, width: `${dnaContainerSize}%`, height: '100%', justifyContent: 'center', marginBottom: marginBottom }}>
+                    {rowElements}
+                </div>
+                <div id="column" style={{ visibility: visibility, height: '100%', width: `${(100 - dnaContainerSize) / 2}%`, display: 'flex', flexDirection: 'column', alignItems: 'center', userSelect: 'none' }}>{rightCounters}</div>
+            </div>
+            <div id="loading" style={{ visibility: iconVisibility, position: 'fixed', zIndex: 1, height: '100%', width: `${dnaContainerSize-10}%`, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                <img src="https://gifimage.net/wp-content/uploads/2018/04/loading-bar-animated-gif-transparent-background-6.gif" alt="loading animation" style={{ height: '30%', marginTop: 210, marginRight: '2%' }}/>
+            </div>
+            <button onClick={handleShowMore} style={{ visibility: visibility, display: 'flex', marginBottom: 30 }}>Show More</button>
+        </div>
+    )
+}
+
+
+<div id="header" style={{ zIndex: 2, position: 'fixed', height: headerSize, width: '80%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgb(220, 220, 220)' }}>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row' }}>Species: {geneData.taxname} </span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>mRNA: {geneData.symbol}</span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Length: {sequenceArray.length.toLocaleString("en-US")} bp </span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Transcript: {parseInt(transcriptIndex)+1}</span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Assembly: {geneData.annotations[0].assemblies_in_scope[0].name}</span>
+                <span style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Chromosome: {geneData.chromosomes[0]}</span>
+                <span onClick={setStyling} style={{ userSelect: 'none', display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/3}%` }}>Style</span>
+            </div>

@@ -1,0 +1,10 @@
+
+export default function Icon( ) {
+
+    const dotSize = 6
+
+    return (
+        <span style={{ height: dotSize, width: dotSize, borderRadius: dotSize/2, backgroundColor: 'black', marginRight: 6 }}></span>
+        
+    )
+}
