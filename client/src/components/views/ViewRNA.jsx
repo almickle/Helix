@@ -4,7 +4,7 @@ import XMLParser from 'react-xml-parser'
 import SequenceRender from "./SequenceRender"
 import InfoPanel from "./InfoPanel"
 import LoadingGIF from "./LoadingGIF"
-import SequenceHeader from "./SequenceHeader"
+import SequenceHeader from "./sequence-header/SequenceHeader"
 import Annotation from "./Annotation"
 
 export default function ViewRNA ( { geneData, annotationText, setAnnotationText, sequenceID, transcriptIndex, reload, rerenderLibrary, setRerenderLibrary } ) {
@@ -41,6 +41,8 @@ export default function ViewRNA ( { geneData, annotationText, setAnnotationText,
     }, [sequenceID])
 
 
+    // note: should migrate to a style specific component
+
     useEffect(() => {
         switch (sequenceStyle) {
             case false:
@@ -57,12 +59,12 @@ export default function ViewRNA ( { geneData, annotationText, setAnnotationText,
     }, [sequenceStyle])
 
 
+    // the following functionality can be moved to a consise location
 
     // custom annotation handling
     function handleAddAnnotation() {
         setIsAnnotating(!isAnnotating)
     }
-
 
     useEffect(() => {
         if(isAnnotating === true) {
@@ -106,9 +108,11 @@ export default function ViewRNA ( { geneData, annotationText, setAnnotationText,
         // eslint-disable-next-line
     }, [annotationSequence])
 
+    // end
+
     // get annotations
-    useEffect(() => {
-        fetch('https://www.helixgenomes.com/annotations', {
+    useEffect(() => { // note: need to configure for dna, rna, or protein
+        fetch('/annotations', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

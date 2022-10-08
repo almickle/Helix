@@ -50,7 +50,7 @@ export default function Home () {
         const libraryGenes = []
         const configStateLoader = []
 
-        fetch('https://www.helixgenomes.com/genelibrary', {
+        fetch('/genelibrary', {
             credentials: 'include'
         })
         .then(resp => resp.json())

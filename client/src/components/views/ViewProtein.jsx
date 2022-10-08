@@ -4,7 +4,7 @@ import XMLParser from 'react-xml-parser'
 import SequenceRender from "./SequenceRender"
 import InfoPanel from "./InfoPanel"
 import LoadingGIF from "./LoadingGIF"
-import SequenceHeader from "./SequenceHeader"
+import SequenceHeader from "./sequence-header/SequenceHeader"
 import Annotation from "./Annotation"
 
 export default function ViewProtein ( { geneData, annotationText, setAnnotationText, sequenceID, transcriptIndex, reload, rerenderLibrary, setRerenderLibrary } ) {
@@ -108,7 +108,7 @@ export default function ViewProtein ( { geneData, annotationText, setAnnotationT
 
     // get annotations
     useEffect(() => {
-        fetch('https://www.helixgenomes.com/annotations', {
+        fetch('/annotations', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

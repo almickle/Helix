@@ -3,7 +3,7 @@ import ViewDNA from "./views/ViewDNA";
 import ViewRNA from "./views/ViewRNA";
 import ViewProtein from "./views/ViewProtein";
 
-export default function Main ( { mainHeight, setTranscriptIndex, inputData, reload, setReload, geneData, setGeneData, setSequenceID, sequenceID, presentView, transcriptIndex, rerenderLibrary, setRerenderLibrary } ) {
+export default function Main ( { mainHeight, inputData, reload, setReload, geneData, setGeneData, setSequenceID, sequenceID, presentView, transcriptIndex, rerenderLibrary, setRerenderLibrary } ) {
 
     const [annotationText, setAnnotationText] = useState(null)
 

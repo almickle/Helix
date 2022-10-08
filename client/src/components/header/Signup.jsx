@@ -43,7 +43,7 @@ export default function Signup ( { modalVisible, setModalVisible, setLoginModalV
     function handleSignup() {
         if(signupObject !== null) {
             setModalVisible(false)
-            fetch('https://www.helixgenomes.com/signup', {
+            fetch('/signup', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -54,7 +54,7 @@ export default function Signup ( { modalVisible, setModalVisible, setLoginModalV
             .then(resp => resp.json())
             .then(user => {
                 if(user.id !== null) {
-                    fetch('https://www.helixgenomes.com/login', {
+                    fetch('/login', {
                             method: 'POST',
                             credentials: 'include',
                             headers: {

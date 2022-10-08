@@ -35,7 +35,8 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
         setRenderSequence(sequenceArray.slice(selectedRegion[0], selectedRegion[1]))
     }, [sequenceArray, selectedRegion])
 
-    useEffect(() => {
+    // show more
+    useEffect(() => { // bug: show more button does not appear sometimes
         if(sequenceArray.length > selectedRegion[1] && renderSequence.length < sequenceArray.length ) {
             setShowMoreButton(<ShowMoreButton setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} visibility={visibility}/>)
         } else setShowMoreButton()
@@ -89,7 +90,7 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
 
     const basePairElements = basePairs.map((bp, index) => {
         let color 
-        switch (renderSequence[index]) {
+        switch (renderSequence[index]) { // need to handle amino acid styling
             case 'A':
                 color = basePairColors.A
                 break
@@ -174,7 +175,7 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
         }
     }, [bpPresent, renderSequence])
 
-    useEffect(() => {
+    useEffect(() => { // note: can remove loading gif after loaded?
         if (isLoaded === true) {
             setVisibility('visible')
             setIconVisibility('hidden')
@@ -192,14 +193,14 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
     }, [reload])
 
 
-
-    function showBasePair(event) {
+    
+    function showBasePair(event) { // note: should incorporate this functionality into a feature
         console.log('bp: ' + event.target.id)
     }
 
     
 
-    
+    // note: should annotationText be here?
 
     return (
         <div id="container" style={{ zIndex: 0, height: `fit-content`, width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: headerMargin, overflowX: 'clip' }}>

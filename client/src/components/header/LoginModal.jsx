@@ -41,7 +41,7 @@ export default function LoginModal ( { loginModalVisible, setLoginModalVisible, 
 
     function handleLogin() {
         if(loginObject !== null) {
-                fetch('https://www.helixgenomes.com/login', {
+                fetch('/login', {
                         method: 'POST',
                         credentials: 'include',
                         headers: {

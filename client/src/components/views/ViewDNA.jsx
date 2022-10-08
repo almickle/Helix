@@ -3,7 +3,7 @@ import XMLParser from 'react-xml-parser'
 import InfoPanel from "./InfoPanel"
 import LoadingGIF from "./LoadingGIF"
 import SequenceRender from "./SequenceRender"
-import SequenceHeader from "./SequenceHeader"
+import SequenceHeader from "./sequence-header/SequenceHeader"
 import Annotation from "./Annotation"
 
 export default function ViewDNA ( { inputData, annotationText, setAnnotationText, geneData, setGeneData, setSequenceID, sequenceID, reload, setReload, rerenderLibrary, setRerenderLibrary } ) {
@@ -44,7 +44,7 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
                 if(resp.ok) {
                 resp.json().then(data => {
                                     if(fetchSuccessful(data)) {
-                                        if(true) { // this has a hole
+                                        if(true) { // bug: click the same gene gets stuck in loading loop
                                             const gene = data.genes[0].gene
                                             let strand
                                             if(gene.orientation === 'plus') {
@@ -77,6 +77,7 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
     }, [sequenceID])
 
 
+    // note: should migrate to a style specific component
     useEffect(() => {
         switch (sequenceStyle) {
             case false:
@@ -100,12 +101,12 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
 
 
 
+    // the following functionality can be moved to a consise location
 
     // custom annotation handling
     function handleAddAnnotation() {
         setIsAnnotating(!isAnnotating)
     }
-
 
     useEffect(() => {
         if(isAnnotating === true) {
@@ -149,9 +150,12 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
         // eslint-disable-next-line
     }, [annotationSequence])
 
+    // end
+
+
     // get annotations
-    useEffect(() => {
-        fetch('https://www.helixgenomes.com/annotations', {
+    useEffect(() => { // note: need to configure for dna, rna, or protein
+        fetch('/annotations', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -159,8 +163,10 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
                 },
                 body: JSON.stringify({ symbol: geneData.symbol })
             })
-            .then(resp => resp.json())
-            .then(data => setAnnotations(data))
+            .then(resp => {
+                if(resp.ok) {
+                    resp.json().then(data => setAnnotations(data))
+                }})
     }, [geneData, triggerAnnotation])
 
 

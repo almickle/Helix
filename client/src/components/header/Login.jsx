@@ -5,7 +5,7 @@ export default function Login ( { setUser, user, setModalVisible, modalVisible, 
 
 
     useEffect(() => {
-        fetch('https://www.helixgenomes.com/me', {
+        fetch('/me', {
             credentials: 'include',
         })
         .then(resp => {
@@ -18,7 +18,7 @@ export default function Login ( { setUser, user, setModalVisible, modalVisible, 
 
     function handleLogin() {
         if (user.username !== 'guest') {
-            fetch('https://www.helixgenomes.com/logout', {
+            fetch('/logout', {
                 method: 'DELETE',
                 credentials: 'include',
             })

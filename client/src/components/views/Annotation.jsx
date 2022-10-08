@@ -25,7 +25,7 @@ export default function Annotation ( { basepairs, transcriptIndex, isProtein, an
         else {
             setAnnotationText(null)
         }
-        fetch('https://www.helixgenomes.com/newannotation', {
+        fetch('/newannotation', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
