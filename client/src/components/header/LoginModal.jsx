@@ -41,7 +41,7 @@ export default function LoginModal ( { loginModalVisible, setLoginModalVisible, 
 
     function handleLogin() {
         if(loginObject !== null) {
-                fetch('https://calm-escarpment-52610.herokuapp.com/login', {
+                fetch('https://www.helixgenomes.com/login', {
                         method: 'POST',
                         credentials: 'include',
                         headers: {

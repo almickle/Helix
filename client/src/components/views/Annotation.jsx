@@ -25,7 +25,7 @@ export default function Annotation ( { basepairs, transcriptIndex, isProtein, an
         else {
             setAnnotationText(null)
         }
-        fetch('https://calm-escarpment-52610.herokuapp.com/newannotation', {
+        fetch('https://www.helixgenomes.com/newannotation', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

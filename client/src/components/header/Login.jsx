@@ -5,7 +5,7 @@ export default function Login ( { setUser, user, setModalVisible, modalVisible, 
 
 
     useEffect(() => {
-        fetch('https://calm-escarpment-52610.herokuapp.com/me', {
+        fetch('https://www.helixgenomes.com/me', {
             credentials: 'include',
         })
         .then(resp => {
@@ -18,7 +18,7 @@ export default function Login ( { setUser, user, setModalVisible, modalVisible, 
 
     function handleLogin() {
         if (user.username !== 'guest') {
-            fetch('https://calm-escarpment-52610.herokuapp.com/logout', {
+            fetch('https://www.helixgenomes.com/logout', {
                 method: 'DELETE',
                 credentials: 'include',
             })

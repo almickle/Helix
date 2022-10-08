@@ -50,7 +50,7 @@ export default function Home () {
         const libraryGenes = []
         const configStateLoader = []
 
-        fetch('https://calm-escarpment-52610.herokuapp.com/genelibrary', {
+        fetch('https://www.helixgenomes.com/genelibrary', {
             credentials: 'include'
         })
         .then(resp => resp.json())

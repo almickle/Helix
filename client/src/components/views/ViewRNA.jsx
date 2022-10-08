@@ -108,7 +108,7 @@ export default function ViewRNA ( { geneData, annotationText, setAnnotationText,
 
     // get annotations
     useEffect(() => {
-        fetch('https://calm-escarpment-52610.herokuapp.com/annotations', {
+        fetch('https://www.helixgenomes.com/annotations', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
