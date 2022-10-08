@@ -6,11 +6,11 @@ import PaintBrush from '../../assets/PaintBrush.png'
 import Circles from '../../assets/Circles.png'
 import BookIcon from '../../assets/BookIcon.png'
 import Note from '../Note'
+import SeqRange from './SeqRange'
 
 
 export default function SequenceHeader ( { geneData, annotations, annotationToggle, setAnnotationToggle, setAnnotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
 
-    const labelMargin = 7
     const headerSize = 60
 
     const [inLibrary, setInLibrary] = useState(false)
@@ -185,14 +185,18 @@ export default function SequenceHeader ( { geneData, annotations, annotationTogg
 
     return (
         <div id="header" style={{ zIndex: 2, position: 'fixed', height: headerSize, width: '70%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgb(220, 220, 220)', borderRadius: '0px 0px 10px 10px' }}>
-            <span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/6}%`, marginRight: `${labelMargin/6}%` }}>Add feature</span>
-            <span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/6}%`, marginRight: `${labelMargin/6}%` }}>Add feature</span>
-            <span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/6}%`, marginRight: `${labelMargin/6}%` }}>Add feature</span>
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={setStyling} src={Circles} style={{ height: '80%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 12, paddingRight: 12, backgroundColor: bookColor }}><img onClick={toggleAnnotations} src={BookIcon} style={{ height: '72%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6, backgroundColor: paintbrushColor}}><img onClick={handleAddAnnotation} src={PaintBrush} style={{ height: '115%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={handleAddToLibrary} src={bookmarkIcon} style={{ height: '110%', cursor: 'pointer' }} alt="bookmark icon: add to library" /> </span>
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={handleAddToClipboard} src={CopyIcon} style={{ height: '100%', cursor: 'pointer' }} alt="copy icon: add to clipboard" /> </span>
+            <div style={{ width: '20%' }}>
+                <SeqRange />
+            </div>
+            <div style={{ height: '100%', width: '60%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={setStyling} src={Circles} style={{ height: '80%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 12, paddingRight: 12, backgroundColor: bookColor }}><img onClick={toggleAnnotations} src={BookIcon} style={{ height: '72%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6, backgroundColor: paintbrushColor}}><img onClick={handleAddAnnotation} src={PaintBrush} style={{ height: '115%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
+            </div>
+            <div style={{ height: '100%', width: '20%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={handleAddToLibrary} src={bookmarkIcon} style={{ height: '110%', cursor: 'pointer' }} alt="bookmark icon: add to library" /> </span>
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={handleAddToClipboard} src={CopyIcon} style={{ height: '100%', cursor: 'pointer' }} alt="copy icon: add to clipboard" /> </span>
+            </div>
         </div>
     )
 }

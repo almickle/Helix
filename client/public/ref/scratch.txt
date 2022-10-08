@@ -273,3 +273,8 @@ function handleDragHorizontal(event) {
             // .then(user => setUser(user))
 
             // <img onClick={handleShowOptions} src={RefineIcon} style={{ height: '90%', marginTop: 1.05, cursor: 'pointer' }} alt='refine icon: refine search options'/>
+
+
+<span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/6}%`, marginRight: `${labelMargin/6}%` }}>Add feature</span>
+
+{/* <img src={searchIcon} style={{ height: height+offset, marginTop: -offset/2, borderRadius: radius }} alt='search icon'/> */}        
