@@ -7,7 +7,7 @@ import SeqRange from './SeqRange'
 import AnnotationHandler from './AnnotationHandler'
 
 
-export default function SequenceHeader ( { geneData, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
+export default function SequenceHeader ( { geneData, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, annotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
 
     const headerSize = 60
 

@@ -4,7 +4,7 @@ import BookIcon from '../../assets/BookIcon.png'
 import Annotation from '../Annotation'
 import Note from '../Note'
 
-export default function AnnotationHandler ( { geneData, annotations, annotationText, setAnnotationText, setTriggerAnnotation, triggerAnnotation } ) {
+export default function AnnotationHandler ( { geneData, annotations, setAnnotationText, setTriggerAnnotation, triggerAnnotation } ) {
 
     const [annotationSequence, setAnnotationSequence] = useState([])
     const [triggerHighlight, setTriggerHighlight] = useState(false)
@@ -151,7 +151,6 @@ export default function AnnotationHandler ( { geneData, annotations, annotationT
         <div style={{ height: '100%', width: 'fit-content', display: 'flex', flexDirection: 'row' }}>
             <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 12, paddingRight: 12, backgroundColor: bookColor }}><img onClick={toggleAnnotations} src={BookIcon} style={{ height: '72%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
             <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6, backgroundColor: paintbrushColor}}><img onClick={handleAddAnnotation} src={PaintBrush} style={{ height: '115%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
-            {annotationText}
         </div>
     )
 }

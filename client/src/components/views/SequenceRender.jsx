@@ -200,7 +200,7 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
 
     
 
-    // note: should annotationText be here?
+
 
     return (
         <div id="container" style={{ zIndex: 0, height: `fit-content`, width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: headerMargin, overflowX: 'clip' }}>
