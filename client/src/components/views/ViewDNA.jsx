@@ -73,7 +73,7 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
     }, [sequenceID])
 
 
-    // note: should migrate to a style specific component
+    // note: should migrate to a style specific component?
     useEffect(() => {
         switch (sequenceStyle) {
             case false:
