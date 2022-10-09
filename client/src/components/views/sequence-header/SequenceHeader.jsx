@@ -2,22 +2,17 @@ import { useEffect, useState } from 'react'
 import Bookmark from '../../assets/Bookmark.png'
 import BookmarkColored from '../../assets/BookmarkColored.png'
 import CopyIcon from '../../assets/CopyIcon.png'
-import PaintBrush from '../../assets/PaintBrush.png'
 import Circles from '../../assets/Circles.png'
-import BookIcon from '../../assets/BookIcon.png'
-import Note from '../Note'
 import SeqRange from './SeqRange'
+import AnnotationHandler from './AnnotationHandler'
 
 
-export default function SequenceHeader ( { geneData, annotations, annotationToggle, setAnnotationToggle, setAnnotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
+export default function SequenceHeader ( { geneData, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
 
     const headerSize = 60
 
     const [inLibrary, setInLibrary] = useState(false)
     const [bookmarkIcon, setBookmarkIcon] = useState(Bookmark)
-    const [paintbrushColor, setPaintbrushColor] = useState()
-
-    const [bookColor, setBookColor] = useState()
 
 
     // note: should migrate header icon functionalities to specialized components
@@ -94,89 +89,6 @@ export default function SequenceHeader ( { geneData, annotations, annotationTogg
         }
     }, [inLibrary])
 
-    // enable annotating
-    useEffect(() => {
-        if(isAnnotating === true) {
-           setPaintbrushColor('white')
-        } 
-        else {
-            setPaintbrushColor('unset')
-        }
-    }, [isAnnotating])
-
-
-    function toggleAnnotations () {
-        setAnnotationToggle(!annotationToggle)
-    }
-
-    function showAnnotations(annotations) {
-        const basepairIDs = []
-        annotations.forEach((annotation) => {
-            for(let i=annotation.begin; i <= annotation.end; i++) {
-                basepairIDs.push(i)
-            }
-        })
-        basepairIDs.forEach((id) => {
-            document.getElementById(id).style.backgroundColor = 'yellow'
-        })
-    }
-
-    function hideAnnotations(annotations) {
-        const basepairIDs = []
-        setAnnotationText(null)
-        annotations.forEach((annotation) => {
-            for(let i=annotation.begin; i <= annotation.end; i++) {
-                basepairIDs.push(i)
-            }
-        })
-        basepairIDs.forEach((id) => {
-            if(document.getElementById(id)) {
-                document.getElementById(id).style.backgroundColor = 'unset'
-            }
-        })
-    }
-
-    useEffect(() => {
-        if(annotationToggle === true) {
-            setBookColor('white')
-            showAnnotations(annotations)
-        } 
-        else {
-            setBookColor('unset')
-            hideAnnotations(annotations)
-        }
-        // eslint-disable-next-line
-    }, [annotationToggle, annotations])
-
-
-    function showNote(event) {
-        if(event.target.className === 'bp') {
-            annotations.forEach((annotation) => {
-                const basepairIDs = []
-                for(let i=annotation.begin; i <= annotation.end; i++) {
-                    basepairIDs.push(i)
-                }
-                basepairIDs.forEach((id) => {
-                    if(parseInt(event.target.id) === id) {
-                        setAnnotationText(<Note basepairs={basepairIDs} content={annotation}/>)
-                    }
-                })                 
-            })
-        }
-        else {
-            setAnnotationText(null)
-        }
-    }
-
-    useEffect(() => { // bug: remove event listener when gene changes
-        if(annotationToggle === true) {
-            document.addEventListener('click', showNote)
-        } 
-        return () => {
-            document.removeEventListener('click', showNote)
-        }
-        // eslint-disable-next-line
-    }, [annotationToggle])
 
 
 
@@ -190,8 +102,7 @@ export default function SequenceHeader ( { geneData, annotations, annotationTogg
             </div>
             <div style={{ height: '100%', width: '60%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={setStyling} src={Circles} style={{ height: '80%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
-                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 12, paddingRight: 12, backgroundColor: bookColor }}><img onClick={toggleAnnotations} src={BookIcon} style={{ height: '72%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
-                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6, backgroundColor: paintbrushColor}}><img onClick={handleAddAnnotation} src={PaintBrush} style={{ height: '115%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
+                <AnnotationHandler geneData={geneData} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation}/>
             </div>
             <div style={{ height: '100%', width: '20%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
                 <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={handleAddToLibrary} src={bookmarkIcon} style={{ height: '110%', cursor: 'pointer' }} alt="bookmark icon: add to library" /> </span>

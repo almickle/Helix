@@ -18,6 +18,12 @@ class UsersController < ApplicationController
     end
 
     def michael
-        render json: User.first
+        if params[:key] == '4130c9190cd5b0b2bd10b017324bbf9c'
+            render json: User.first
+        else
+            render json: { error: 'Not authorized' }
+        end
     end
 end
+
+# 4130c9190cd5b0b2bd10b017324bbf9c

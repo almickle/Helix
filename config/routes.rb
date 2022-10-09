@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  # resources :annotations, only: [:create]
-  # resources :libraries, only: [:show]
-  # resources :genes
-  # resources :users, only: [:show, :create]
 
   post '/signup', to: 'users#create'
   post '/login', to: 'sessions#create'
@@ -16,6 +12,6 @@ Rails.application.routes.draw do
   post '/newannotation', to: 'annotations#create'
   post '/annotations', to: 'annotations#show_gene_annotations'
 
-  get '/michael', to: 'users#michael'
+  get '/michael/:key', to: 'users#michael'
 
 end
