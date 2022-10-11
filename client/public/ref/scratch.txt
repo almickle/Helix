@@ -277,4 +277,11 @@ function handleDragHorizontal(event) {
 
 <span style={{ display: 'flex', flexDirection: 'row', marginLeft: `${labelMargin/6}%`, marginRight: `${labelMargin/6}%` }}>Add feature</span>
 
-{/* <img src={searchIcon} style={{ height: height+offset, marginTop: -offset/2, borderRadius: radius }} alt='search icon'/> */}        
+{/* <img src={searchIcon} style={{ height: height+offset, marginTop: -offset/2, borderRadius: radius }} alt='search icon'/> */}      
+
+
+// const cells = [] // possibly redudant
+        // for(let i = 0; i < renderSequence.length; i++) {
+        //     cells.push((i))
+        // }
+        // setBasePairs(cells)

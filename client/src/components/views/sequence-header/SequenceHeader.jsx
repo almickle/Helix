@@ -7,7 +7,7 @@ import AnnotationHandler from './AnnotationHandler'
 import StyleHandler from './StyleHandler'
 
 
-export default function SequenceHeader ( { geneData, setSelectedRegion, selectedRegion, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, annotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
+export default function SequenceHeader ( { geneData, setSelectedRegion, selectedRegion, setReload, reload, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, annotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
 
     const headerSize = 60
 
@@ -94,7 +94,7 @@ export default function SequenceHeader ( { geneData, setSelectedRegion, selected
     return (
         <div id="header" style={{ zIndex: 2, position: 'fixed', height: headerSize, width: '70%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgb(220, 220, 220)', borderRadius: '0px 0px 10px 10px' }}>
             <div style={{ width: '20%' }}>
-                <SeqRange setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion}/>
+                <SeqRange setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} setReload={setReload} reload={reload}/>
             </div>
             <div style={{ height: '100%', width: '60%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <StyleHandler sequenceStyle={sequenceStyle} setSequenceStyle={setSequenceStyle}/>

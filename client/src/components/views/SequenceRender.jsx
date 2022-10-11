@@ -18,7 +18,6 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
     const [rowCount, setRowCount] = useState()
     const [rowMarkersLeft, setRowMarkersLeft] = useState([])
     const [rowMarkersRight, setRowMarkersRight] = useState([])
-    const [basePairs, setBasePairs] = useState([])
 
 
 
@@ -58,21 +57,19 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
     }, [cellsPerRow, renderSequence])
 
     useEffect(() => {
+        console.log('renderSequence')
+        console.log(renderSequence)
         const rows = [1]
         for(let i = 1; i < rowCount; i++) {
             rows.push((i*cellsPerRow)+1)
         }
-        setRowMarkersLeft(rows)
-        const right = rows.map((num) => num = (num + cellsPerRow - 1))
+        const left = rows.map(num => num = num + selectedRegion[0])
+        setRowMarkersLeft(left)
+        const right = rows.map((num) => num = (num + cellsPerRow - 1 + selectedRegion[0]))
         right.pop()
-        right.push(renderSequence.length)
+        right.push(renderSequence.length + selectedRegion[0])
         setRowMarkersRight(right)
-        const cells = []
-        for(let i = 0; i < renderSequence.length; i++) {
-            cells.push((i))
-        }
-        setBasePairs(cells)
-    }, [rowCount, cellsPerRow, renderSequence])
+    }, [rowCount, cellsPerRow, renderSequence, selectedRegion])
 
 
     // building blocks
@@ -88,7 +85,7 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
         )
     })
 
-    const basePairElements = basePairs.map((bp, index) => {
+    const basePairElements = renderSequence.map((bp, index) => {
         let color 
         switch (renderSequence[index]) { // need to handle amino acid styling
             case 'A':
@@ -119,15 +116,24 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
 
     const rowElements = rowMarkersLeft.map((row, index, array) => {
         if (index === (rowMarkersLeft.length - 1)) {
+            const remainder = cellsPerRow - basePairElements.slice((array[index]-1-selectedRegion[0]), (renderSequence.length)).length
+            console.log(remainder)
+            const spaces = []
+            for(let i=0; i < remainder; i++) {
+                spaces.push(i)
+            }
+            console.log(spaces.length)
+            const fillerElements = spaces.map(() => <span style={{ height: rowSize, width: rowSize }}></span>)
             return (
-                <div key={array[index]} style={{ width: '100%', height: rowSize, marginBottom: rowMargin, display: 'flex', flexDirection: 'row' }}>
-                    {basePairElements.slice((array[index]-1), (renderSequence.length))}
+                <div key={array[index]} style={{ width: '100%', height: rowSize, marginBottom: rowMargin, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                    {basePairElements.slice((array[index]-1-selectedRegion[0]), (renderSequence.length))}
+                    {fillerElements}
                 </div>
             )} 
         else {
             return (
                 <div key={array[index]} style={{ width: '100%', height: rowSize, marginBottom: rowMargin, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                    {basePairElements.slice((array[index]-1), (array[index+1]-1))}
+                    {basePairElements.slice((array[index]-1-selectedRegion[0]), (array[index+1]-1-selectedRegion[0]))}
                 </div>
             )
         }
@@ -193,9 +199,17 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
     }, [reload])
 
 
+    // useEffect(() => {
+    //     console.log(isLoaded)
+    //     console.log('bpPresent')
+    //     console.log(bpPresent)
+    //     console.log('renderSequence')
+    //     console.log(renderSequence.length)
+    // }, [isLoaded])
+
     
     function showBasePair(event) { // note: should incorporate this functionality into a feature
-        console.log('bp: ' + event.target.id)
+        console.log('bp: ' + (parseInt(event.target.id)+selectedRegion[0]))
     }
 
     
