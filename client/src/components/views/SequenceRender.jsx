@@ -6,7 +6,7 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
     const rowSize = 20
     const rowMargin = 10
     const dnaContainerSize = 90
-    const marginBottom = 80
+    const marginBottom = 30
     const headerMargin = 90
 
     const [isLoaded, setIsLoaded] = useState(false)

@@ -12,7 +12,7 @@ export default function SeqRange ( { setSelectedRegion, selectedRegion, setReloa
 
     function handleSubmit(event) {
         event.preventDefault()
-        setSelectedRegion([document.getElementById('range-begin').value-1, document.getElementById('range-end').value])
+        setSelectedRegion([parseInt(document.getElementById('range-begin').value-1), parseInt(document.getElementById('range-end').value)])
         document.getElementById('range-begin').value = ''
         document.getElementById('range-end').value = ''
     }
