@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import Bookmark from '../../assets/Bookmark.png'
 import BookmarkColored from '../../assets/BookmarkColored.png'
 import CopyIcon from '../../assets/CopyIcon.png'
-import Circles from '../../assets/Circles.png'
 import SeqRange from './SeqRange'
 import AnnotationHandler from './AnnotationHandler'
+import StyleHandler from './StyleHandler'
 
 
-export default function SequenceHeader ( { geneData, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, annotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
+export default function SequenceHeader ( { geneData, setSelectedRegion, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, annotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
 
     const headerSize = 60
 
@@ -16,10 +16,6 @@ export default function SequenceHeader ( { geneData, setTriggerAnnotation, trigg
 
 
     // note: should migrate header icon functionalities to specialized components
-
-    function setStyling() {
-        setSequenceStyle(!sequenceStyle)
-    }
 
     function handleAddToClipboard() {
         navigator.clipboard.writeText(rawSequence)
@@ -98,10 +94,10 @@ export default function SequenceHeader ( { geneData, setTriggerAnnotation, trigg
     return (
         <div id="header" style={{ zIndex: 2, position: 'fixed', height: headerSize, width: '70%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgb(220, 220, 220)', borderRadius: '0px 0px 10px 10px' }}>
             <div style={{ width: '20%' }}>
-                <SeqRange />
+                <SeqRange setSelectedRegion={setSelectedRegion}/>
             </div>
             <div style={{ height: '100%', width: '60%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={setStyling} src={Circles} style={{ height: '80%', cursor: 'pointer' }} alt="paint icon: make an annotation" /> </span>
+                <StyleHandler sequenceStyle={sequenceStyle} setSequenceStyle={setSequenceStyle}/>
                 <AnnotationHandler geneData={geneData} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation}/>
             </div>
             <div style={{ height: '100%', width: '20%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
