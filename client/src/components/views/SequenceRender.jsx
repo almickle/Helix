@@ -57,8 +57,6 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
     }, [cellsPerRow, renderSequence])
 
     useEffect(() => {
-        console.log('renderSequence')
-        console.log(renderSequence)
         const rows = [1]
         for(let i = 1; i < rowCount; i++) {
             rows.push((i*cellsPerRow)+1)

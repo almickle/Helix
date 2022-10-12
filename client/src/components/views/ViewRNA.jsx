@@ -5,7 +5,7 @@ import SequenceRender from "./SequenceRender"
 import InfoPanel from "./InfoPanel"
 import LoadingGIF from "./LoadingGIF"
 import SequenceHeader from "./sequence-header/SequenceHeader"
-import Annotation from "./Annotation"
+
 
 export default function ViewRNA ( { geneData, annotationText, setAnnotationText, sequenceID, transcriptIndex, reload, rerenderLibrary, setRerenderLibrary } ) {
 
@@ -23,11 +23,7 @@ export default function ViewRNA ( { geneData, annotationText, setAnnotationText,
     const [sequenceStyle, setSequenceStyle] = useState(false)
     const [basePairColors, setBasePairColors] = useState({A: 'black', T: 'black', G: 'black', C: 'black'})
 
-    const [annotationSequence, setAnnotationSequence] = useState([])
-    const [isAnnotating, setIsAnnotating] = useState(false)
-    const [triggerHighlight, setTriggerHighlight] = useState(false)
     const [triggerAnnotation, setTriggerAnnotation] = useState(false)
-    const [annotationToggle, setAnnotationToggle] = useState(false)
     const [annotations, setAnnotations] = useState([])
 
 
@@ -59,57 +55,6 @@ export default function ViewRNA ( { geneData, annotationText, setAnnotationText,
     }, [sequenceStyle])
 
 
-    // the following functionality can be moved to a consise location
-
-    // custom annotation handling
-    function handleAddAnnotation() {
-        setIsAnnotating(!isAnnotating)
-    }
-
-    useEffect(() => {
-        if(isAnnotating === true) {
-            document.addEventListener('mousedown', handleStartDrag, {once: true})
-            document.addEventListener('mouseup', handleDragEnd, {once: true})
-        }
-        // eslint-disable-next-line
-    }, [isAnnotating, triggerHighlight])
-
-    const highlightedBp = []
-
-    function handleStartDrag(event) {
-        highlightedBp.splice(0, highlightedBp.length)
-        if(event.target.className === 'bp') {
-            document.getElementById(event.target.id).style.backgroundColor = 'yellow'
-            highlightedBp.push(event.target.id)
-            document.addEventListener('mouseover', handleWhileDragging)
-        }
-    }
-
-    function handleWhileDragging(event) {
-        const basepair = event.target.id
-        if(event.target.className === 'bp') {
-            if(parseInt(basepair) === parseInt(Math.max(...highlightedBp)+1) || parseInt(basepair) ===  parseInt(Math.min(...highlightedBp)-1)) {
-                document.getElementById(event.target.id).style.backgroundColor = 'yellow'
-                highlightedBp.push(event.target.id)
-            }
-        }
-    }
-
-    function handleDragEnd() {
-        const bpLowToHigh = highlightedBp.sort((a, b) => a - b)
-        setAnnotationSequence(bpLowToHigh)
-        document.removeEventListener('mouseover', handleWhileDragging)
-    }
-
-    useEffect(() => {
-        if(annotationSequence.length > 1) {
-            setAnnotationText(<Annotation basepairs={annotationSequence} transcriptIndex={transcriptIndex} isProtein={false} annotationToggle={annotationToggle} triggerAnnotation={triggerAnnotation} setTriggerAnnotation={setTriggerAnnotation} setAnnotationText={setAnnotationText} setTriggerHighlight={setTriggerHighlight} triggerHighlight={triggerHighlight} geneData={geneData}/>)
-        }
-        // eslint-disable-next-line
-    }, [annotationSequence])
-
-    // end
-
     // get annotations
     useEffect(() => { // note: need to configure for dna, rna, or protein
         fetch('/annotations', {
@@ -125,6 +70,11 @@ export default function ViewRNA ( { geneData, annotationText, setAnnotationText,
     }, [geneData, triggerAnnotation])
 
 
+
+    useEffect(() => {
+        console.log('geneData')
+        console.log(geneData)
+    }, [geneData])
 
 
 

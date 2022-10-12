@@ -62,7 +62,6 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
 
 
     useEffect(() => {
-        console.log(sequenceID)
         if(sequenceID.accession) { // note: monkey-patch
             fetch('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=' + sequenceID.accession + '&strand=' + sequenceID.strand + '&seq_start=' + sequenceID.range[0] + '&seq_stop=' + sequenceID.range[1] + '&rettype=fasta&retmode=xml')
             .then(resp => resp.text())
