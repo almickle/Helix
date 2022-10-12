@@ -21,7 +21,6 @@ export default function AnnotationHandler ( { geneData, annotations, setAnnotati
     }
 
     useEffect(() => {
-        console.log('fired')
         if(isAnnotating === true) { // bug: need fixing; event handler cleanup etc
             document.addEventListener('mousedown', handleStartDrag)
             document.addEventListener('mouseup', handleDragEnd)

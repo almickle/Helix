@@ -83,7 +83,7 @@ export default function ViewProtein ( { geneData, annotationText, setAnnotationT
 
     return (
         <div id="workspace" style={{ height: 'fit-content', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'white' }}>
-            <SequenceHeader geneData={geneData} setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation} sequenceStyle={sequenceStyle} setSequenceStyle={setSequenceStyle} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary} rawSequence={rawSequence} />
+            <SequenceHeader geneData={geneData} transcriptOptions={{transcripts: [], visibility: false}} setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation} sequenceStyle={sequenceStyle} setSequenceStyle={setSequenceStyle} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary} rawSequence={rawSequence} />
             <SequenceRender sequenceArray={sequenceArray} annotationText={annotationText} setIconVisibility={setIconVisibility} setVisibility={setVisibility} visibility={visibility} basePairColors={basePairColors} selectedRegion={selectedRegion} setShowMoreButton={setShowMoreButton} setSelectedRegion={setSelectedRegion} reload={reload}/>
             <LoadingGIF iconVisibility={iconVisibility} dnaContainerSize={dnaContainerSize}/>
             {showMoreButton}
