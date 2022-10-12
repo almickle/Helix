@@ -16,9 +16,8 @@ export default function Label ( { label, geneIndex, geneData, setGeneData, setIn
     }
 
     function handleDNA () {
-        // setReload(!reload)
         setPresentView('DNA')
-        setInputData(config[1][0][entryIndex])
+        setInputData([config[1][0][previousIndex], 'Homo sapiens'])
         setReload(!reload)
     }
 
@@ -30,24 +29,23 @@ export default function Label ( { label, geneIndex, geneData, setGeneData, setIn
     }
 
     function handleProtein () {
-        setPresentView('Protein')
-        setSequenceID(geneData.transcripts[previousIndex].protein.accession_version)
-        setTranscriptIndex(previousIndex)
-        setReload(!reload)
+        // console.log('set gene data')
+        // setPresentView('Protein')
+        // setSequenceID(geneData.transcripts[previousIndex].protein.accession_version)
+        // setTranscriptIndex(previousIndex)
+        // setReload(!reload)
     }
 
     function handleDoubleClickLabel() {
         switch (renderLevel) {
             case 1:
-                fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/symbol/' + config[1][0][previousIndex] + '/taxon/human')
-                    .then((resp) => resp.json())
-                    .then((data) => setGeneData(data.genes[0].gene, handleDNA()))
+                handleDNA()
                 break;
 
             case 2:
                 fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/symbol/' + config[1][0][previousIndex] + '/taxon/human')
                     .then((resp) => resp.json())
-                    .then((data) => setGeneData(data.genes[0].gene, handleRNA()))
+                    .then((data) => setGeneData(data.genes[0].gene).then(() => console.log('changed')))
                 break;
 
             case 3:

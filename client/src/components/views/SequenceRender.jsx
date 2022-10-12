@@ -117,12 +117,10 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
     const rowElements = rowMarkersLeft.map((row, index, array) => {
         if (index === (rowMarkersLeft.length - 1)) {
             const remainder = cellsPerRow - basePairElements.slice((array[index]-1-selectedRegion[0]), (renderSequence.length)).length
-            console.log(remainder)
             const spaces = []
             for(let i=0; i < remainder; i++) {
                 spaces.push(i)
             }
-            console.log(spaces.length)
             const fillerElements = spaces.map(() => <span style={{ height: rowSize, width: rowSize }}></span>)
             return (
                 <div key={array[index]} style={{ width: '100%', height: rowSize, marginBottom: rowMargin, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>

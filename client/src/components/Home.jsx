@@ -98,6 +98,7 @@ export default function Home () {
             setInputData([gene, species])
             setReload(!reload)
             setPresentView('DNA')
+            // setSelectedRegion([0, 10000])
         }
         // insert modal trigger if search error
         document.getElementById('gene-search').value = ''

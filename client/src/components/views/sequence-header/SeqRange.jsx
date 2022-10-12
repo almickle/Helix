@@ -1,6 +1,6 @@
 
 
-export default function SeqRange ( { setSelectedRegion, selectedRegion, setReload, reload } ) {
+export default function SeqRange ( { setSelectedRegion, selectedRegion } ) {
 
     const radius = 30
     const height = 25
