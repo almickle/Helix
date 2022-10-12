@@ -12,6 +12,7 @@ export default function ViewProtein ( { geneData, annotationText, setAnnotationT
     const dnaContainerSize = 90
     const infoPanelLabels = {type: 'Protein', unit: 'aa', info: ['Isoform', geneData.transcripts[transcriptIndex].protein.isoform_name]}
 
+    
     const [visibility, setVisibility] = useState('hidden')
     const [iconVisibility, setIconVisibility] = useState('visible')
     const [showMoreButton, setShowMoreButton] = useState()

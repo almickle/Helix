@@ -62,14 +62,17 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
 
 
     useEffect(() => {
-        fetch('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=' + sequenceID.accession + '&strand=' + sequenceID.strand + '&seq_start=' + sequenceID.range[0] + '&seq_stop=' + sequenceID.range[1] + '&rettype=fasta&retmode=xml')
-        .then(resp => resp.text())
-        .then(data => {
-                        const respArray = new XMLParser().parseFromString(data).children[0].children[0].children
-                        const seq = new XMLParser().parseFromString(data).children[0].children[0].children[respArray.length-1].value
-                        setRawSequence(seq)
-                        setSequenceArray(seq.split(''))
-                    })
+        console.log(sequenceID)
+        if(sequenceID.accession) {
+            fetch('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=' + sequenceID.accession + '&strand=' + sequenceID.strand + '&seq_start=' + sequenceID.range[0] + '&seq_stop=' + sequenceID.range[1] + '&rettype=fasta&retmode=xml')
+            .then(resp => resp.text())
+            .then(data => {
+                            const respArray = new XMLParser().parseFromString(data).children[0].children[0].children
+                            const seq = new XMLParser().parseFromString(data).children[0].children[0].children[respArray.length-1].value
+                            setRawSequence(seq)
+                            setSequenceArray(seq.split(''))
+                        })
+        }
     }, [sequenceID])
 
 

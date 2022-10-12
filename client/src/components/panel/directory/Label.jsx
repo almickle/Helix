@@ -21,20 +21,21 @@ export default function Label ( { label, geneIndex, geneData, setGeneData, setIn
         setReload(!reload)
     }
 
-    function handleRNA () {
+    function handleRNA (gene) {
         setPresentView('RNA')
-        setSequenceID(geneData.transcripts[entryIndex].accession_version)
+        setSequenceID(gene.transcripts[entryIndex].accession_version)
         setTranscriptIndex(entryIndex)
         setReload(!reload)
     }
 
     function handleProtein () {
-        // console.log('set gene data')
-        // setPresentView('Protein')
-        // setSequenceID(geneData.transcripts[previousIndex].protein.accession_version)
-        // setTranscriptIndex(previousIndex)
-        // setReload(!reload)
+        setPresentView('Protein')
+        setSequenceID(geneData.transcripts[previousIndex].protein.accession_version)
+        setTranscriptIndex(previousIndex)
+        setReload(!reload)
     }
+
+   
 
     function handleDoubleClickLabel() {
         switch (renderLevel) {
@@ -45,13 +46,24 @@ export default function Label ( { label, geneIndex, geneData, setGeneData, setIn
             case 2:
                 fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/symbol/' + config[1][0][previousIndex] + '/taxon/human')
                     .then((resp) => resp.json())
-                    .then((data) => setGeneData(data.genes[0].gene).then(() => console.log('changed')))
+                    .then((data) => {
+                            const gene = data.genes[0].gene
+                            console.log('rna')
+                            console.log(gene)
+                            setGeneData(gene)
+                            handleRNA(gene)
+                    })
                 break;
 
             case 3:
                 fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/symbol/' + config[1][0][geneIndex] + '/taxon/human')
                 .then((resp) => resp.json())
-                .then((data) => setGeneData(data.genes[0].gene, handleProtein()))
+                .then((data) => {
+                            const gene = data.genes[0].gene
+                            console.log('protein')
+                            console.log(gene)
+                            // setGeneData(gene)
+                })
                 break;
         
             default:
