@@ -28,9 +28,9 @@ export default function Label ( { label, geneIndex, geneData, setGeneData, setIn
         setReload(!reload)
     }
 
-    function handleProtein () {
+    function handleProtein (gene) {
         setPresentView('Protein')
-        setSequenceID(geneData.transcripts[previousIndex].protein.accession_version)
+        setSequenceID(gene.transcripts[previousIndex].protein.accession_version)
         setTranscriptIndex(previousIndex)
         setReload(!reload)
     }
@@ -44,25 +44,22 @@ export default function Label ( { label, geneIndex, geneData, setGeneData, setIn
                 break;
 
             case 2:
-                fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/symbol/' + config[1][0][previousIndex] + '/taxon/human')
+                fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/symbol/' + config[1][0] + '/taxon/human')
                     .then((resp) => resp.json())
                     .then((data) => {
                             const gene = data.genes[0].gene
-                            console.log('rna')
-                            console.log(gene)
                             setGeneData(gene)
                             handleRNA(gene)
                     })
                 break;
 
             case 3:
-                fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/symbol/' + config[1][0][geneIndex] + '/taxon/human')
+                fetch('https://api.ncbi.nlm.nih.gov/datasets/v1/gene/symbol/' + config[1][0] + '/taxon/human')
                 .then((resp) => resp.json())
                 .then((data) => {
                             const gene = data.genes[0].gene
-                            console.log('protein')
-                            console.log(gene)
-                            // setGeneData(gene)
+                            setGeneData(gene)
+                            handleProtein(gene)
                 })
                 break;
         
