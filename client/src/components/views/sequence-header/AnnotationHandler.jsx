@@ -4,7 +4,7 @@ import BookIcon from '../../assets/BookIcon.png'
 import Annotation from '../Annotation'
 import Note from '../Note'
 
-export default function AnnotationHandler ( { annotationText, geneData, annotations, setAnnotationText, setTriggerAnnotation, triggerAnnotation } ) {
+export default function AnnotationHandler ( { geneData, annotations, setAnnotationText, setTriggerAnnotation, triggerAnnotation } ) {
 
     const [annotationSequence, setAnnotationSequence] = useState([])
     const [triggerHighlight, setTriggerHighlight] = useState(false)
@@ -15,6 +15,7 @@ export default function AnnotationHandler ( { annotationText, geneData, annotati
 
 
     // custom annotation handling
+
     function handleAddAnnotation() {
         setIsAnnotating(!isAnnotating)
     }
@@ -69,10 +70,6 @@ export default function AnnotationHandler ( { annotationText, geneData, annotati
         // eslint-disable-next-line
     }, [annotationSequence])
 
-    useEffect(() => {
-        console.log('annotationText')
-        console.log(annotationText)
-    }, [annotationText])
 
     // enable annotating
     useEffect(() => {
@@ -87,7 +84,7 @@ export default function AnnotationHandler ( { annotationText, geneData, annotati
 
 
 
-
+    // viewing annotations
 
     function toggleAnnotations () {
         setAnnotationToggle(!annotationToggle)

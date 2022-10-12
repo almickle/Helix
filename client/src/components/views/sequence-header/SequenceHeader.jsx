@@ -7,7 +7,7 @@ import AnnotationHandler from './AnnotationHandler'
 import StyleHandler from './StyleHandler'
 
 
-export default function SequenceHeader ( { annotationText, geneData, setSelectedRegion, selectedRegion, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
+export default function SequenceHeader ( { geneData, setSelectedRegion, selectedRegion, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
 
     const headerSize = 60
 
@@ -98,7 +98,7 @@ export default function SequenceHeader ( { annotationText, geneData, setSelected
             </div>
             <div style={{ height: '100%', width: '60%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <StyleHandler sequenceStyle={sequenceStyle} setSequenceStyle={setSequenceStyle}/>
-                <AnnotationHandler annotationText={annotationText} geneData={geneData} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation}/>
+                <AnnotationHandler geneData={geneData} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation}/>
             </div>
             <div style={{ height: '100%', width: '20%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
                 <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={handleAddToLibrary} src={bookmarkIcon} style={{ height: '110%', cursor: 'pointer' }} alt="bookmark icon: add to library" /> </span>
