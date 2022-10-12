@@ -1,6 +1,7 @@
 import CheckYes from '../assets/CheckYes.png'
 import CheckNo from '../assets/CheckNo.png'
 import Note from './Note'
+import { useEffect } from 'react'
 
 export default function Annotation ( { basepairs, transcriptIndex, isProtein, annotationToggle, setAnnotationText, triggerAnnotation, setTriggerAnnotation, setTriggerHighlight, triggerHighlight, geneData } ) {
 
@@ -19,6 +20,14 @@ export default function Annotation ( { basepairs, transcriptIndex, isProtein, an
     function handleSaveAnnotation() {
         const title = document.getElementById('annotation-title').value
         const body = document.getElementById('annotation-body').value
+        console.log('basepairs')
+        console.log(basepairs)
+        console.log('data')
+        console.log('title: ' + title)
+        console.log('body: ' + body)
+        console.log('symbol: ' + geneData.symbol)
+        console.log('begin: ' + basepairs[0])
+        console.log('end: ' + basepairs[basepairs.length-1])
         if(annotationToggle === true) {
             setAnnotationText(<Note basepairs={basepairs} content={{title: title, body: body, begin: basepairs[0], end: basepairs[basepairs.length-1]}}/>)
         }
@@ -41,7 +50,10 @@ export default function Annotation ( { basepairs, transcriptIndex, isProtein, an
                     end: parseInt(basepairs[basepairs.length-1])
                 })
             })
-        .then(() => setTriggerAnnotation(!triggerAnnotation))
+        .then(() => {
+            setTriggerAnnotation(!triggerAnnotation)
+            setTriggerHighlight(!triggerHighlight)
+        })
     }  
 
     function handleCancelAnnotation() {
@@ -51,6 +63,16 @@ export default function Annotation ( { basepairs, transcriptIndex, isProtein, an
         })
         setTriggerHighlight(!triggerHighlight)
     }
+
+
+    useEffect(() => {
+        console.log('annotation sequence')
+        console.log(basepairs)
+    }, [basepairs])
+
+    useEffect(() => {
+        console.log('test')
+    }, [])
 
 
     return (

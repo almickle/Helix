@@ -25786,3 +25786,1843 @@ Processing by AnnotationsController#show_gene_annotations as */*
 Completed 200 OK in 15ms (Views: 5.7ms | ActiveRecord: 1.5ms | Allocations: 2398)
 
 
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:42:59 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-12 10:42:59 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:42:59 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:42:59 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:42:59 -0600
+  [1m[36mActiveRecord::SchemaMigration Pluck (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as */*
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+Completed 404 Not Found in 25ms (ActiveRecord: 44.7ms | Allocations: 2481)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Completed 404 Not Found in 24ms (ActiveRecord: 14.0ms | Allocations: 2331)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:43:00 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 185)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Completed 404 Not Found in 239ms (ActiveRecord: 25.3ms | Allocations: 50454)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mUser Load (30.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 401 Unauthorized in 577ms (Views: 0.3ms | ActiveRecord: 85.0ms | Allocations: 94855)
+
+
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 74.2ms | Allocations: 854)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-12 10:43:01 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:43:01 -0600
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 401 Unauthorized in 6ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 734)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.6ms | Allocations: 714)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:43:01 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 719)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:43:02 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 0.6ms | Allocations: 714)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:43:02 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.6ms | Allocations: 714)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:43:02 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 714)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:48:53 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:48:53 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-12 10:48:53 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 185)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 725)
+
+
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 714)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:48:53 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 185)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:48:53 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 713)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-12 10:48:53 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:48:53 -0600
+Processing by UsersController#show as */*
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 723)
+
+
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 714)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:48:54 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 714)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:48:55 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 714)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:48:55 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:48:55 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:48:55 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 185)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 185)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 713)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:49:51 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:49:51 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 720)
+
+
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"AKT1", "annotation"=>{}}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 185)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Started POST "/login" for 127.0.0.1 at 2022-10-12 10:50:05 -0600
+Processing by SessionsController#create as */*
+  Parameters: {"username"=>"almickle", "password"=>"[FILTERED]", "session"=>{"username"=>"almickle", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "almickle"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 64ms (Views: 1.7ms | ActiveRecord: 2.1ms | Allocations: 15446)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:50:05 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (2.0ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (1.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 199ms (Views: 46.7ms | ActiveRecord: 10.1ms | Allocations: 37584)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:50:13 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 13ms (Views: 5.3ms | ActiveRecord: 1.2ms | Allocations: 2530)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:50:14 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"AKT1", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (1.2ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (1.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 4]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 76ms (Views: 47.3ms | ActiveRecord: 4.5ms | Allocations: 20724)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 10:51:00 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"AKT1", "transcriptIndex"=>-1, "protein"=>false, "title"=>"Test", "body"=>"This is a test annotation because a feature stopped working related to the event listeners", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Test", "body"=>"This is a test annotation because a feature stopped working related to the event listeners", "protein"=>false}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.9ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 20ms (Views: 0.3ms | ActiveRecord: 6.4ms | Allocations: 3952)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:51:00 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"AKT1", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.3ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 4]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 11ms (Views: 3.7ms | ActiveRecord: 1.2ms | Allocations: 2549)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:51:18 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-12 10:51:18 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:51:18 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mGene Load (3.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 3.8ms | Allocations: 3344)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Processing by UsersController#show as */*
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:51:19 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 1.4ms | Allocations: 2068)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 259ms (Views: 1.1ms | ActiveRecord: 16.3ms | Allocations: 29707)
+
+
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (2.0ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (1.1ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 320ms (Views: 9.3ms | ActiveRecord: 21.4ms | Allocations: 38494)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-12 10:51:19 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:51:19 -0600
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 0.5ms | Allocations: 788)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 13ms (Views: 5.3ms | ActiveRecord: 1.7ms | Allocations: 2539)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:51:20 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 12ms (Views: 4.5ms | ActiveRecord: 1.3ms | Allocations: 2539)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:51:20 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 13ms (Views: 6.1ms | ActiveRecord: 1.1ms | Allocations: 2539)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:51:20 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 14ms (Views: 6.9ms | ActiveRecord: 1.4ms | Allocations: 2531)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:51:21 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:51:21 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (1.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (1.0ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 18ms (Views: 4.1ms | ActiveRecord: 3.7ms | Allocations: 2468)
+
+
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:51:21 -0600
+  [1m[36mGene Load (1.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.5ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 14ms (Views: 3.2ms | ActiveRecord: 2.4ms | Allocations: 2788)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 12ms (Views: 5.5ms | ActiveRecord: 1.1ms | Allocations: 2531)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:51:21 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 12ms (Views: 6.0ms | ActiveRecord: 0.8ms | Allocations: 2531)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:51:25 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:51:25 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"AKT1", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mGene Load (1.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.5ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 4]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 12ms (Views: 3.7ms | ActiveRecord: 2.0ms | Allocations: 3002)
+
+
+  [1m[36mUser Load (4.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.9ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 19ms (Views: 5.4ms | ActiveRecord: 5.6ms | Allocations: 4458)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 10:57:49 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"AKT1", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test", "body"=>"Testing post", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Test", "body"=>"Testing post", "protein"=>false}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (1.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 116ms (Views: 0.3ms | ActiveRecord: 9.5ms | Allocations: 6677)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:57:49 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"AKT1", "annotation"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.9ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 4]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 15ms (Views: 5.9ms | ActiveRecord: 1.8ms | Allocations: 2571)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:59:38 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:59:38 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-12 10:59:38 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 1.1ms | Allocations: 2293)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.5ms | Allocations: 776)
+
+
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (1.1ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (1.8ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 176ms (Views: 14.7ms | ActiveRecord: 23.8ms | Allocations: 19327)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:59:39 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-12 10:59:39 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:59:39 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.8ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 1.2ms | Allocations: 2112)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 13ms (Views: 1.2ms | ActiveRecord: 0.5ms | Allocations: 5156)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 16ms (Views: 7.3ms | ActiveRecord: 1.2ms | Allocations: 2543)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:59:39 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 12ms (Views: 5.0ms | ActiveRecord: 1.0ms | Allocations: 2537)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:59:39 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 17ms (Views: 7.9ms | ActiveRecord: 1.4ms | Allocations: 2537)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:59:41 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 12ms (Views: 5.2ms | ActiveRecord: 1.1ms | Allocations: 2537)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 10:59:41 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 10:59:41 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.9ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 16ms (Views: 5.3ms | ActiveRecord: 2.8ms | Allocations: 2430)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 13ms (Views: 5.7ms | ActiveRecord: 1.2ms | Allocations: 2537)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:00:06 -0600
+Processing by UsersController#show as */*
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:00:06 -0600
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 6ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 832)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:00:06 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mLibrary Load (2.9ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (1.1ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 26ms (Views: 10.9ms | ActiveRecord: 4.3ms | Allocations: 3908)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:00:07 -0600
+  [1m[36mGene Load (13.0ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 14.8ms | Allocations: 4641)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:00:07 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:00:07 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (2.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 4.9ms | Allocations: 2088)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 7ms (Views: 1.6ms | ActiveRecord: 0.5ms | Allocations: 799)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 14ms (Views: 5.7ms | ActiveRecord: 1.3ms | Allocations: 2541)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:00:07 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 13ms (Views: 6.8ms | ActiveRecord: 1.1ms | Allocations: 2541)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:00:07 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 12ms (Views: 5.1ms | ActiveRecord: 1.1ms | Allocations: 2541)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:00:08 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 22ms (Views: 8.7ms | ActiveRecord: 1.6ms | Allocations: 2541)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:00:09 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:00:09 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (1.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 17ms (Views: 6.3ms | ActiveRecord: 3.8ms | Allocations: 2472)
+
+
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.6ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 15ms (Views: 4.8ms | ActiveRecord: 1.5ms | Allocations: 2408)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:00:09 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 10ms (Views: 5.2ms | ActiveRecord: 0.8ms | Allocations: 2541)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:00:09 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 16ms (Views: 6.7ms | ActiveRecord: 1.0ms | Allocations: 2541)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:00:55 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test", "body"=>"This is a test annotation", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Test", "body"=>"This is a test annotation", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 18ms (Views: 0.4ms | ActiveRecord: 2.0ms | Allocations: 3639)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:00:55 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.3ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 10ms (Views: 3.4ms | ActiveRecord: 1.0ms | Allocations: 2406)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:01:52 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:01:52 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:01:52 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+Processing by UsersController#show as */*
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (1.1ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 2.9ms | Allocations: 2530)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 56ms (Views: 0.9ms | ActiveRecord: 1.4ms | Allocations: 9882)
+
+
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 16ms (Views: 7.9ms | ActiveRecord: 1.1ms | Allocations: 2536)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:01:53 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.8ms | Allocations: 2050)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:01:53 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:01:53 -0600
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.8ms | Allocations: 791)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 14ms (Views: 6.0ms | ActiveRecord: 1.0ms | Allocations: 2537)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:01:53 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 18ms (Views: 8.1ms | ActiveRecord: 1.2ms | Allocations: 2537)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:01:54 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 12ms (Views: 5.6ms | ActiveRecord: 0.8ms | Allocations: 2537)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:01:54 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 15ms (Views: 5.7ms | ActiveRecord: 1.2ms | Allocations: 2543)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:01:55 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:01:55 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mAnnotation Load (1.6ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 20ms (Views: 7.2ms | ActiveRecord: 2.2ms | Allocations: 2838)
+
+
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.8ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.6ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 29ms (Views: 5.6ms | ActiveRecord: 3.5ms | Allocations: 3618)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:01:55 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 14ms (Views: 6.4ms | ActiveRecord: 0.9ms | Allocations: 2543)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:01:55 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 14ms (Views: 7.4ms | ActiveRecord: 0.8ms | Allocations: 2543)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:02:14 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test", "body"=>"This is a test. Post is broken", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Test", "body"=>"This is a test. Post is broken", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 18ms (Views: 0.3ms | ActiveRecord: 2.0ms | Allocations: 3628)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:02:14 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 11ms (Views: 3.3ms | ActiveRecord: 1.1ms | Allocations: 2406)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:05:59 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test", "body"=>"Another test", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Test", "body"=>"Another test", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 18ms (Views: 0.4ms | ActiveRecord: 1.8ms | Allocations: 3627)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:06:00 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.5ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 13ms (Views: 3.6ms | ActiveRecord: 1.4ms | Allocations: 2400)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:07:00 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"New Test", "body"=>"Different test", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"New Test", "body"=>"Different test", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 19ms (Views: 0.5ms | ActiveRecord: 1.8ms | Allocations: 3629)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:07:01 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 10ms (Views: 3.4ms | ActiveRecord: 0.9ms | Allocations: 2414)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:08:54 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test", "body"=>"Test", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Test", "body"=>"Test", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 19ms (Views: 0.6ms | ActiveRecord: 2.3ms | Allocations: 3625)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:08:55 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 10ms (Views: 3.5ms | ActiveRecord: 0.9ms | Allocations: 2416)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:12:24 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:12:24 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 20ms (Views: 8.3ms | ActiveRecord: 1.8ms | Allocations: 2553)
+
+
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 39ms (Views: 1.0ms | ActiveRecord: 0.8ms | Allocations: 777)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:12:25 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.9ms | Allocations: 2050)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:12:25 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:12:25 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 1.0ms | Allocations: 2257)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:12:25 -0600
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 6ms (Views: 1.1ms | ActiveRecord: 0.7ms | Allocations: 776)
+
+
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (1.0ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (1.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 206ms (Views: 7.6ms | ActiveRecord: 14.6ms | Allocations: 19830)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:12:25 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.7ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 17ms (Views: 6.1ms | ActiveRecord: 1.8ms | Allocations: 2537)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:12:25 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.8ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 16ms (Views: 6.5ms | ActiveRecord: 1.7ms | Allocations: 2537)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:12:27 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:12:27 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:12:27 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mGene Load (4.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mAnnotation Load (1.2ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 35ms (Views: 8.1ms | ActiveRecord: 6.2ms | Allocations: 3526)
+
+
+  [1m[36mLibrary Load (0.8ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.9ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 30ms (Views: 7.7ms | ActiveRecord: 3.0ms | Allocations: 4338)
+
+
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.3ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 11ms (Views: 2.3ms | ActiveRecord: 1.0ms | Allocations: 2404)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:12:27 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 15ms (Views: 7.2ms | ActiveRecord: 1.0ms | Allocations: 2537)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:12:27 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 13ms (Views: 6.3ms | ActiveRecord: 1.1ms | Allocations: 2537)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:12:44 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test Test", "body"=>"This is a test", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Test Test", "body"=>"This is a test", "protein"=>false}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 12ms (Views: 0.4ms | ActiveRecord: 1.3ms | Allocations: 3642)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:12:44 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 14ms (Views: 4.3ms | ActiveRecord: 1.1ms | Allocations: 2410)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:14:42 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test", "body"=>"Test", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Test", "body"=>"Test", "protein"=>false}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 24ms (Views: 0.4ms | ActiveRecord: 2.5ms | Allocations: 3629)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:14:42 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.2ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.2ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 8ms (Views: 2.6ms | ActiveRecord: 0.7ms | Allocations: 2416)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:17:15 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"", "body"=>"", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"", "body"=>"", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (1.9ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 19ms (Views: 0.4ms | ActiveRecord: 3.2ms | Allocations: 3647)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:17:16 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.5ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 12ms (Views: 6.2ms | ActiveRecord: 1.0ms | Allocations: 2408)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:18:22 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test", "body"=>"Highlight", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Test", "body"=>"Highlight", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.2ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 3617)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:18:22 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.3ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 10ms (Views: 2.6ms | ActiveRecord: 1.0ms | Allocations: 2394)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:37:31 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:37:31 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+Processing by UsersController#show as */*
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:37:31 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:37:31 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 221ms (Views: 1.1ms | ActiveRecord: 41.1ms | Allocations: 9441)
+
+
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (2.2ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (1.2ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 252ms (Views: 7.6ms | ActiveRecord: 45.7ms | Allocations: 13618)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:37:31 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:37:31 -0600
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 7ms (Views: 0.8ms | ActiveRecord: 0.4ms | Allocations: 787)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 16ms (Views: 6.9ms | ActiveRecord: 1.4ms | Allocations: 2553)
+
+
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (2.2ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 196ms (ActiveRecord: 20.1ms | Allocations: 18524)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+  [1m[36mGene Load (4.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 241ms (ActiveRecord: 22.7ms | Allocations: 34614)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:37:31 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 16ms (Views: 7.3ms | ActiveRecord: 1.3ms | Allocations: 2542)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:37:32 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 12ms (Views: 4.8ms | ActiveRecord: 1.3ms | Allocations: 2537)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:37:32 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.6ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 17ms (Views: 6.0ms | ActiveRecord: 1.6ms | Allocations: 2541)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:37:33 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:37:33 -0600
+  [1m[36mGene Load (1.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (5.9ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 23ms (Views: 6.8ms | ActiveRecord: 8.0ms | Allocations: 2908)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:37:33 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.6ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 13ms (Views: 4.0ms | ActiveRecord: 1.7ms | Allocations: 2439)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 13ms (Views: 5.2ms | ActiveRecord: 1.4ms | Allocations: 2541)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:37:33 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 10ms (Views: 4.8ms | ActiveRecord: 0.8ms | Allocations: 2541)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:38:18 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Annotation", "body"=>"Test", "begin"=>nil, "end"=>nil, "annotation"=>{"begin"=>nil, "end"=>nil, "title"=>"Annotation", "body"=>"Test", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 20ms (Views: 0.4ms | ActiveRecord: 2.0ms | Allocations: 3632)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:38:18 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.3ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 8ms (Views: 2.7ms | ActiveRecord: 0.9ms | Allocations: 2410)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:41:03 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:41:03 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:41:03 -0600
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 6ms (Views: 0.9ms | ActiveRecord: 0.4ms | Allocations: 784)
+
+
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.8ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 23ms (Views: 6.4ms | ActiveRecord: 1.9ms | Allocations: 2558)
+
+
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.8ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 1.1ms | Allocations: 2042)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:41:03 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.6ms | Allocations: 2041)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:41:04 -0600
+Processing by UsersController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 934)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:41:04 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 14ms (Views: 5.9ms | ActiveRecord: 1.0ms | Allocations: 2529)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:41:04 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 14ms (Views: 6.7ms | ActiveRecord: 1.1ms | Allocations: 2529)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:41:04 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 16ms (Views: 5.9ms | ActiveRecord: 1.0ms | Allocations: 2529)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:41:05 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 15ms (Views: 5.6ms | ActiveRecord: 1.1ms | Allocations: 2539)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:41:05 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.3ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 12ms (Views: 6.0ms | ActiveRecord: 0.9ms | Allocations: 2406)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:41:05 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 10ms (Views: 4.3ms | ActiveRecord: 0.8ms | Allocations: 2539)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:41:24 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test", "body"=>"Test", "begin"=>299, "end"=>304, "annotation"=>{"begin"=>299, "end"=>304, "title"=>"Test", "body"=>"Test", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mAnnotation Create (8.1ms)[0m  [1m[32mINSERT INTO "annotations" ("gene_id", "begin", "end", "title", "body", "created_at", "updated_at", "transcript", "protein") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["gene_id", 5], ["begin", 299], ["end", 304], ["title", "Test"], ["body", "Test"], ["created_at", "2022-10-12 17:41:24.607956"], ["updated_at", "2022-10-12 17:41:24.607956"], ["transcript", nil], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 50ms (Views: 0.8ms | ActiveRecord: 11.5ms | Allocations: 4371)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:41:24 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.7ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 14ms (Views: 4.6ms | ActiveRecord: 1.5ms | Allocations: 2531)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:43:24 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"New Test", "body"=>"Stress test", "begin"=>192, "end"=>199, "annotation"=>{"begin"=>192, "end"=>199, "title"=>"New Test", "body"=>"Stress test", "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mAnnotation Create (0.6ms)[0m  [1m[32mINSERT INTO "annotations" ("gene_id", "begin", "end", "title", "body", "created_at", "updated_at", "transcript", "protein") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["gene_id", 5], ["begin", 192], ["end", 199], ["title", "New Test"], ["body", "Stress test"], ["created_at", "2022-10-12 17:43:24.910700"], ["updated_at", "2022-10-12 17:43:24.910700"], ["transcript", nil], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 20ms (Views: 0.9ms | ActiveRecord: 2.4ms | Allocations: 4261)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:43:25 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 14ms (Views: 5.0ms | ActiveRecord: 1.1ms | Allocations: 2672)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:46:24 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:46:24 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.7ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Processing by UsersController#show as */*
+  [1m[36mGene Load (2.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 25ms (Views: 10.9ms | ActiveRecord: 3.7ms | Allocations: 3981)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:46:24 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:46:24 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:46:24 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 1.5ms | Allocations: 2097)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "annotation"=>{}}
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 18ms (Views: 7.8ms | ActiveRecord: 1.3ms | Allocations: 2771)
+
+
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 349ms (Views: 0.8ms | ActiveRecord: 36.4ms | Allocations: 25884)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:46:24 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-12 11:46:24 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (1.1ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Processing by UsersController#show as */*
+  [1m[36mGene Load (1.9ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 21ms (Views: 8.7ms | ActiveRecord: 3.4ms | Allocations: 2986)
+
+
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 14ms (Views: 1.3ms | ActiveRecord: 1.8ms | Allocations: 2255)
+
+
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (2.2ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+Completed 500 Internal Server Error in 174ms (ActiveRecord: 14.3ms | Allocations: 16710)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:46:25 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 17ms (Views: 7.8ms | ActiveRecord: 1.3ms | Allocations: 2544)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:46:26 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.2ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 8ms (Views: 3.5ms | ActiveRecord: 0.9ms | Allocations: 2525)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:46:26 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:46:26 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:46:26 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mGene Load (1.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  [1m[36mAnnotation Load (5.1ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  [1m[36mGene Load (3.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 29ms (Views: 12.4ms | ActiveRecord: 7.1ms | Allocations: 5092)
+
+
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mAnnotation Load (4.3ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+  [1m[36mLibrary Load (1.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 28ms (Views: 7.7ms | ActiveRecord: 9.2ms | Allocations: 5683)
+
+
+  [1m[36mGene Load (0.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 26ms (Views: 5.7ms | ActiveRecord: 5.0ms | Allocations: 5894)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-12 11:46:26 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 12ms (Views: 6.6ms | ActiveRecord: 1.1ms | Allocations: 2525)
+
+
+Started POST "/newannotation" for 127.0.0.1 at 2022-10-12 11:46:39 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcriptIndex"=>nil, "protein"=>false, "title"=>"Test", "body"=>"Test", "begin"=>130, "end"=>137, "annotation"=>{"begin"=>130, "end"=>137, "title"=>"Test", "body"=>"Test", "protein"=>false}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mAnnotation Create (0.9ms)[0m  [1m[32mINSERT INTO "annotations" ("gene_id", "begin", "end", "title", "body", "created_at", "updated_at", "transcript", "protein") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["gene_id", 5], ["begin", 130], ["end", 137], ["title", "Test"], ["body", "Test"], ["created_at", "2022-10-12 17:46:39.743016"], ["updated_at", "2022-10-12 17:46:39.743016"], ["transcript", nil], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 18ms (Views: 0.9ms | ActiveRecord: 3.0ms | Allocations: 4270)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-12 11:46:39 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "annotation"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:11:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:12:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.5ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1[0m  [["gene_id", 5]]
+  ↳ app/controllers/annotations_controller.rb:13:in `show_gene_annotations'
+Completed 200 OK in 11ms (Views: 4.4ms | ActiveRecord: 1.3ms | Allocations: 2851)
+
+

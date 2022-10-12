@@ -4,7 +4,7 @@ import BookIcon from '../../assets/BookIcon.png'
 import Annotation from '../Annotation'
 import Note from '../Note'
 
-export default function AnnotationHandler ( { geneData, annotations, setAnnotationText, setTriggerAnnotation, triggerAnnotation } ) {
+export default function AnnotationHandler ( { annotationText, geneData, annotations, setAnnotationText, setTriggerAnnotation, triggerAnnotation } ) {
 
     const [annotationSequence, setAnnotationSequence] = useState([])
     const [triggerHighlight, setTriggerHighlight] = useState(false)
@@ -20,9 +20,14 @@ export default function AnnotationHandler ( { geneData, annotations, setAnnotati
     }
 
     useEffect(() => {
+        console.log('fired')
         if(isAnnotating === true) { // bug: need fixing; event handler cleanup etc
-            document.addEventListener('mousedown', handleStartDrag, {once: true})
-            document.addEventListener('mouseup', handleDragEnd, {once: true})
+            document.addEventListener('mousedown', handleStartDrag)
+            document.addEventListener('mouseup', handleDragEnd)
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleStartDrag)
+            document.removeEventListener('mouseup', handleDragEnd)
         }
         // eslint-disable-next-line
     }, [isAnnotating, triggerHighlight])
@@ -49,17 +54,25 @@ export default function AnnotationHandler ( { geneData, annotations, setAnnotati
     }
 
     function handleDragEnd() {
-        const bpLowToHigh = highlightedBp.sort((a, b) => a - b)
-        setAnnotationSequence(bpLowToHigh)
-        document.removeEventListener('mouseover', handleWhileDragging)
+        if(highlightedBp.length > 1) {
+            const bpLowToHigh = highlightedBp.sort((a, b) => a - b)
+            setAnnotationSequence(bpLowToHigh)
+            document.removeEventListener('mouseover', handleWhileDragging)
+            document.removeEventListener('mousedown', handleStartDrag)
+        }
     }
 
     useEffect(() => {
-        if(annotationSequence.length > 1) { // note: configure for flexibility
-            setAnnotationText(<Annotation basepairs={annotationSequence} transcriptIndex={-1} isProtein={false} annotationToggle={annotationToggle} triggerAnnotation={triggerAnnotation} setTriggerAnnotation={setTriggerAnnotation} setAnnotationText={setAnnotationText} setTriggerHighlight={setTriggerHighlight} triggerHighlight={triggerHighlight} geneData={geneData}/>)
+        if(annotationSequence.length > 1) { // note: configure for flexibility and ?transcript index?        
+            setAnnotationText(<Annotation basepairs={annotationSequence} transcriptIndex={null} isProtein={false} annotationToggle={annotationToggle} triggerAnnotation={triggerAnnotation} setTriggerAnnotation={setTriggerAnnotation} setAnnotationText={setAnnotationText} setTriggerHighlight={setTriggerHighlight} triggerHighlight={triggerHighlight} geneData={geneData}/>)
         }
         // eslint-disable-next-line
     }, [annotationSequence])
+
+    useEffect(() => {
+        console.log('annotationText')
+        console.log(annotationText)
+    }, [annotationText])
 
     // enable annotating
     useEffect(() => {
@@ -70,6 +83,10 @@ export default function AnnotationHandler ( { geneData, annotations, setAnnotati
             setPaintbrushColor('unset')
         }
     }, [isAnnotating])
+
+
+
+
 
 
     function toggleAnnotations () {
@@ -130,8 +147,8 @@ export default function AnnotationHandler ( { geneData, annotations, setAnnotati
                 })                 
             })
         }
-        else {
-            setAnnotationText(null)
+        else { // bug: click away note close overrides new annotation
+        //    setAnnotationText(null)
         }
     }
 
