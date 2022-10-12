@@ -19,7 +19,7 @@ export default function Home () {
     const [inputData, setInputData] = useState(['BRCA2', 'human'])
     const [reload, setReload] = useState(false)
 
-    const [geneData, setGeneData] = useState({taxname: '', symbol: '', chromosomes: [], genomic_ranges: [], transcripts: [{protein: ''}], annotations: [{assemblies_in_scope: [{name: ''}]}]})
+    const [geneData, setGeneData] = useState({taxname: '', symbol: '', chromosomes: [], genomic_ranges: [{range: [{begin: '', end: ''}]}], transcripts: [{exons: {range: [{begin: '', end: ''}]}, protein: ''}], annotations: [{assemblies_in_scope: [{name: ''}]}]})
     const [sequenceID, setSequenceID] = useState({ accession: 'NC_000013.11', range: [32315508, 32400268], strand: 1 })
     const [transcriptIndex, setTranscriptIndex] = useState(0)
 
