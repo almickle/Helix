@@ -108,7 +108,7 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
 
 
         return (
-            <span key={index} onClick={showBasePair} className='bp' id={index+1} style={{ height: rowSize, width: rowSize, justifyContent: 'center', display: 'flex', color: color }}>{renderSequence[index]}</span>
+            <span key={index} onClick={showBasePair} className='bp' id={index+1+selectedRegion[0]} style={{ height: rowSize, width: rowSize, justifyContent: 'center', display: 'flex', color: color }}>{renderSequence[index]}</span>
         )
     })
 
@@ -195,17 +195,9 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
     }, [reload])
 
 
-    // useEffect(() => {
-    //     console.log(isLoaded)
-    //     console.log('bpPresent')
-    //     console.log(bpPresent)
-    //     console.log('renderSequence')
-    //     console.log(renderSequence.length)
-    // }, [isLoaded])
-
     
     function showBasePair(event) { // note: should incorporate this functionality into a feature
-        console.log('bp: ' + (parseInt(event.target.id)+selectedRegion[0]))
+        console.log('bp: ' + event.target.id)
     }
 
     
