@@ -35,7 +35,6 @@ export default function Inputs ( { inputValues, setInputValues, inputs } ) {
     }
 
     const inputElements = inputs.map((label, index) => {
-
         if(index === 2 || index === 3) {
             return (
                 <div key={label} className="input">
@@ -43,7 +42,12 @@ export default function Inputs ( { inputValues, setInputValues, inputs } ) {
                     <span className="input" style={{ position: 'absolute', right: 41 }}>{passwordIcon}</span>
                 </div>
             )
-        } 
+        }
+        if(label === 'Password') {
+            return (
+                <input className="input" key={label} onChange={handleInputChange} autoComplete="off" id={label} type='password' style={{ marginBottom: 10, width: 140 }}></input>
+            )
+        }
         else {
             return (
                 <input className="input" key={label} onChange={handleInputChange} autoComplete="off" id={label} type='text' style={{ marginBottom: 10, width: 140 }}></input>
