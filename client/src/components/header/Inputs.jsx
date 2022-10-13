@@ -34,6 +34,7 @@ export default function Inputs ( { inputValues, setInputValues, inputs } ) {
         setInputValues({ ...inputValues, [key]: event.target.value})
     }
 
+    // note: username and password id duplicates
     const inputElements = inputs.map((label, index) => {
         if(index === 2 || index === 3) {
             return (

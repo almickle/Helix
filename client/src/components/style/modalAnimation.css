@@ -1,6 +1,6 @@
 
 @keyframes modalEnter {
-    from {top: 0;}
+    from {top: 0}
 }
 
 @keyframes modalLeave {
@@ -9,4 +9,14 @@
 
 @keyframes sideEnter {
     from {left: 0}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0%}
+    to {opacity: 100%}
+}
+
+@keyframes fadeOut {
+    from {opacity: 100%}
+    to {opacity: 0%}
 }

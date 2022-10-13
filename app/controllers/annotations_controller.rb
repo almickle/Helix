@@ -7,6 +7,11 @@ class AnnotationsController < ApplicationController
         render json: new_annotation
     end
 
+    def delete
+        Annotation.find(params[:id]).destroy
+        head :no_content
+    end
+
     def show_gene_annotations
         user = User.find(session[:user_id])
         gene = user.genes.find_by(symbol: params[:symbol])

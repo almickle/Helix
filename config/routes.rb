@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   post '/newannotation', to: 'annotations#create'
   post '/annotations', to: 'annotations#show_gene_annotations'
+  post '/deleteannotation', to: 'annotations#delete'
 
   get '/michael/:key', to: 'users#michael'
 

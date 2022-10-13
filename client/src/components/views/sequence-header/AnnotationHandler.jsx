@@ -138,7 +138,7 @@ export default function AnnotationHandler ( { geneData, annotations, setAnnotati
                 }
                 basepairIDs.forEach((id) => {
                     if(parseInt(event.target.id) === id) {
-                        setAnnotationText(<Note basepairs={basepairIDs} content={annotation}/>)
+                        setAnnotationText(<Note basepairs={basepairIDs} content={annotation} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation} setAnnotationText={setAnnotationText} />)
                     }
                 })                 
             })
