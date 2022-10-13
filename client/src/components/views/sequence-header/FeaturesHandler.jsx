@@ -71,7 +71,8 @@ export default function FeaturesHandler ( { transcriptOptions, selectedRegion, g
                 }
             })
         }
-    }, [featuresIndex, isFeatures])
+        // eslint-disable-next-line
+    }, [featuresIndex, isFeatures, selectedRegion])
 
     
     const selectOptions = transcriptOptions.transcripts.map((transcript, index) => {

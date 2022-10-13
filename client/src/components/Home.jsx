@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Console from "./Console";
+import Console from "./console/Console";
 import Panel from "./panel/Panel"
 import Main from "./Main";
 import Header from "./header/Header";
@@ -8,7 +8,7 @@ import Header from "./header/Header";
 
 export default function Home () {
 
-    const consoleHeight = 22
+    const consoleHeight = 24
     const mainWidth = 84
     const mainHeight = 100 - consoleHeight
     const panelWidth = 100 - mainWidth
@@ -22,6 +22,8 @@ export default function Home () {
     const [geneData, setGeneData] = useState({taxname: '', symbol: '', chromosomes: [], genomic_ranges: [{range: [{begin: '', end: ''}]}], transcripts: [{exons: {range: [{begin: '', end: ''}]}, protein: ''}], annotations: [{assemblies_in_scope: [{name: ''}]}]})
     const [sequenceID, setSequenceID] = useState({ accession: 'NC_000013.11', range: [32315508, 32400268], strand: 1 })
     const [transcriptIndex, setTranscriptIndex] = useState(0)
+
+    const [peptideSequence, setPeptideSequence] = useState([])
 
     const [presentView, setPresentView] = useState('DNA')
 
@@ -106,13 +108,13 @@ export default function Home () {
     
 
     return (
-        <div id="home" style={{ height: '100vh', width: '100%', display: "flex", flexDirection: 'column' }}>
+        <div id="home" style={{ height: '100vh', width: '100%', display: "flex", flexDirection: 'column', overflow: 'hidden' }}>
             <Header headerHeight={headerHeight} handleSearchSubmit={handleSearchSubmit} setUser={setUser} user={user}/>
             <div style={{ height: `${100-headerHeight}%`, width: '100%', display: "flex", flexDirection: 'row' }}>
                 <Panel panelWidth={panelWidth} geneData={geneData} setGeneData={setGeneData} setSequenceID={setSequenceID} setReload={setReload} reload={reload} setPresentView={setPresentView} setTranscriptIndex={setTranscriptIndex} user={user} config={config} libraryConfig={libraryConfig} setInputData={setInputData}/>
                 <div style={{ width: `${mainWidth}%`, display: 'flex', flexDirection: 'column' }}>
-                    <Main mainHeight={mainHeight} mainWidth={mainWidth} inputData={inputData} reload={reload} setReload={setReload} geneData={geneData} setGeneData={setGeneData} setSequenceID={setSequenceID} sequenceID={sequenceID} setTranscriptIndex={setTranscriptIndex} presentView={presentView} transcriptIndex={transcriptIndex} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary} />
-                    <Console consoleHeight={consoleHeight} mainWidth={mainWidth} panelWidth={panelWidth} />
+                    <Main mainHeight={mainHeight} inputData={inputData} reload={reload} setReload={setReload} setPeptideSequence={setPeptideSequence} geneData={geneData} setGeneData={setGeneData} setSequenceID={setSequenceID} sequenceID={sequenceID} setTranscriptIndex={setTranscriptIndex} presentView={presentView} transcriptIndex={transcriptIndex} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary} />
+                    <Console consoleHeight={consoleHeight} presentView={presentView} peptideSequence={peptideSequence}/>
                 </div>
             </div>
         </div>

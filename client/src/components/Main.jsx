@@ -3,7 +3,7 @@ import ViewDNA from "./views/ViewDNA";
 import ViewRNA from "./views/ViewRNA";
 import ViewProtein from "./views/ViewProtein";
 
-export default function Main ( { mainHeight, inputData, reload, setReload, geneData, setGeneData, setSequenceID, sequenceID, presentView, transcriptIndex, rerenderLibrary, setRerenderLibrary } ) {
+export default function Main ( { mainHeight, inputData, reload, setReload, setPeptideSequence, geneData, setGeneData, setSequenceID, sequenceID, presentView, transcriptIndex, rerenderLibrary, setRerenderLibrary } ) {
 
     const [annotationText, setAnnotationText] = useState(null)
 
@@ -15,7 +15,7 @@ export default function Main ( { mainHeight, inputData, reload, setReload, geneD
             case 'RNA':
                 return <ViewRNA reload={reload} annotationText={annotationText} setAnnotationText={setAnnotationText} geneData={geneData} sequenceID={sequenceID} transcriptIndex={transcriptIndex} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary}/>
             case 'Protein':
-                return <ViewProtein reload={reload} annotationText={annotationText} setAnnotationText={setAnnotationText} geneData={geneData} sequenceID={sequenceID} transcriptIndex={transcriptIndex} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary}/>
+                return <ViewProtein reload={reload} setPeptideSequence={setPeptideSequence} annotationText={annotationText} setAnnotationText={setAnnotationText} geneData={geneData} sequenceID={sequenceID} transcriptIndex={transcriptIndex} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary}/>
             default:
                 break;
         }

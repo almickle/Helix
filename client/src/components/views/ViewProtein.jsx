@@ -7,7 +7,7 @@ import LoadingGIF from "./LoadingGIF"
 import SequenceHeader from "./sequence-header/SequenceHeader"
 
 
-export default function ViewProtein ( { geneData, annotationText, setAnnotationText, sequenceID, transcriptIndex, reload, rerenderLibrary, setRerenderLibrary } ) {
+export default function ViewProtein ( { geneData, setPeptideSequence, annotationText, setAnnotationText, sequenceID, transcriptIndex, reload, rerenderLibrary, setRerenderLibrary } ) {
 
     const dnaContainerSize = 90
     const infoPanelLabels = {type: 'Protein', unit: 'aa', info: ['Isoform', geneData.transcripts[transcriptIndex].protein.isoform_name]}
@@ -31,10 +31,12 @@ export default function ViewProtein ( { geneData, annotationText, setAnnotationT
     useEffect(() => {
         fetch('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=sequences&id=' + sequenceID + '&rettype=FASTA&retmode=xml')
         .then(resp => resp.text())
-        .then(data => { const seq = new XMLParser().parseFromString(data).children[0].children[0].children[6].value
+        .then(data => { const seq = new XMLParser().parseFromString(data).children[0].children[0].children[6].value // note: should get data by key 
                         setRawSequence(seq)
                         setSequenceArray(seq.split(''))
+                        setPeptideSequence(seq.split(''))
         })
+        // eslint-disable-next-line
     }, [sequenceID])
 
 
