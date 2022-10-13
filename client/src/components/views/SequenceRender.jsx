@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import ShowMoreButton from "./ShowMoreButton"
 
-export default function SequenceRender ( { reload, sequenceArray, setIconVisibility, setVisibility, visibility, basePairColors, selectedRegion, setShowMoreButton, setSelectedRegion, annotationText } ) {
+export default function SequenceRender ( { reload, sequenceArray, setIconVisibility, setVisibility, visibility, basePairColors, selectedRegion, setShowMoreButton, setSelectedRegion, annotationText, editBox } ) {
 
     const rowSize = 20
     const rowMargin = 10
@@ -212,6 +212,7 @@ export default function SequenceRender ( { reload, sequenceArray, setIconVisibil
                 </div>
             <div id="column" style={{ visibility: visibility, height: '100%', width: `${(100 - dnaContainerSize) / 2}%`, display: 'flex', flexDirection: 'column', alignItems: 'center', userSelect: 'none' }}>{rightCounters}</div>
             {annotationText}
+            {editBox}
         </div>
     )
 }

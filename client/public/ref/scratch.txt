@@ -340,3 +340,5 @@ function handleDragHorizontal(event) {
     //     }
     //     // eslint-disable-next-line
     // }, [annotationSequence])
+
+    // {title: title, body: body, begin: basepairs[0], end: basepairs[basepairs.length-1]}

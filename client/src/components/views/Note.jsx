@@ -3,6 +3,7 @@ import TrashIcon from '../assets/TrashIcon.png'
 import EditIcon from '../assets/EditIcon.png'
 import '../style/modalAnimation.css'
 
+
 export default function Note ( { basepairs, content, setTriggerAnnotation, triggerAnnotation, setAnnotationText } ) {
 
     const [iconsVisibility, setIconsVisibility] = useState('hidden')
@@ -41,8 +42,9 @@ export default function Note ( { basepairs, content, setTriggerAnnotation, trigg
             credentials: 'include',
             body: JSON.stringify({ id: content.id })
         })
-        .then(() => setTriggerAnnotation(!triggerAnnotation))
+        .then(() => setTriggerAnnotation('hello'))
     }
+
 
 
     return (

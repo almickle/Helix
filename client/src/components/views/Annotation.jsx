@@ -20,13 +20,6 @@ export default function Annotation ( { basepairs, transcriptIndex, isProtein, an
         const title = document.getElementById('annotation-title').value
         const body = document.getElementById('annotation-body').value
 
-        if(annotationToggle === true) {
-            setAnnotationText(<Note basepairs={basepairs} content={{title: title, body: body, begin: basepairs[0], end: basepairs[basepairs.length-1]}}/>)
-        }
-        else {
-            setAnnotationText(null)
-        }
-
         fetch('/newannotation', {
                 method: 'POST',
                 credentials: 'include',
@@ -43,7 +36,15 @@ export default function Annotation ( { basepairs, transcriptIndex, isProtein, an
                     end: parseInt(basepairs[basepairs.length-1])
                 })
             })
-        .then(() => {
+        .then(resp => resp.json())
+        .then(data => {
+            if(annotationToggle === true) {
+                setAnnotationText(<Note basepairs={basepairs} content={data} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation} setAnnotationText={setAnnotationText}/>) 
+            }
+            else {
+                setAnnotationText(null)
+            }
+
             setTriggerAnnotation(!triggerAnnotation)
             setTriggerHighlight(!triggerHighlight)
         })
