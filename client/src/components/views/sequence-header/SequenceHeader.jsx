@@ -8,7 +8,7 @@ import StyleHandler from './StyleHandler'
 import FeaturesHandler from './FeaturesHandler'
 
 
-export default function SequenceHeader ( { geneData, transcriptOptions, setSelectedRegion, selectedRegion, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
+export default function SequenceHeader ( { geneData, transcriptOptions, transcriptIdentifier, isProtein, setSelectedRegion, selectedRegion, setTriggerAnnotation, triggerAnnotation, annotations, setAnnotationText, sequenceStyle, setSequenceStyle, rerenderLibrary, setRerenderLibrary, rawSequence, handleAddAnnotation, isAnnotating } ) {
 
     const headerSize = 60
 
@@ -100,7 +100,7 @@ export default function SequenceHeader ( { geneData, transcriptOptions, setSelec
             <div style={{ height: '100%', width: '60%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <StyleHandler sequenceStyle={sequenceStyle} setSequenceStyle={setSequenceStyle}/>
                 <FeaturesHandler transcriptOptions={transcriptOptions} selectedRegion={selectedRegion} geneData={geneData}/>
-                <AnnotationHandler geneData={geneData} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation}/>
+                <AnnotationHandler geneData={geneData} transcriptIdentifier={transcriptIdentifier} isProtein={isProtein} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation}/>
             </div>
             <div style={{ height: '100%', width: '20%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
                 <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', paddingLeft: 6, paddingRight: 6 }}><img onClick={handleAddToLibrary} src={bookmarkIcon} style={{ height: '110%', cursor: 'pointer' }} alt="bookmark icon: add to library" /> </span>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function Label ( { label, geneIndex, geneData, setGeneData, setInputData, setDirectoryOpen, directoryOpen, setTranscriptIndex, setPresentView, setSequenceID, renderLevel, config, previousIndex, entryIndex, reload, setReload } ) {
+export default function Label ( { label, setGeneData, setInputData, setDirectoryOpen, directoryOpen, setTranscriptIndex, setPresentView, setSequenceID, renderLevel, config, previousIndex, entryIndex, reload, setReload } ) {
 
     const [triggerRender, setTriggerRender] = useState(false)
 
@@ -35,7 +35,7 @@ export default function Label ( { label, geneIndex, geneData, setGeneData, setIn
         setReload(!reload)
     }
 
-   
+    // note: configure for species
 
     function handleDoubleClickLabel() {
         switch (renderLevel) {
@@ -70,7 +70,7 @@ export default function Label ( { label, geneIndex, geneData, setGeneData, setIn
 
     let bottomBorder = 1
     let topBorder = 1
-    let tabBorderHeight
+    let tabBorderHeight = 0
     let borderRadius = 0
 
     if(document.getElementById(label)) {

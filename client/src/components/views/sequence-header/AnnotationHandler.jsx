@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import PaintBrush from '../../assets/PaintBrush.png'
 import BookIcon from '../../assets/BookIcon.png'
-import Annotation from '../Annotation'
-import Note from '../Note'
+import Annotation from './Annotation'
+import Note from './Note'
 
-export default function AnnotationHandler ( { geneData, annotations, setAnnotationText, setTriggerAnnotation, triggerAnnotation } ) {
+export default function AnnotationHandler ( { geneData, annotations, setAnnotationText, setTriggerAnnotation, triggerAnnotation, transcriptIdentifier, isProtein } ) {
 
     const [annotationSequence, setAnnotationSequence] = useState([])
     const [triggerHighlight, setTriggerHighlight] = useState(false)
@@ -64,7 +64,7 @@ export default function AnnotationHandler ( { geneData, annotations, setAnnotati
 
     useEffect(() => {
         if(annotationSequence.length > 1) { // note: configure for flexibility and ?transcript index?        
-            setAnnotationText(<Annotation basepairs={annotationSequence} transcriptIndex={null} isProtein={false} annotationToggle={annotationToggle} triggerAnnotation={triggerAnnotation} setTriggerAnnotation={setTriggerAnnotation} setAnnotationText={setAnnotationText} setTriggerHighlight={setTriggerHighlight} triggerHighlight={triggerHighlight} geneData={geneData}/>)
+            setAnnotationText(<Annotation basepairs={annotationSequence} transcriptIdentifier={transcriptIdentifier} isProtein={isProtein} annotationToggle={annotationToggle} triggerAnnotation={triggerAnnotation} setTriggerAnnotation={setTriggerAnnotation} setAnnotationText={setAnnotationText} setTriggerHighlight={setTriggerHighlight} triggerHighlight={triggerHighlight} geneData={geneData}/>)
         }
         // eslint-disable-next-line
     }, [annotationSequence])

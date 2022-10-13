@@ -107,7 +107,7 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ symbol: geneData.symbol })
+                body: JSON.stringify({ symbol: geneData.symbol, transcript: -1, protein: false })
             })
             .then(resp => {
                 if(resp.ok) {
@@ -125,7 +125,7 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
 
     return (
         <div id="workspace" style={{ height: 'fit-content', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'white' }}>
-            <SequenceHeader geneData={geneData} transcriptOptions={{transcripts: geneData.transcripts, visibility: true}} setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation} sequenceStyle={sequenceStyle} setSequenceStyle={setSequenceStyle} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary} rawSequence={rawSequence} />
+            <SequenceHeader geneData={geneData} transcriptIdentifier={-1} isProtein={false} transcriptOptions={{transcripts: geneData.transcripts, visibility: true}} setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation} sequenceStyle={sequenceStyle} setSequenceStyle={setSequenceStyle} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary} rawSequence={rawSequence} />
             <SequenceRender sequenceArray={sequenceArray} setIconVisibility={setIconVisibility} setVisibility={setVisibility} visibility={visibility} basePairColors={basePairColors} selectedRegion={selectedRegion} setShowMoreButton={setShowMoreButton} setSelectedRegion={setSelectedRegion} reload={reload} annotationText={annotationText}/>
             <LoadingGIF iconVisibility={iconVisibility} dnaContainerSize={dnaContainerSize} />
             {showMoreButton}

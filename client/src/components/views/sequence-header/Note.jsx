@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import TrashIcon from '../assets/TrashIcon.png'
-import EditIcon from '../assets/EditIcon.png'
-import '../style/modalAnimation.css'
+import TrashIcon from '../../assets/TrashIcon.png'
+import EditIcon from '../../assets/EditIcon.png'
+import '../../style/modalAnimation.css'
 
 
 export default function Note ( { basepairs, content, setTriggerAnnotation, triggerAnnotation, setAnnotationText } ) {

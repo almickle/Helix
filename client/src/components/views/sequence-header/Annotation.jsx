@@ -1,8 +1,8 @@
-import CheckYes from '../assets/CheckYes.png'
-import CheckNo from '../assets/CheckNo.png'
+import CheckYes from '../../assets/CheckYes.png'
+import CheckNo from '../../assets/CheckNo.png'
 import Note from './Note'
 
-export default function Annotation ( { basepairs, transcriptIndex, isProtein, annotationToggle, setAnnotationText, triggerAnnotation, setTriggerAnnotation, setTriggerHighlight, triggerHighlight, geneData } ) {
+export default function Annotation ( { basepairs, transcriptIdentifier, isProtein, annotationToggle, setAnnotationText, triggerAnnotation, setTriggerAnnotation, setTriggerHighlight, triggerHighlight, geneData } ) {
 
 
     const annotationStyle = {
@@ -28,7 +28,7 @@ export default function Annotation ( { basepairs, transcriptIndex, isProtein, an
                 },
                 body: JSON.stringify({
                     symbol: geneData.symbol,
-                    transcriptIndex: transcriptIndex,
+                    transcript: transcriptIdentifier,
                     protein: isProtein,
                     title: title,
                     body: body,

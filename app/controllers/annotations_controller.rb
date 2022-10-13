@@ -15,7 +15,8 @@ class AnnotationsController < ApplicationController
     def show_gene_annotations
         user = User.find(session[:user_id])
         gene = user.genes.find_by(symbol: params[:symbol])
-        render json: gene.annotations
+        annotations = gene.annotations.where(transcript: params[:transcript], protein: params[:protein])
+        render json: annotations
     end
     
 end
