@@ -117,7 +117,6 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
     }, [geneData, triggerAnnotation])
 
     useEffect(() => {
-        console.log(triggerAnnotation)
         if(triggerAnnotation === 'hello') {
             setTriggerAnnotation(true)
         }
