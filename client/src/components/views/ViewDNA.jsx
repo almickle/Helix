@@ -101,7 +101,6 @@ export default function ViewDNA ( { inputData, annotationText, setAnnotationText
 
     // get annotations
     useEffect(() => { // note: need to configure for dna, rna, or protein
-        console.log('fetched annotations')
         fetch('/annotations', {
                 method: 'POST',
                 credentials: 'include',
