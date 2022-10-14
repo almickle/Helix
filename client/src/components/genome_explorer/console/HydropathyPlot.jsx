@@ -105,7 +105,7 @@ export default function HydropathyPlot ( { peptideSequence } ) {
                 hideOverlappingLabels: true,
                 showDuplicates: true,
             }
-          }, 
+          },
           stroke: {
             width: 2
         }

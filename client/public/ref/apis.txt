@@ -136,3 +136,14 @@
                         const seq = new XMLParser().parseFromString(data).children[0].children[0].children[6].value
                     })
     }, [])
+
+
+     // useEffect(() => {
+    //     fetch('https://files.rcsb.org/view/2A07.cif', {
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //     .then(resp => resp.text())
+    //     .then(data => console.log(data))
+    // }, [])

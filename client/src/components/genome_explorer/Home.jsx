@@ -3,10 +3,21 @@ import Console from "./console/Console";
 import Panel from "./panel/Panel"
 import Main from "./Main";
 import Header from "./header/Header";
-
+import pdb from './assets/1axc.cif'
+import parsePDB from 'parse-mmcif'
 
 
 export default function Home () {
+
+    useEffect(() => {
+        fetch(pdb)
+        .then(resp => resp.text())
+        .then(data => {
+            console.log(data)
+            return parsePDB(data)
+        })
+        .then(parsed => console.log(parsed.atoms))
+    }, [])
 
     const consoleHeight = 24
     const mainWidth = 84
@@ -105,6 +116,8 @@ export default function Home () {
         // insert modal trigger if search error
         document.getElementById('gene-search').value = ''
     }
+
+
     
 
     return (
