@@ -342,3 +342,5 @@ function handleDragHorizontal(event) {
     // }, [annotationSequence])
 
     // {title: title, body: body, begin: basepairs[0], end: basepairs[basepairs.length-1]}
+
+    "https://cdn4.iconfinder.com/data/icons/interface-essential-1/24/button-parallel-vertical-lines-menu-navigation-three-hamburger-512.png"
