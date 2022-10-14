@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/protein_explorer' element={<Scene />} />
+          <Route path='/genome_explorer' element={<Home />} />
         </Routes>
       </BrowserRouter>
     </div>
