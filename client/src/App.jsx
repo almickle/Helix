@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom'
 import Home from "./components/genome_explorer/Home"
-import Scene from './components/protein_explorer/Scene';
+import Scene from './components/protein_explorer/Scene'
 
 
 function App() {
