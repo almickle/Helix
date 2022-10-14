@@ -55407,3 +55407,179 @@ Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 185)
 ActiveRecord::RecordNotFound (Couldn't find User without an ID):
   
 app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:16:27 -0600
+Processing by FrontendController#render as HTML
+  Parameters: {"path"=>"protein_explorer"}
+Completed 500 Internal Server Error in 4ms (Allocations: 144)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/frontend_controller.rb:2:in `render'
+app/controllers/frontend_controller.rb:3:in `render'
+Started GET "/favicon.ico" for ::1 at 2022-10-14 07:16:28 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/" for ::1 at 2022-10-14 07:16:46 -0600
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 5.1ms | Allocations: 357)
+Completed 200 OK in 19ms (Views: 12.0ms | Allocations: 1119)
+
+
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:16:51 -0600
+Processing by FrontendController#render as HTML
+  Parameters: {"path"=>"protein_explorer"}
+Completed 500 Internal Server Error in 0ms (Allocations: 100)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/frontend_controller.rb:2:in `render'
+app/controllers/frontend_controller.rb:3:in `render'
+Started GET "/favicon.ico" for ::1 at 2022-10-14 07:16:51 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:19:38 -0600
+  
+SyntaxError (C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:2: syntax error, unexpected '|', expecting ';' or '\n'
+    def render |path|
+               ^
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:3: syntax error, unexpected tLABEL, expecting `do' or '{' or '('
+      render file: 'public/index.html'
+             ^~~~~
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input):
+  
+app/controllers/frontend_controller.rb:2: syntax error, unexpected '|', expecting ';' or '\n'
+app/controllers/frontend_controller.rb:3: syntax error, unexpected tLABEL, expecting `do' or '{' or '('
+app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input
+app/controllers/frontend_controller.rb:2: syntax error, unexpected '|', expecting ';' or '\n'
+app/controllers/frontend_controller.rb:3: syntax error, unexpected tLABEL, expecting `do' or '{' or '('
+app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input
+Started GET "/favicon.ico" for ::1 at 2022-10-14 07:19:39 -0600
+  
+SyntaxError (C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:2: syntax error, unexpected '|', expecting ';' or '\n'
+    def render |path|
+               ^
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:3: syntax error, unexpected tLABEL, expecting `do' or '{' or '('
+      render file: 'public/index.html'
+             ^~~~~
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input):
+  
+app/controllers/frontend_controller.rb:2: syntax error, unexpected '|', expecting ';' or '\n'
+app/controllers/frontend_controller.rb:3: syntax error, unexpected tLABEL, expecting `do' or '{' or '('
+app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input
+app/controllers/frontend_controller.rb:2: syntax error, unexpected '|', expecting ';' or '\n'
+app/controllers/frontend_controller.rb:3: syntax error, unexpected tLABEL, expecting `do' or '{' or '('
+app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:21:03 -0600
+  
+SyntaxError (C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:2: syntax error, unexpected '(', expecting ';' or '\n'
+    def render func(path)
+                   ^
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input):
+  
+app/controllers/frontend_controller.rb:2: syntax error, unexpected '(', expecting ';' or '\n'
+app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input
+app/controllers/frontend_controller.rb:2: syntax error, unexpected '(', expecting ';' or '\n'
+app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input
+Started GET "/favicon.ico" for ::1 at 2022-10-14 07:21:03 -0600
+  
+SyntaxError (C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:2: syntax error, unexpected '(', expecting ';' or '\n'
+    def render func(path)
+                   ^
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input):
+  
+app/controllers/frontend_controller.rb:2: syntax error, unexpected '(', expecting ';' or '\n'
+app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input
+app/controllers/frontend_controller.rb:2: syntax error, unexpected '(', expecting ';' or '\n'
+app/controllers/frontend_controller.rb:5: syntax error, unexpected `end', expecting end-of-input
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:21:15 -0600
+Processing by FrontendController#render as HTML
+  Parameters: {"path"=>"protein_explorer"}
+Completed 500 Internal Server Error in 0ms (Allocations: 100)
+
+
+  
+ArgumentError (wrong number of arguments (given 0, expected 1)):
+  
+app/controllers/frontend_controller.rb:2:in `render'
+Started GET "/favicon.ico" for ::1 at 2022-10-14 07:21:15 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:22:35 -0600
+Processing by FrontendController#render as HTML
+  Parameters: {"path"=>"protein_explorer"}
+Completed 500 Internal Server Error in 14ms (Allocations: 113)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/frontend_controller.rb:2:in `render'
+app/controllers/frontend_controller.rb:4:in `render'
+Started GET "/favicon.ico" for ::1 at 2022-10-14 07:22:36 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:23:26 -0600
+Processing by FrontendController#render as HTML
+Completed 500 Internal Server Error in 0ms (Allocations: 103)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/frontend_controller.rb:2:in `render'
+app/controllers/frontend_controller.rb:3:in `render'
+Started GET "/favicon.ico" for ::1 at 2022-10-14 07:23:27 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:23:59 -0600
+  
+SyntaxError (C:/Users/micha/OneDrive/Documents/Code/helix-app/config/routes.rb:25: syntax error, unexpected `end'):
+  
+config/routes.rb:25: syntax error, unexpected `end'
+config/routes.rb:25: syntax error, unexpected `end'
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:24:17 -0600
+Processing by FrontendController#render as HTML
+  Parameters: {"path"=>"protein_explorer"}
+Completed 500 Internal Server Error in 1ms (Allocations: 101)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/frontend_controller.rb:2:in `render'
+app/controllers/frontend_controller.rb:3:in `render'
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:24:32 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/protein_explorer"):
+  
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:25:12 -0600
+Processing by FrontendController#render as HTML
+  Parameters: {"path"=>"protein_explorer"}
+Completed 500 Internal Server Error in 1ms (Allocations: 103)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/frontend_controller.rb:2:in `render'
+app/controllers/frontend_controller.rb:3:in `render'
+Started GET "/protein_explorer" for ::1 at 2022-10-14 07:26:00 -0600
+Processing by FrontendController#index as HTML
+  Parameters: {"path"=>"protein_explorer"}
+Completed 500 Internal Server Error in 4ms (Allocations: 551)
+
+
+  
+ArgumentError (`render file:` should be given the absolute path to a file. 'public/index.html' was given instead):
+  
+app/controllers/frontend_controller.rb:3:in `index'
