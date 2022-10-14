@@ -63,7 +63,7 @@ export default function Home () {
         const libraryGenes = []
         const configStateLoader = []
 
-        fetch('/genelibrary', {
+        fetch('/api/genelibrary', {
             credentials: 'include'
         })
         .then(resp => resp.json())

@@ -20,7 +20,7 @@ export default function Annotation ( { basepairs, transcriptIdentifier, isProtei
         const title = document.getElementById('annotation-title').value
         const body = document.getElementById('annotation-body').value
 
-        fetch('/newannotation', {
+        fetch('/api/newannotation', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

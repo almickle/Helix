@@ -41,7 +41,7 @@ export default function LoginModal ( { loginModalVisible, setLoginModalVisible, 
 
     function handleLogin() {
         if(loginObject !== null) {
-                fetch('/login', {
+                fetch('/api/login', {
                         method: 'POST',
                         credentials: 'include',
                         headers: {

@@ -61,7 +61,7 @@ export default function ViewProtein ( { geneData, setPeptideSequence, annotation
 
     // get annotations
     useEffect(() => {
-        fetch('/annotations', {
+        fetch('/api/annotations', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

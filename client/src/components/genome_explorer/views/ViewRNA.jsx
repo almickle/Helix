@@ -57,7 +57,7 @@ export default function ViewRNA ( { geneData, annotationText, setAnnotationText,
 
     // get annotations
     useEffect(() => { // note: need to configure for dna, rna, or protein
-        fetch('/annotations', {
+        fetch('/api/annotations', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

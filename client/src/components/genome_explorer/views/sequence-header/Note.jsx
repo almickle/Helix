@@ -34,7 +34,7 @@ export default function Note ( { basepairs, content, setTriggerAnnotation, trigg
         basepairs.forEach((bp) => {
             document.getElementById(bp).style.backgroundColor = 'unset'
         })
-        fetch('/deleteannotation', {
+        fetch('api/deleteannotation', {
             method: 'POST',
             headers: {
                 "Content-Type": 'application/json'

@@ -5,7 +5,7 @@ export default function Login ( { setUser, user, setModalVisible, modalVisible, 
 
 
     useEffect(() => {
-        fetch('/me', {
+        fetch('/api/me', {
             credentials: 'include',
         })
         .then(resp => {
@@ -18,7 +18,7 @@ export default function Login ( { setUser, user, setModalVisible, modalVisible, 
 
     function handleLogin() {
         if (user.username !== 'guest') {
-            fetch('/logout', {
+            fetch('api/logout', {
                 method: 'DELETE',
                 credentials: 'include',
             })

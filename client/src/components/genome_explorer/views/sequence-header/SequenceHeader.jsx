@@ -24,7 +24,7 @@ export default function SequenceHeader ( { geneData, transcriptOptions, transcri
 
     function handleAddToLibrary() {
         if(inLibrary === true) {
-            fetch('/removegene', {
+            fetch('api/removegene', {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
@@ -38,7 +38,7 @@ export default function SequenceHeader ( { geneData, transcriptOptions, transcri
             })
         }
         else {
-            fetch('/addgene', {
+            fetch('/api/addgene', {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
@@ -56,7 +56,7 @@ export default function SequenceHeader ( { geneData, transcriptOptions, transcri
     // get library
     useEffect(() => {
         const library = []
-        fetch('/genelibrary', {
+        fetch('/api/genelibrary', {
             headers: {
                 "Content-Type": 'application/json'
             },
