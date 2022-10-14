@@ -1,5 +1,5 @@
 class FrontendController < ActionController::Base
-    def render
+    def index
       render file: 'public/index.html'
     end
 end

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     get '/michael/:key', to: 'users#michael'
   end
 
-  get '*path', to: "frontend#render", constraints: ->(req) { !req.xhr? && req.format.html? }
+  get '*path', to: "frontend#index", constraints: ->(req) { !req.xhr? && req.format.html? }
   # get '/', to: "frontend#render", constraints: ->(req) { !req.xhr? && req.format.html? }
   # get '/protein_explorer', to: "frontend#render", constraints: ->(req) { !req.xhr? && req.format.html? }
 
