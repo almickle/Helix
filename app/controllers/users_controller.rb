@@ -25,5 +25,3 @@ class UsersController < ApplicationController
         end
     end
 end
-
-# 4130c9190cd5b0b2bd10b017324bbf9c
