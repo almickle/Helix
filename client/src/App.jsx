@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Home from "./components/genome_explorer/Home"
 import Scene from './components/protein_explorer/Scene';
 
@@ -6,14 +6,18 @@ import Scene from './components/protein_explorer/Scene';
 function App() {
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/protein_explorer' element={<Scene />} />
-        <Route path='/genome_explorer' element={<Home />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    <Switch>
+      <Route exact path='/'>
+        <Home />
+      </Route>
+      <Route exact path='/protein_explorer'>
+        <Scene />
+      </Route>
+      <Route exact path='/genome_explorer'>
+        <Home />
+      </Route>
+    </Switch>
+  )
 }
 
 export default App;

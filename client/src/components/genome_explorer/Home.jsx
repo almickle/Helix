@@ -9,15 +9,15 @@ import parsePDB from 'parse-mmcif'
 
 export default function Home () {
 
-    useEffect(() => {
-        fetch(pdb)
-        .then(resp => resp.text())
-        .then(data => {
-            console.log(data)
-            return parsePDB(data)
-        })
-        .then(parsed => console.log(parsed.atoms))
-    }, [])
+    // useEffect(() => {
+    //     fetch(pdb)
+    //     .then(resp => resp.text())
+    //     .then(data => {
+    //         console.log(data)
+    //         return parsePDB(data)
+    //     })
+    //     .then(parsed => console.log(parsed.atoms))
+    // }, [])
 
     const consoleHeight = 24
     const mainWidth = 84
