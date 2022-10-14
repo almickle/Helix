@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
-import Console from "./console/Console";
+import { useState, useEffect } from "react"
+import Console from "./console/Console"
 import Panel from "./panel/Panel"
-import Main from "./Main";
-import Header from "./header/Header";
-import pdb from './assets/1axc.cif'
-import parsePDB from 'parse-mmcif'
+import Main from "./Main"
+import Header from "./header/Header"
 
 
 export default function Home () {

@@ -1,17 +1,43 @@
-import { FreeCamera, Vector3, HemisphericLight, MeshBuilder } from "@babylonjs/core";
-import Canvas from "./Canvas"; // uses above component in same directory
+import { FreeCamera, Vector3, Curve3, HemisphericLight, MeshBuilder } from "@babylonjs/core"
+import Canvas from "./Canvas"
+import parsePDB from 'parse-mmcif'
+
 
 
 export default function Scene() {
 
-    let box;
 
     const onSceneReady = (scene) => {
-    // This creates and positions a free camera (non-mesh)
-    var camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
 
-    // This targets the camera to scene origin
-    camera.setTarget(Vector3.Zero());
+        fetch('https://files.rcsb.org/view/1AXC.cif', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(resp => resp.text())
+        .then(data => parsePDB(data))
+        .then(parsed => {
+            const atoms = parsed.atoms.map((atom) => {
+                return (
+                    [atom.x, atom.y, atom.z]
+                )
+            })
+            const splinePoints = atoms.map((atom) => {
+                return (
+                    new Vector3(atom[0], atom[1], atom[2])
+                )
+            })
+        
+            const myCurve = Curve3.CreateCatmullRomSpline(splinePoints, 20, false)
+        
+            MeshBuilder.CreateLines("spline", {points: myCurve.getPoints()}, scene)
+
+            camera.setTarget(splinePoints[100])
+        })
+
+
+    // This creates and positions a free camera (non-mesh)
+    var camera = new FreeCamera("camera1", new Vector3(100, 100, 100), scene);
 
     const canvas = scene.getEngine().getRenderingCanvas();
 
@@ -24,24 +50,12 @@ export default function Scene() {
     // Default intensity is 1. Let's dim the light a small amount
     light.intensity = 0.7;
 
-    // Our built-in 'box' shape.
-    box = MeshBuilder.CreateBox("box", { size: 2 }, scene);
 
-    // Move the box upward 1/2 its height
-    box.position.y = 1;
-
-    // Our built-in 'ground' shape.
-    MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, scene);
     };
 
     // Will run on every frame
     const onRender = (scene) => {
-    if (box !== undefined) {
-        var deltaTimeInMillis = scene.getEngine().getDeltaTime();
-
-        const rpm = 10;
-        box.rotation.y += (rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000);
-    }
+   
     }
 
 
