@@ -9,7 +9,7 @@ function App() {
     <div id="app" style={{ userSelect: 'none' }}>
       <BrowserRouter>
         <Routes>
-          <Route path='genome_explorer' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='protein_explorer' element={<Scene />} />
         </Routes>
       </BrowserRouter>

@@ -53780,3 +53780,440 @@ Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 185)
 ActiveRecord::RecordNotFound (Couldn't find User without an ID):
   
 app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+Started GET "/me" for 127.0.0.1 at 2022-10-14 04:44:09 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:09 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:44:09 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:44:09 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:09 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-14 04:44:09 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:09 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:09 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:44:10 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:10 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:13 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-14 04:44:13 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:44:13 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:44:13 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-14 04:44:13 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:13 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:13 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:13 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:15 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:44:15 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:44:15 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:44:15 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/michael/4130c9190cd5b" for ::1 at 2022-10-14 04:51:50 -0600
+Processing by FrontendController#render as HTML
+  Parameters: {"path"=>"michael/4130c9190cd5b"}
+Completed 500 Internal Server Error in 1ms (Allocations: 144)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/frontend_controller.rb:2:in `render'
+app/controllers/frontend_controller.rb:3:in `render'
+Started GET "/favicon.ico" for ::1 at 2022-10-14 04:51:51 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/michael/4130c9190cd5b0b2bd10b017324bbf9c" for ::1 at 2022-10-14 04:51:57 -0600
+Processing by FrontendController#render as HTML
+  Parameters: {"path"=>"michael/4130c9190cd5b0b2bd10b017324bbf9c"}
+Completed 500 Internal Server Error in 1ms (Allocations: 100)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/frontend_controller.rb:2:in `render'
+app/controllers/frontend_controller.rb:3:in `render'
+Started GET "/favicon.ico" for ::1 at 2022-10-14 04:51:59 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:53:15 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-14 04:53:15 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:15 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:53:16 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:16 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-14 04:53:16 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:16 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:16 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:53:18 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:18 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/me" for 127.0.0.1 at 2022-10-14 04:53:18 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:18 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:53:18 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:53:18 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-14 04:53:18 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:18 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:19 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:19 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:21 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:53:21 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 04:53:21 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 04:53:21 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/annotations"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+Started POST "/login" for 127.0.0.1 at 2022-10-14 04:53:42 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/login"):
+  
+Started POST "/login" for 127.0.0.1 at 2022-10-14 04:53:45 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/login"):
+  
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 04:57:29 -0600
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 04:57:30 -0600
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 04:57:41 -0600
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 04:59:37 -0600
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 04:59:42 -0600
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-14 04:59:56 -0600
+Started GET "/api/me" for 127.0.0.1 at 2022-10-14 04:59:56 -0600
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 04:59:57 -0600
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 05:00:02 -0600
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 05:00:03 -0600
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 05:00:29 -0600
+Started POST "/api/login" for 127.0.0.1 at 2022-10-14 05:00:29 -0600
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 05:05:06 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-14 05:05:06 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/genelibrary"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+Started POST "/login" for 127.0.0.1 at 2022-10-14 05:05:36 -0600
+Processing by SessionsController#create as */*
+  Parameters: {"username"=>"almickle", "password"=>"[FILTERED]", "session"=>{"username"=>"almickle", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "almickle"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 193ms (Views: 1.7ms | ActiveRecord: 15.7ms | Allocations: 35863)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 05:05:37 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (2.0ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (2.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 202ms (Views: 55.5ms | ActiveRecord: 10.9ms | Allocations: 40537)
+
+
+Started GET "/me" for 127.0.0.1 at 2022-10-14 05:05:54 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 05:05:54 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 05:05:54 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Processing by UsersController#show as */*
+  [1m[36mLibrary Load (5.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (1.1ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 33ms (Views: 10.8ms | ActiveRecord: 7.2ms | Allocations: 4289)
+
+
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mGene Load (0.8ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+Completed 500 Internal Server Error in 53ms (ActiveRecord: 4.1ms | Allocations: 4740)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:18:in `show_gene_annotations'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 191ms (Views: 0.8ms | ActiveRecord: 12.1ms | Allocations: 26287)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 05:05:54 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 05:05:54 -0600
+Started GET "/me" for 127.0.0.1 at 2022-10-14 05:05:54 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mLibrary Load (1.9ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+Processing by UsersController#show as */*
+  [1m[36mGene Load (4.0ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 30ms (Views: 11.6ms | ActiveRecord: 6.7ms | Allocations: 5228)
+
+
+  [1m[36mGene Load (4.2ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 6.0ms | Allocations: 5734)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:18:in `show_gene_annotations'
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 05:05:54 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 15ms (Views: 7.0ms | ActiveRecord: 1.2ms | Allocations: 2661)
+
+
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 157ms (Views: 0.6ms | ActiveRecord: 10.0ms | Allocations: 22540)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 05:05:54 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (1.8ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (1.1ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 19ms (Views: 8.7ms | ActiveRecord: 3.4ms | Allocations: 2677)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 05:05:55 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 15ms (Views: 7.0ms | ActiveRecord: 1.2ms | Allocations: 2653)
+
+
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 05:05:55 -0600
+Started POST "/annotations" for 127.0.0.1 at 2022-10-14 05:05:55 -0600
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 05:05:56 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mGene Load (3.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mUser Load (7.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mAnnotation Load (4.5ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 37ms (Views: 6.9ms | ActiveRecord: 8.7ms | Allocations: 3859)
+
+
+  [1m[36mGene Load (3.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mAnnotation Load (7.2ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 41ms (Views: 4.6ms | ActiveRecord: 17.4ms | Allocations: 4242)
+
+
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 17ms (Views: 8.1ms | ActiveRecord: 1.3ms | Allocations: 2653)
+
+
+Started GET "/genelibrary" for 127.0.0.1 at 2022-10-14 05:05:56 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 17ms (Views: 8.8ms | ActiveRecord: 1.3ms | Allocations: 2653)
+
+
