@@ -110,7 +110,7 @@ export default function Home () {
     
 
     return (
-        <div id="home" style={{ height: '100vh', width: '100%', display: "flex", flexDirection: 'column', overflow: 'hidden' }}>
+        <div id="home" style={{ height: '100vh', width: '100%', display: "flex", flexDirection: 'column', overflow: 'hidden', userSelect: 'none' }}>
             <Header headerHeight={headerHeight} handleSearchSubmit={handleSearchSubmit} setUser={setUser} user={user}/>
             <div style={{ height: `${100-headerHeight}%`, width: '100%', display: "flex", flexDirection: 'row' }}>
                 <Panel panelWidth={panelWidth} geneData={geneData} setGeneData={setGeneData} setSequenceID={setSequenceID} setReload={setReload} reload={reload} setPresentView={setPresentView} setTranscriptIndex={setTranscriptIndex} user={user} config={config} libraryConfig={libraryConfig} setInputData={setInputData}/>
