@@ -14,8 +14,8 @@ import renderSpheres from "./render functions/renderSpheres";
 
 export default function Scene() {
 
-    const [PDB, setPDB] = useState('1AXC')
-    const [proteinData, setProteinData] = useState({atoms: [{x: 0, y: 0, z: 0}], chains: {A: []}, chain_info: [], backbones: {A: []}})
+    const [PDB, setPDB] = useState('1HUW')
+    const [proteinData, setProteinData] = useState({atoms: [{x: 0, y: 0, z: 0}], chains: {A: []}, chain_info: [], backbones: {A: [[{x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}]]}})
 
     useEffect(() => {
         fetch('https://files.rcsb.org/view/' + PDB + '.cif', {
@@ -38,7 +38,7 @@ export default function Scene() {
 
         const canvas = scene.getEngine().getRenderingCanvas()
         const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
-            light.intensity = 1
+            light.intensity = 0.9
 
         scene.clearColor = new Color3(0.05, 0.05, 0.05)
 
@@ -55,8 +55,21 @@ export default function Scene() {
              return new Vector3(atom.x, atom.y, atom.z)
         })
 
+        const atomsX = atoms.map((atom) => atom.x)
+        const atomsY = atoms.map((atom) => atom.y)
+        const atomsZ = atoms.map((atom) => atom.z)
+
+        const max_x = Math.max(...atomsX)
+        const max_y = Math.max(...atomsY)
+        const max_z = Math.max(...atomsZ)
+        const min_x = Math.min(...atomsX)
+        const min_y = Math.min(...atomsY)
+        const min_z = Math.min(...atomsZ)
+
+        const size = Math.sqrt((max_x-min_x)*(max_x-min_x)+(max_y-min_y)*(max_y-min_y)+(max_z-min_z)*(max_z-min_z))
+
         const centroid = new Vector3(total_X/atoms.length, total_Y/atoms.length, total_Z/atoms.length)
-        const camera = new ArcRotateCamera('camera', 45, 0.1, 160, centroid, scene)
+        const camera = new ArcRotateCamera('camera', 45, 0.1, size, centroid, scene)
         camera.setTarget(centroid)
         camera.attachControl(canvas, true)
 
@@ -77,8 +90,8 @@ export default function Scene() {
         })
 
 
-        // renderPointcloud(atomVectors, scene)
-        renderTube(backboneVectors, scene)
+        renderPointcloud(atomVectors, scene)
+        renderTube(backboneVectors, backboneKeys, scene)
         renderMissing(backboneVectors, scene)
         // renderSpheres(atomVectors, atoms, scene)
 

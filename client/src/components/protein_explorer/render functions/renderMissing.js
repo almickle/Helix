@@ -46,7 +46,8 @@ export default function renderMissing (backboneVectors, scene) {
     emptyRanges.forEach((range) => {
         range.forEach((group) => {
             if(group[0] !== null && group[1] !== null && group[2] !== null && group[3] !== null) {
-                const scale = 80
+                const vector = group[1].subtract(group[2])
+                const scale = vector.length()
                 const tangentA = group[1].subtract(group[0]).scaleInPlace(scale)
                 const tangentB = group[3].subtract(group[2]).scaleInPlace(scale)
                 const hermiteSpline = Curve3.CreateHermiteSpline(group[1], tangentA, group[2], tangentB, 30)

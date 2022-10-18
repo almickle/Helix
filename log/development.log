@@ -56146,3 +56146,54 @@ Started GET "/protein_explorer" for 127.0.0.1 at 2022-10-17 16:16:21 -0600
   
 ActionController::RoutingError (No route matches [GET] "/protein_explorer"):
   
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-17 23:00:55 -0600
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-17 23:00:55 -0600
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-17 23:00:55 -0600
+Started GET "/api/me" for 127.0.0.1 at 2022-10-17 23:00:55 -0600
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as */*
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+Completed 404 Not Found in 168ms (ActiveRecord: 20.1ms | Allocations: 18782)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+Completed 404 Not Found in 293ms (ActiveRecord: 15.2ms | Allocations: 39005)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 124ms (Views: 0.4ms | ActiveRecord: 23.1ms | Allocations: 19185)
+
+
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 401 Unauthorized in 446ms (Views: 0.4ms | ActiveRecord: 74.7ms | Allocations: 64532)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-17 23:00:57 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 734)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-17 23:00:57 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 714)
+
+
