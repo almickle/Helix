@@ -8,6 +8,7 @@ import renderPointcloud from "./render functions/renderPointcloud";
 import renderTube from "./render functions/renderTube";
 import renderMissing from "./render functions/renderMissing";
 import renderSpheres from "./render functions/renderSpheres";
+import renderAminos from "./render functions/renderAminos";
 
 
 
@@ -88,12 +89,13 @@ export default function Scene() {
                 })
             )
         })
-
+        
 
         renderPointcloud(atomVectors, scene)
-        renderTube(backboneVectors, backboneKeys, scene)
-        renderMissing(backboneVectors, scene)
+        // renderTube(backboneVectors, backboneKeys, scene)
+        // renderMissing(backboneVectors, scene)
         // renderSpheres(atomVectors, atoms, scene)
+        renderAminos(chains, backboneKeys, scene)
 
         // console.log(backboneVectors[0])
         
@@ -114,7 +116,7 @@ export default function Scene() {
     return (
         <div style={{ height: '100vh', overflow: 'hidden' }}>
             <Canvas antialias onSceneReady={onSceneReady} onRender={onRender} id="my-canvas" />
-            <Ramachandran PDB={PDB}/>
+            {/* <Ramachandran PDB={PDB}/> */}
             <form onSubmit={handleSubmit}>
                 <input id="pdb-input" type='text' placeholder="PDB ID.." style={{ position: 'absolute', width: 100, height: 20, right: 40, bottom: 20 }}></input>
             </form>

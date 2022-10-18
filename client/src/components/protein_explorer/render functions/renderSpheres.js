@@ -1,7 +1,7 @@
 import { MeshBuilder, StandardMaterial, Color3 } from "@babylonjs/core"
 
 
-export default function(atomVectors, atoms, scene) {
+export default function renderSpheres(atomVectors, atoms, scene) {
 
     const oxygenMaterial = new StandardMaterial('material', scene)
                 oxygenMaterial.diffuseColor = new Color3(.5, .5, .7);
@@ -18,6 +18,12 @@ export default function(atomVectors, atoms, scene) {
                 nitrogenMaterial.specularColor = new Color3(0.5, 0.6, 0.87);
                 nitrogenMaterial.emissiveColor = new Color3(0.2, 0, 1);
                 nitrogenMaterial.ambientColor = new Color3(0.23, 0.98, 0.53);
+    const sulphurMaterial = new StandardMaterial('material', scene)
+                sulphurMaterial.diffuseColor = new Color3(.5, .5, .7);
+                sulphurMaterial.specularColor = new Color3(0.5, 0.6, 0.87);
+                sulphurMaterial.emissiveColor = new Color3(0.7, 0, .6);
+                sulphurMaterial.ambientColor = new Color3(0.23, 0.98, 0.53);
+
 
     atomVectors.forEach((vector, i) => {
 
@@ -37,11 +43,14 @@ export default function(atomVectors, atoms, scene) {
                 oxygen.setAbsolutePosition(vector)
                 oxygen.material = oxygenMaterial
                 break;
+            case 'S':
+                const sulphur = MeshBuilder.CreateSphere('atom', {segments: 3, diameter: 0.8}, scene)
+                sulphur.setAbsolutePosition(vector)
+                sulphur.material = sulphurMaterial
+                break;
             default:
                 break;
         }
-        // const sphere = MeshBuilder.CreateSphere('atom', {segments: 2, diameter: 0.8}, scene)
-        // sphere.setAbsolutePosition(vector)
     })
 
     return
