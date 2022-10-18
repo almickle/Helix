@@ -54,7 +54,7 @@ export default function Scene() {
         })
 
         const centroid = new Vector3(total_X/atoms.length, total_Y/atoms.length, total_Z/atoms.length)
-        const camera = new ArcRotateCamera('camera', 0.1, 0.1, 160, centroid, scene)
+        const camera = new ArcRotateCamera('camera', 45, 0.1, 160, centroid, scene)
         camera.setTarget(centroid)
         camera.attachControl(canvas, true)
 
@@ -76,7 +76,7 @@ export default function Scene() {
 
 
         renderPointcloud(atomVectors, scene)
-        renderTube(backboneVectors, scene)
+        renderTube(backboneVectors, scene, centroid)
         
     }
 

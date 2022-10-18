@@ -56059,3 +56059,90 @@ Processing by LibrariesController#show as */*
 Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 717)
 
 
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-17 16:15:45 -0600
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-17 16:15:45 -0600
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-17 16:15:45 -0600
+Started GET "/api/me" for 127.0.0.1 at 2022-10-17 16:15:45 -0600
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-17 16:15:47 -0600
+  [1m[36mActiveRecord::SchemaMigration Pluck (5.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as */*
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+Completed 404 Not Found in 251ms (ActiveRecord: 20.8ms | Allocations: 20652)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 147ms (Views: 0.5ms | ActiveRecord: 93.5ms | Allocations: 3707)
+
+
+  [1m[36mUser Load (4.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 401 Unauthorized in 604ms (Views: 0.3ms | ActiveRecord: 30.8ms | Allocations: 50450)
+
+
+Completed 404 Not Found in 531ms (ActiveRecord: 42.3ms | Allocations: 43003)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+Started GET "/api/me" for 127.0.0.1 at 2022-10-17 16:15:48 -0600
+Processing by UsersController#show as */*
+Completed 404 Not Found in 699ms (ActiveRecord: 21.7ms | Allocations: 59917)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mUser Load (16.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 401 Unauthorized in 57ms (Views: 0.3ms | ActiveRecord: 17.4ms | Allocations: 11263)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-17 16:15:48 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.6ms | Allocations: 713)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-17 16:15:48 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.7ms | Allocations: 714)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-17 16:15:49 -0600
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.8ms | Allocations: 717)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-17 16:15:49 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+Completed 200 OK in 7ms (Views: 0.7ms | ActiveRecord: 0.6ms | Allocations: 719)
+
+
+Started GET "/protein_explorer" for 127.0.0.1 at 2022-10-17 16:16:21 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/protein_explorer"):
+  

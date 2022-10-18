@@ -57,7 +57,7 @@ export default function Ramachandran ( { PDB } ) {
     }
 
     return (
-        <div style={{ position: 'absolute', height: '50%', width: '40%', backgroundColor: 'white', left: 30, bottom: 30 }}>
+        <div style={{ position: 'absolute', height: '50%', width: '20%', backgroundColor: 'white', left: 30, bottom: 30 }}>
             <Chart options={chartConfig.options} type={chartConfig.type} series={chartConfig.series} width={chartConfig.width} height={chartConfig.height}/>
         </div>
     )
