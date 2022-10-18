@@ -1,0 +1,34 @@
+// const atomVectors = atoms.map((atom) => {
+            //     return (
+            //         new Vector3(atom.x, atom.y, atom.z)
+            //     )
+            // })
+
+        //     let total_X = 0
+        //     let total_Y = 0
+        //     let total_Z = 0
+        //     atomVectors.forEach((atom) => {
+        //          total_X += atom.x
+        //          total_Y += atom.y
+        //          total_Z += atom.z
+        //     })
+        //     const centroid = new Vector3(total_X/atomVectors.length, total_Y/atomVectors.length, total_Z/atomVectors.length)
+        //     centroid_camera.push(centroid)
+
+        //     const pointCloud = new PointsCloudSystem('pointCloud', 0, scene)
+        //     atoms.forEach((atom) => {
+        //         pointCloud.addPoints(1, (particle) => {
+        //             particle.position = atom
+        //         })
+        //     })
+
+        //     pointCloud.buildMeshAsync()
+
+        //     camera.setTarget(centroid)
+        //     camera.attachControl(canvas, true);
+
+            
+            
+            
+        // })
+

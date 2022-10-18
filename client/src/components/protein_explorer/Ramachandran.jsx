@@ -3,13 +3,13 @@ import Chart from "react-apexcharts"
 import parse_mmCIF from "mmcif-parser"
 import { useEffect } from "react"
 
-export default function Ramachandran ( { pdb } ) {
+export default function Ramachandran ( { PDB } ) {
 
     const [proteinData, setProteinData] = useState({torsion_angles: {A: []}})
     const [torsionAngles, setTorsionAngles] = useState()
 
     useEffect(() => {
-        fetch('https://files.rcsb.org/view/' + pdb + '.cif')
+        fetch('https://files.rcsb.org/view/' + PDB + '.cif')
             .then(resp => resp.text())
             .then(data => parse_mmCIF(data))
             .then(data => setProteinData(data))
@@ -17,7 +17,6 @@ export default function Ramachandran ( { pdb } ) {
 
     useEffect(() => {
         const ta = Object.keys(proteinData.torsion_angles)
-        console.log(ta[0])
         const keys = Object.keys(proteinData.torsion_angles)
         const angles = proteinData.torsion_angles[ta[0]].map((residue) => [residue.phi, residue.psi])
         setTorsionAngles(angles)
