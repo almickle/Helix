@@ -1,76 +1,72 @@
-import { Curve3, Mesh, MeshBuilder, Vector3 } from "@babylonjs/core"
+import { Curve3, Mesh, MeshBuilder } from "@babylonjs/core"
 
 
-export default function renderTube (backboneVectors, scene, centroid) {
+export default function renderTube(backboneVectors, scene) {
 
-    // console.log(backboneVectors.A)
-
-    const peptidePoints = backboneVectors.map((chain) => {
-        const empties = []
-        const residues = chain.map((residue, i, array) => {
-            if(residue) {
-                return residue.map((atom) => new Vector3(atom.x, atom.y, atom.z))
-            } else {
-                if(i !== 0) {
-                    if(array[i-1]) empties.push(array[i-1]) 
-                    else empties.push(null)
-                    if(array[i+1]) empties.push(array[i+1])
-                    else empties.push(null)
-                } else empties.push(null)
-            }
-        })
-        const object = {residues: residues, empties: empties}
-        return (
-            object
-        )
-    })
-
-
-    const emptyRanges = peptidePoints.map((chain, index) => {
-        const range = []
+    // const backboneCarbonNitrogen = backboneVectors.map((chain) => chain.map((residue, index, array) => {if(residue){ return [residue[0], residue[2]]} else return null}))
+    
+    const backboneSegments = backboneVectors.map((chain, index, array) => {
+        const segments = [[]]
         let n = 0
-        chain.empties.forEach((entry, i, array) => {
-            if(array[0] === null && i === 0) {
-                range.push([null])
-                n++
-            } 
-            if(entry !== null && array[i+1] === null) {
-                range.push([entry[1], entry[2]])
-                n++                
+        chain.forEach((residue, i, array) => {
+            // if(index === 0 ) {
+            //     console.log(residue)
+            // }
+            if(residue !== null) {
+                segments[n].push(residue)
+                if(array[i+1] === null) {
+                    segments.push([])
+                    n++
+                }
             }
-            if(entry !== null && array[i-1] === null) range[n-1].push(entry[0], entry[1])
-            if(i === array.length-1 && entry === null) range[n-1].push(null)
+            if(array[array.length-1] === null && i === array.length-1) segments.pop()
         })
-
-        return range
+        return segments
     })
 
-    emptyRanges.forEach((range) => {
-        range.forEach((group) => {
-            if(group[0] !== null && group[1] !== null && group[2] !== null && group[3] !== null) {
-                const scale = 4
-                const tangentA = group[1].subtract(group[0]).scaleInPlace(scale)
-                const tangentB = group[3].subtract(group[2]).scaleInPlace(scale)
-                const hermiteSpline = Curve3.CreateHermiteSpline(group[1], tangentA, group[2], tangentB, 30)
-                // MeshBuilder.CreateDashedLines('empty', {points: hermiteSpline.getPoints(), dashSize: 100, gapSize: 1, dashNb: 100}, scene)
-                MeshBuilder.CreateLines('empty', {points: hermiteSpline.getPoints()}, scene)
-            }
+
+    // backboneSegments.forEach((chain) => {
+    //     chain.forEach((segment) => {
+    //         segment.forEach((residue, i, array) => {
+    //             if(i === 0) {
+    //                 const amino = residue
+    //                 amino.push(array[i+1][0])
+    //                 const spline = Curve3.CreateCatmullRomSpline(amino, 4)
+    //                 // MeshBuilder.CreateLines('line', { points: amino }, scene)
+    //                 MeshBuilder.CreateTube('residue', { path: spline.getPoints(), radius: 0.5}, scene)
+    //             }
+    //             if(i === array.length-1) {
+    //                 const amino = residue
+    //                 // amino.unshift(array[i-1][2])
+    //                 const spline = Curve3.CreateCatmullRomSpline(amino, 4)
+    //                 // MeshBuilder.CreateLines('line', { points: amino }, scene)
+    //                 MeshBuilder.CreateTube('residue', { path: spline.getPoints(), radius: 0.5}, scene)
+    //             }
+    //             if(i !== array.length-1 && i !== 0) {
+    //                 const amino = residue
+    //                 amino.push(array[i+1][0]); // amino.unshift(array[i-1][2])
+    //                 const spline = Curve3.CreateCatmullRomSpline(amino, 4)
+    //                 console.log(spline)
+    //                 // MeshBuilder.CreateLines('line', { points: amino }, scene)
+    //                 MeshBuilder.CreateTube('residue', { path: spline.getPoints(), radius: 0.5}, scene)
+    //             }
+    //         })
+    //     })
+    // })
+
+    backboneSegments.forEach((chain) => {
+        chain.forEach((segment) => {
+            let array = []
+            segment.forEach((residue) => array = [...array, ...residue])
+            console.log(array)
+            const spline = Curve3.CreateCatmullRomSpline(array, 4)
+            MeshBuilder.CreateTube('segment', { path: spline.getPoints(), radius: 0.5}, scene)
         })
     })
 
-    // const hermite = Curve3.CreateHermiteSpline(
-    //     centroid,
-    //     new Vector3(-30, 30, -140).add(centroid),
-    //     new Vector3(20, 10, 40).add(centroid),
-    //     new Vector3(90, -30, -30).add(centroid),
-    //     60);
-
-    //     // MeshBuilder.CreateDashedLines('empty', {points: hermite.getPoints(), dashSize: 1000, gapSize: 1000, dashNb: 5}, scene)
-
-    //     MeshBuilder.CreateLines("hermite", {points: hermite.getPoints()}, scene)
-    // console.log(emptyRanges[0])
-
-    // const testVector = new Vector3(1, 1, 1).subtract()
-
-    // const tube = MeshBuilder.CreateTube('tube', { path: peptidePoints, radius: 1, cap: 3 }, scene)
+    // let array2 = []
+    //     array.forEach((residue) => array2 = [...array2, ...residue])
+    // console.log('tube')
+    // console.log(backboneCarbonNitrogen[0])
+    // console.log(backboneSegments[0])
 }

@@ -6,6 +6,8 @@ import Ramachandran from "./Ramachandran";
 import { useEffect } from "react";
 import renderPointcloud from "./render functions/renderPointcloud";
 import renderTube from "./render functions/renderTube";
+import renderMissing from "./render functions/renderMissing";
+import renderSpheres from "./render functions/renderSpheres";
 
 
 
@@ -24,7 +26,7 @@ export default function Scene() {
         .then(resp => resp.text())
         .then(data => parse_mmCIF(data))
         .then(parsed => setProteinData(parsed))
-    }, [])
+    }, [PDB])
 
     useEffect(() => {
         console.log(proteinData)
@@ -75,8 +77,12 @@ export default function Scene() {
         })
 
 
-        renderPointcloud(atomVectors, scene)
-        renderTube(backboneVectors, scene, centroid)
+        // renderPointcloud(atomVectors, scene)
+        renderTube(backboneVectors, scene)
+        renderMissing(backboneVectors, scene)
+        // renderSpheres(atomVectors, atoms, scene)
+
+        // console.log(backboneVectors[0])
         
     }
 
