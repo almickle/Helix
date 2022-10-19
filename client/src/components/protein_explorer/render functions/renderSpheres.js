@@ -44,7 +44,7 @@ export default function renderSpheres(atomVectors, atoms, scene) {
                 oxygen.material = oxygenMaterial
                 break;
             case 'S':
-                const sulphur = MeshBuilder.CreateSphere('atom', {segments: 3, diameter: 0.8}, scene)
+                const sulphur = MeshBuilder.CreateSphere('atom', {segments: 3, diameter: 1.35}, scene)
                 sulphur.setAbsolutePosition(vector)
                 sulphur.material = sulphurMaterial
                 break;

@@ -27,6 +27,9 @@
         //     camera.setTarget(centroid)
         //     camera.attachControl(canvas, true);
 
+        // const carbonyl = residue.filter((atom) => atom.atom_type === 'O' || atom.atom_type === 'C' || atom.atom_type === 'CA').map((atom) => new Vector3(atom.x, atom.y, atom.z))
+        // MeshBuilder.CreateTube('main', {path: carbonyl, radius: 0.2}, scene)
+
             
             
             

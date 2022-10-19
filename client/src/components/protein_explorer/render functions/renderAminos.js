@@ -20,9 +20,9 @@ import renderGlutamine from "./amino acids/renderGlutamine";
 import renderThreonine from "./amino acids/renderThreonine";
 
 
-export default function renderAminos (residues, keys, scene) {
+export default function renderAminos (chains, keys, scene) {
     keys.forEach((key) => {
-        residues[key].forEach((residue) => {
+        chains[key].forEach((residue, i) => {
             if(residue) {
                 switch (residue[0].residue) {
                 case 'MET':
@@ -68,21 +68,18 @@ export default function renderAminos (residues, keys, scene) {
                     renderValine(residue, scene)
                     break
                 case 'ASP':
-                    console.log(residue)
                     renderAsparticAcid(residue, scene)
                     break
                 case 'GLU':
                     renderGlutamicAcid(residue, scene)
                     break
                 case 'HIS':
-                    console.log(residue)
                     renderHistidine(residue, scene)
                     break
                 case 'ASN':
                     renderAsparagine(residue, scene)
                     break
                 case 'GLN':
-                    console.log(residue)
                     renderGlutamine(residue, scene)
                     break
                 case 'THR':
