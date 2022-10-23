@@ -9,6 +9,7 @@ import renderTube from "./render functions/renderTube";
 import renderMissing from "./render functions/renderMissing";
 import renderSpheres from "./render functions/renderSpheres";
 import renderAminos from "./render functions/renderAminos";
+import renderMesh from "./render functions/renderMesh";
 
 
 
@@ -56,6 +57,8 @@ export default function Scene() {
              return new Vector3(atom.x, atom.y, atom.z)
         })
 
+        const atomPoints = atoms.map((atom) => [atom.x, atom.y, atom.z])
+
         const atomsX = atoms.map((atom) => atom.x)
         const atomsY = atoms.map((atom) => atom.y)
         const atomsZ = atoms.map((atom) => atom.z)
@@ -69,9 +72,14 @@ export default function Scene() {
 
         const size = Math.sqrt((max_x-min_x)*(max_x-min_x)+(max_y-min_y)*(max_y-min_y)+(max_z-min_z)*(max_z-min_z))
 
-        const centroid = new Vector3(total_X/atoms.length, total_Y/atoms.length, total_Z/atoms.length)
-        const camera = new ArcRotateCamera('camera', 45, 0.1, size, centroid, scene)
-        camera.setTarget(centroid)
+        // const centroid = new Vector3(total_X/atoms.length, total_Y/atoms.length, total_Z/atoms.length)
+        // const camera = new ArcRotateCamera('camera', 45, 0.1, size, centroid, scene)
+        // camera.setTarget(centroid)
+        // camera.attachControl(canvas, true)
+
+        const origin = new Vector3(0, 0, 0)
+        const camera = new ArcRotateCamera('camera', 45, 0.1, 100, origin, scene)
+        camera.setTarget(origin)
         camera.attachControl(canvas, true)
 
 
@@ -91,12 +99,12 @@ export default function Scene() {
         })
 
 
-        renderPointcloud(atomVectors, scene)
-        renderTube(backboneVectors, backboneKeys, scene)
-        renderMissing(backboneVectors, scene)
+        // renderPointcloud(atomVectors, scene)
+        // renderTube(backboneVectors, backboneKeys, scene)
+        // renderMissing(backboneVectors, scene)
         // renderSpheres(atomVectors, atoms, scene)
-        renderAminos(chains, backboneKeys, scene)
-
+        // renderAminos(chains, backboneKeys, scene)
+        renderMesh(atomVectors, scene)
         // console.log(backboneVectors[0])
         
     }

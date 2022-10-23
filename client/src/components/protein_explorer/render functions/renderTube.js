@@ -81,16 +81,16 @@ export default function renderTube(backboneVectors, keys=[], scene) {
                     peptide.material = chainBMaterial
                     break;
                 case 'C':
-                    peptide.material = chainAMaterial
+                    peptide.material = chainCMaterial
                     break;
                 case 'D':
-                    peptide.material = chainBMaterial
+                    peptide.material = chainDMaterial
                     break;
                 case 'E':
-                    peptide.material = chainAMaterial
+                    peptide.material = chainDMaterial
                     break;
                 case 'F':
-                    peptide.material = chainBMaterial
+                    peptide.material = chainEMaterial
                     break;
                 default:
                     break;
