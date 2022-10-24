@@ -99,7 +99,7 @@ export default function Scene() {
         })
 
 
-        // renderPointcloud(atomVectors, scene)
+        renderPointcloud(atomVectors, scene)
         // renderTube(backboneVectors, backboneKeys, scene)
         // renderMissing(backboneVectors, scene)
         // renderSpheres(atomVectors, atoms, scene)

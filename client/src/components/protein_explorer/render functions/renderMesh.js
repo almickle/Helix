@@ -11,13 +11,13 @@ export default function renderMesh (atomVectors, scene) {
     // })
 
     // TEST
-    const testPoints = [[1, 3, 1], [2, 5, 4], [1, 2, 3]].map((array) => new Vector3(array[0], array[1], array[2]))
+    const testPoints = [[1, 3, 1], [2, 1, 4], [1, 2, 3]].map((array) => new Vector3(array[0], array[1], array[2]))
     const pointCloud = new PointsCloudSystem('test', 5, scene)
         testPoints.forEach((point) => pointCloud.addPoints(1, (particle) => {
             particle.position = point
         }))
 
-    // const zero = MeshBuilder.CreateSphere('circumcenter', {segments: 4, diameter: 0.3}, scene).position = new Vector3(0, 0, 0)
+    const zero = MeshBuilder.CreateSphere('circumcenter', {segments: 4, diameter: 0.3}, scene).position = new Vector3(0, 0, 0)
 
     const circumcircle = Curve3.ArcThru3Points(testPoints[0], testPoints[1], testPoints[2], 100, false, true)
     MeshBuilder.CreateLines('circumcircle', {points: circumcircle.getPoints()})
@@ -51,6 +51,16 @@ export default function renderMesh (atomVectors, scene) {
                 sphereMaterial.alpha = 0.4
                 sphereMaterial.wireframe = true
     sphereMain.material = sphereMaterial
+
+    const testVertex = new Vector3(3, 5, 7)
+    const testSphere = MeshBuilder.CreateSphere('test', {segments: 4, diameter: 0.3}).position = testVertex
+
+    console.log('inside')
+    console.log(checkInside(zero, origin, alpha))
+    console.log('inside')
+    console.log(checkInside(testVertex, origin, alpha))
+
+
     
     return
 }
@@ -143,6 +153,12 @@ function computeLamda(circumradius, points, radius) {
     return planeNormal
 }
 
+function checkInside(pointA, origin, radius) {
+    const distanceToOrigin = pointA.subtract(origin).length()
+    if(distanceToOrigin < radius) {
+        return true
+    } else return false
+}
 
 // const x1 = points[0].x
 //     const y1 = points[0].y
