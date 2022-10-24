@@ -72,15 +72,15 @@ export default function Scene() {
 
         const size = Math.sqrt((max_x-min_x)*(max_x-min_x)+(max_y-min_y)*(max_y-min_y)+(max_z-min_z)*(max_z-min_z))
 
-        // const centroid = new Vector3(total_X/atoms.length, total_Y/atoms.length, total_Z/atoms.length)
-        // const camera = new ArcRotateCamera('camera', 45, 0.1, size, centroid, scene)
-        // camera.setTarget(centroid)
-        // camera.attachControl(canvas, true)
-
-        const origin = new Vector3(0, 0, 0)
-        const camera = new ArcRotateCamera('camera', 45, 0.1, 100, origin, scene)
-        camera.setTarget(origin)
+        const centroid = new Vector3(total_X/atoms.length, total_Y/atoms.length, total_Z/atoms.length)
+        const camera = new ArcRotateCamera('camera', 45, 0.1, size, centroid, scene)
+        camera.setTarget(centroid)
         camera.attachControl(canvas, true)
+
+        // const origin = new Vector3(0, 0, 0)
+        // const camera = new ArcRotateCamera('camera', 45, 0.1, 100, origin, scene)
+        // camera.setTarget(origin)
+        // camera.attachControl(canvas, true)
 
 
 
@@ -99,7 +99,7 @@ export default function Scene() {
         })
 
 
-        renderPointcloud(atomVectors, scene)
+        // renderPointcloud(atomVectors, scene)
         // renderTube(backboneVectors, backboneKeys, scene)
         // renderMissing(backboneVectors, scene)
         // renderSpheres(atomVectors, atoms, scene)
