@@ -312,3 +312,202 @@ function checkInside(pointA, origin, radius) {
 //         return true
 //     } else return false
 // }
+
+ function getVectorsFromVerts(vertices, coordinate) {
+            let vectors = []
+            let vector = []
+            let triplets = []
+            let triplet = []
+            let n = 0
+
+            vertices.forEach((vertex, i) => {
+                triplet.push(vertex)
+                n++
+                if(n % 3 === 0) {
+                    triplets.push(triplet)
+                    n = 0
+                    triplet = []
+                }
+            })
+
+            const mergedTriplets = triplets.map((triplet) => {
+                const merge = `${triplet[0]} ${triplet[1]} ${triplet[2]}`
+                return merge
+            })
+
+            const filteredTriplets = mergedTriplets.filter((triplet, i) => mergedTriplets.indexOf(triplet) === i)
+            const filteredVectors = filteredTriplets.map((triplet) => triplet.split(' ')).map((triplet) => {
+                const baseVector = new Vector3(parseFloat(triplet[0]), parseFloat(triplet[1]), parseFloat(triplet[2]))
+                return baseVector.add(coordinate)
+            })
+
+            return filteredVectors
+        }
+
+        // let vanDerWaalsAtomVectors = []
+        // vanDerWaalsSpheres.forEach((sphere) => vanDerWaalsAtomVectors.push(...sphere))
+
+        // const slicedVanDerWaals = vanDerWaalsAtomVectors.slice(0, 1000)
+
+
+        // const testPoints = [[2, 1, 3], [1, 4, 2], [0, 3, 1], [1, 0, 4], [2, 3, 5], [1, 1, 1], [2, 2, 2]]
+
+
+        // const vanDerWaalsSpheres = atoms.map((atom, i) => {
+        //     const coordinate = new Vector3(atom.x, atom.y, atom.z)
+        //     let vertices 
+        //     let vectors
+        //     let indices
+        //     switch (atom.atom) {
+        //         case 'N':
+        //             const nitrogen = MeshBuilder.CreateSphere('nitrogen', {segments: 3, diameter: 1.64}, scene)
+        //             nitrogen.setAbsolutePosition(coordinate)
+        //             vertices = nitrogen.getVerticesData(VertexBuffer.PositionKind)
+        //             indices = nitrogen.getIndices()
+        //             nitrogen.dispose()
+        //             vectors = getVectorsFromVerts(vertices, coordinate)
+        //             break;
+        //         case 'C':
+        //             const carbon = MeshBuilder.CreateSphere('carbon', {segments: 3, diameter: 1.77}, scene)
+        //             carbon.setAbsolutePosition(coordinate)
+        //             vertices = carbon.getVerticesData(VertexBuffer.PositionKind)
+        //             indices = carbon.getIndices()
+        //             carbon.dispose()
+        //             vectors = getVectorsFromVerts(vertices, coordinate)
+        //             break;
+        //         case 'O':
+        //             const oxygen = MeshBuilder.CreateSphere('oxygen', {segments: 3, diameter: 1.58}, scene)
+        //             oxygen.setAbsolutePosition(coordinate)
+        //             vertices = oxygen.getVerticesData(VertexBuffer.PositionKind)
+        //             indices = oxygen.getIndices()
+        //             oxygen.dispose()
+        //             vectors = getVectorsFromVerts(vertices, coordinate)
+        //             break;
+        //         case 'S':
+        //             const sulphur = MeshBuilder.CreateSphere('sulphur', {segments: 3, diameter: 1.81}, scene)
+        //             sulphur.setAbsolutePosition(coordinate)
+        //             vertices = sulphur.getVerticesData(VertexBuffer.PositionKind)
+        //             indices = sulphur.getIndices()
+        //             sulphur.dispose()
+        //             vectors = getVectorsFromVerts(vertices, coordinate)
+        //             break;
+        //         case 'H':
+        //             const hydrogen = MeshBuilder.CreateSphere('hydrogen', {segments: 3, diameter: 1.10}, scene)
+        //             hydrogen.setAbsolutePosition(coordinate)
+        //             vertices = hydrogen.getVerticesData(VertexBuffer.PositionKind)
+        //             indices = hydrogen.getIndices()
+        //             hydrogen.dispose()
+        //             vectors = getVectorsFromVerts(vertices, coordinate)
+        //             break;
+        //         default:
+        //             const blank = MeshBuilder.CreateSphere('blank', {segments: 3, diameter: 1.10}, scene)
+        //             blank.setAbsolutePosition(coordinate)
+        //             vertices = blank.getVerticesData(VertexBuffer.PositionKind)
+        //             indices = blank.getIndices()
+        //             blank.dispose()
+        //             vectors = getVectorsFromVerts(vertices, coordinate)
+        //             break;
+        //     }
+
+        //     if(i===1) {
+        //         // console.log('vectors')
+        //         // console.log(vectors)
+        //         // console.log('vertices')
+        //         // console.log(vertices)
+        //         // console.log('indices')
+        //         // console.log(indices)
+        //     }
+        //     return vectors
+        // })
+
+
+        const nearPoints = atomVectors.map((vector) => atomVectors.filter((atom) => Vector3.Distance(atom, vector) <= alpha ))
+
+    const simplices = []
+    nearPoints.forEach((points) => {
+        uniqueCombos(points, 3).forEach((combo) => {
+            const insideVerts = []
+            atomVectors.forEach((point) => {
+                const hasVertex = calculateAll(combo, point, alpha)
+                insideVerts.push(hasVertex)
+            })
+            let hasPoint = false
+            insideVerts.forEach((entry) => {
+                if(entry.inner.includes(true) && entry.outer.includes(true)) {
+                    hasPoint = true
+                }
+            })
+            if(hasPoint === false) { 
+                simplices.push([combo[0].x, combo[0].y, combo[0].z, combo[1].x, combo[1].y, combo[1].z, combo[2].x, combo[2].y, combo[2].z])
+            }
+        })
+    })
+
+
+    let mesh = []
+    simplices.forEach((simplex) => mesh.push(...simplex))
+
+    const faceCount = mesh.length/3
+
+    const indices = []
+    for(let i=0; i <= faceCount; i++) {
+        indices.push(i)
+    }
+
+    const surfaceMesh = new Mesh('surface', scene)
+    const vertexData = new VertexData()
+        vertexData.positions = mesh
+        vertexData.indices = indices
+        vertexData.applyToMesh(surfaceMesh)
+
+    const sphereMaterial = new StandardMaterial('mat', scene)
+                sphereMaterial.diffuseColor = new Color3(.5, .5, .7);
+                sphereMaterial.specularColor = new Color3(1, 0.6, 0.87);
+                sphereMaterial.emissiveColor = new Color3(1, 0, 0);
+                sphereMaterial.ambientColor = new Color3(0.23, 0.98, 0.53);
+                sphereMaterial.alpha = 0.4
+                sphereMaterial.backFaceCulling = false
+                sphereMaterial.wireframe = true
+
+                surfaceMesh.material = sphereMaterial
+    
+    return
+}
+
+// const segmentLength = 100
+    // const segmentCount = Math.floor(pointsRaw.length/segmentLength)+1
+    // const segments = []
+    // for(let i=0; i < segmentCount; i++) {
+    //     segments.push(i)
+    // }
+    // segments.forEach((segment, i) => {
+    //     if(i === segments.length-1) {
+    //         const cells = alphaShape(alpha, pointsRaw.slice(i*segmentLength, pointsRaw.length-1))
+    //         console.log('cells')
+    //         console.log(cells)
+    //         const indices = []
+    //         cells.forEach((cell) => indices.push(...cell))
+    //         const positions = []
+    //         pointsRaw.forEach((point) => positions.push(...point))
+        
+    //         const surfaceMesh = new Mesh('surface', scene)
+    //         const vertexData = new VertexData()
+    //         vertexData.positions = positions
+    //         vertexData.indices = indices
+    //         vertexData.applyToMesh(surfaceMesh)
+    //     } else {
+    //         const cells = alphaShape(alpha, pointsRaw.slice(i*segmentLength, i*segmentLength+segmentLength))
+    //         console.log('cells')
+    //         console.log(cells)
+    //         const indices = []
+    //         cells.forEach((cell) => indices.push(...cell))
+    //         const positions = []
+    //         pointsRaw.forEach((point) => positions.push(...point))
+        
+    //         const surfaceMesh = new Mesh('surface', scene)
+    //         const vertexData = new VertexData()
+    //         vertexData.positions = positions
+    //         vertexData.indices = indices
+    //         vertexData.applyToMesh(surfaceMesh)
+    //     }
+    // })
