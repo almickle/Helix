@@ -109,15 +109,15 @@ export default function Scene() {
 
         // surfaceTriangulation(testVectors, 3, scene)
 
-        renderSurface(atoms, 1, scene)
+        renderSurface(atoms, 0.6, scene)
         // renderMesh(atomVectors, 0.5, scene)
         // fibonacciSphere(centroid, 20, 2, scene)
         // renderPointcloud(testVectors, scene)
         // renderPointcloud(atomVectors, scene)
-        // renderTube(backboneVectors, backboneKeys, scene)
+        renderTube(backboneVectors, backboneKeys, scene)
         // renderMissing(backboneVectors, scene)
         // renderSpheres(atomVectors, atoms, scene)
-        // renderAminos(chains, backboneKeys, scene)
+        renderAminos(chains, backboneKeys, scene)
         // renderMesh(atomVectors, scene)
         // renderDelauney(atomVectors, scene)
         
@@ -138,7 +138,7 @@ export default function Scene() {
     return (
         <div style={{ height: '100vh', overflow: 'hidden' }}>
             <Canvas antialias onSceneReady={onSceneReady} onRender={onRender} id="my-canvas" />
-            {/* <Ramachandran PDB={PDB}/> */}
+            <Ramachandran PDB={PDB}/>
             <form onSubmit={handleSubmit}>
                 <input id="pdb-input" type='text' placeholder="PDB ID.." style={{ position: 'absolute', width: 100, height: 20, right: 40, bottom: 20 }}></input>
             </form>
