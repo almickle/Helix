@@ -7,6 +7,6 @@ class Annotation < ApplicationRecord
     validates :begin, presence: true
     validates :end, presence: true
     validates :transcript, presence: true
-    validates :protein, presence: true
+    validates :protein, inclusion: { in: [ true, false ] }
 
 end

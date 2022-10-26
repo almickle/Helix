@@ -19,7 +19,6 @@ export default function Annotation ( { basepairs, transcriptIdentifier, isProtei
     function handleSaveAnnotation() {
         const title = document.getElementById('annotation-title').value
         const body = document.getElementById('annotation-body').value
-
         fetch('/api/newannotation', {
                 method: 'POST',
                 credentials: 'include',
@@ -38,6 +37,7 @@ export default function Annotation ( { basepairs, transcriptIdentifier, isProtei
             })
         .then(resp => resp.json())
         .then(data => {
+            console.log(data)
             if(annotationToggle === true) {
                 setAnnotationText(<Note basepairs={basepairs} content={data} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation} setAnnotationText={setAnnotationText}/>) 
             }
