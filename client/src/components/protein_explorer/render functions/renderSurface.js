@@ -1,9 +1,20 @@
 import { Mesh, VertexData, Vector3, StandardMaterial, Color3 } from '@babylonjs/core'
 import alphaShape from 'alpha-shape'
-import renderPointcloud from './renderPointcloud'
 import fibonacciSphere from './utilities/fibonacciSphere'
 
-export default function renderSurface (atoms, alpha, scene) {
+
+export default () => {
+    // eslint-disable-next-line
+    addEventListener('message', (message) => {
+        if(message.data.command === 'run') {
+            renderSurface(message.data.atoms, message.data.alpha, message.data.scene)
+        }
+    })
+}
+
+
+
+function renderSurface (atoms, alpha, scene) {
 
     const vanDerWaalsSpheres = atoms.map((atom) => {
             const coordinate = new Vector3(atom.x, atom.y, atom.z)
@@ -51,4 +62,5 @@ export default function renderSurface (atoms, alpha, scene) {
             surfaceMaterial.wireframe = true
             surfaceMesh.material = surfaceMaterial
 
+        postMessage(indices)
 }

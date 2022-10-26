@@ -1,4 +1,4 @@
-import { Vector3, Curve3, HemisphericLight, MeshBuilder, PointsCloudSystem, Color3, StandardMaterial, ArcRotateCamera, VertexBuffer } from "@babylonjs/core"
+import { Vector3, HemisphericLight, Color3, StandardMaterial, ArcRotateCamera, VertexData, Mesh } from "@babylonjs/core"
 import { useState } from "react";
 import Canvas from "./Canvas"
 import parse_mmCIF from 'mmcif-parser'
@@ -108,14 +108,26 @@ export default function Scene() {
         const testVectors = testPoints.map((point) => new Vector3(point[0], point[1], point[2]))
 
         // surfaceTriangulation(testVectors, 3, scene)
+        // renderSurface(atoms, 0.2, scene)
 
-        renderSurface(atoms, 0.6, scene)
+        // const meshWorker = new Worker("./render functions/renderSurface.js")
+        // meshWorker.postMessage({command: 'run'})
+        // meshWorker.addEventListener('message', (message) => {
+        //     const surfaceMesh = new Mesh('surface', scene)
+        //     const vertexData = new VertexData()
+        //         vertexData.positions = message.data.positions
+        //         vertexData.indices = message.data.indices
+        //         vertexData.applyToMesh(surfaceMesh)
+        //         surfaceMesh.forceSharedVertices()
+        // })
+
+
         // renderMesh(atomVectors, 0.5, scene)
         // fibonacciSphere(centroid, 20, 2, scene)
         // renderPointcloud(testVectors, scene)
         // renderPointcloud(atomVectors, scene)
         renderTube(backboneVectors, backboneKeys, scene)
-        // renderMissing(backboneVectors, scene)
+        renderMissing(backboneVectors, scene)
         // renderSpheres(atomVectors, atoms, scene)
         renderAminos(chains, backboneKeys, scene)
         // renderMesh(atomVectors, scene)
