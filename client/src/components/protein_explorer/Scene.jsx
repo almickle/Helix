@@ -20,8 +20,8 @@ import renderSurface from "./render functions/renderSurface";
 
 export default function Scene() {
 
-    const [PDB, setPDB] = useState('1XY2')
-    const [proteinData, setProteinData] = useState({atoms: [{x: 0, y: 0, z: 0}], chains: {A: []}, chain_info: [], backbones: {A: [[{x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}]]}})
+    const [PDB, setPDB] = useState('1huw')
+    const [proteinData, setProteinData] = useState({atoms: [{x: 0, y: 0, z: 0}], chains: {A: []}, chain_info: [], torsion_angles: {A: []}, backbones: {A: [[{x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}]]}})
 
     useEffect(() => {
         fetch('https://files.rcsb.org/view/' + PDB + '.cif', {
@@ -146,11 +146,10 @@ export default function Scene() {
         document.getElementById('pdb-input').value = ''
     }
 
-
     return (
         <div style={{ height: '100vh', overflow: 'hidden' }}>
             <Canvas antialias onSceneReady={onSceneReady} onRender={onRender} id="my-canvas" />
-            <Ramachandran PDB={PDB}/>
+            <Ramachandran proteinData={proteinData}/>
             <form onSubmit={handleSubmit}>
                 <input id="pdb-input" type='text' placeholder="PDB ID.." style={{ position: 'absolute', width: 100, height: 20, right: 40, bottom: 20 }}></input>
             </form>
