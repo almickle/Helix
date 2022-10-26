@@ -99,7 +99,7 @@ export default function SequenceHeader ( { geneData, transcriptOptions, transcri
             </div>
             <div style={{ height: '100%', width: '60%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <StyleHandler sequenceStyle={sequenceStyle} setSequenceStyle={setSequenceStyle}/>
-                <FeaturesHandler transcriptOptions={transcriptOptions} selectedRegion={selectedRegion} geneData={geneData}/>
+                <FeaturesHandler transcriptOptions={transcriptOptions} transcriptIdentifier={transcriptIdentifier} isProtein={isProtein} selectedRegion={selectedRegion} geneData={geneData}/>
                 <AnnotationHandler geneData={geneData} transcriptIdentifier={transcriptIdentifier} isProtein={isProtein} annotations={annotations} setAnnotationText={setAnnotationText} setTriggerAnnotation={setTriggerAnnotation} triggerAnnotation={triggerAnnotation}/>
             </div>
             <div style={{ height: '100%', width: '20%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>

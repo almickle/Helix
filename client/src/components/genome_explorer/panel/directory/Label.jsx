@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import '../../style/onHover.css'
 
 export default function Label ( { label, setGeneData, setInputData, setDirectoryOpen, directoryOpen, setTranscriptIndex, setPresentView, setSequenceID, renderLevel, config, previousIndex, entryIndex, reload, setReload } ) {
 
@@ -99,7 +100,7 @@ export default function Label ( { label, setGeneData, setInputData, setDirectory
 
     
     return (
-        <div onClick={handleClickLabel} onDoubleClick={handleDoubleClickLabel} style={{ height: 'fit-content', width: 200, display: 'flex', flexDirection: 'row', alignItems: 'center', boxShadow: `${bottomBorder}px 0px 0px 0px rgb(200, 200, 200) inset` }}>
+        <div onClick={handleClickLabel} onDoubleClick={handleDoubleClickLabel} id='directory-label' style={{ height: 'fit-content', width: 'fit-content', display: 'flex', flexDirection: 'row', alignItems: 'center', cursor: 'pointer', boxShadow: `${bottomBorder}px 0px 0px 0px rgb(200, 200, 200) inset` }}>
             <div style={{ display: 'flex', flexDirection: 'column', height: tabBorderHeight }}>
                 <div style={borderTopStyle}></div>
             </div>

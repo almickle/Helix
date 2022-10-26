@@ -56910,3 +56910,449 @@ Completed 200 OK in 11ms (Views: 3.7ms | ActiveRecord: 1.0ms | Allocations: 2644
   [1m[36mActiveRecord::InternalMetadata Load (2.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205)[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/api/newannotation" for 127.0.0.1 at 2022-10-26 15:41:08 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"AKT1", "transcript"=>-1, "protein"=>false, "title"=>"dsg", "body"=>"sdgsxdgsx", "begin"=>477, "end"=>480, "annotation"=>{"begin"=>477, "end"=>480, "title"=>"dsg", "body"=>"sdgsxdgsx", "transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.2ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 93ms (ActiveRecord: 15.7ms | Allocations: 18224)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Protein can't be blank):
+  
+app/controllers/annotations_controller.rb:6:in `create'
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:41:09 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"AKT1", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 4], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 25ms (Views: 5.8ms | ActiveRecord: 1.3ms | Allocations: 2745)
+
+
+Started POST "/api/newannotation" for 127.0.0.1 at 2022-10-26 15:44:27 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"AKT1", "transcript"=>-1, "protein"=>false, "title"=>"dv", "body"=>"dfgvxdbvd", "begin"=>14, "end"=>19, "annotation"=>{"begin"=>14, "end"=>19, "title"=>"dv", "body"=>"dfgvxdbvd", "transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 15ms (ActiveRecord: 1.4ms | Allocations: 3959)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Protein can't be blank):
+  
+app/controllers/annotations_controller.rb:6:in `create'
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:44:28 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"AKT1", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "AKT1"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.3ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 4], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 11ms (Views: 4.0ms | ActiveRecord: 0.9ms | Allocations: 2643)
+
+
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:45:21 -0600
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-26 15:45:21 -0600
+Started GET "/api/me" for 127.0.0.1 at 2022-10-26 15:45:21 -0600
+Processing by UsersController#show as */*
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mUser Load (14.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mLibrary Load (1.6ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mUser Load (3.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 341ms (Views: 1.0ms | ActiveRecord: 27.4ms | Allocations: 18178)
+
+
+  [1m[36mGene Load (10.0ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (2.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+Completed 500 Internal Server Error in 116ms (ActiveRecord: 48.7ms | Allocations: 12834)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:18:in `show_gene_annotations'
+Completed 200 OK in 337ms (Views: 17.4ms | ActiveRecord: 31.2ms | Allocations: 20265)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-26 15:45:22 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 16ms (Views: 7.1ms | ActiveRecord: 1.1ms | Allocations: 2660)
+
+
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:45:24 -0600
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-26 15:45:24 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mAnnotation Load (0.7ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 17ms (Views: 4.4ms | ActiveRecord: 1.6ms | Allocations: 2933)
+
+
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 20ms (Views: 9.0ms | ActiveRecord: 3.2ms | Allocations: 3584)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-26 15:45:24 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.4ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 14ms (Views: 6.2ms | ActiveRecord: 1.3ms | Allocations: 2653)
+
+
+Started POST "/api/newannotation" for 127.0.0.1 at 2022-10-26 15:45:51 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "title"=>"Testing ", "body"=>"This is a test to see if the protein attribute is the cause of the bug", "begin"=>594, "end"=>599, "annotation"=>{"begin"=>594, "end"=>599, "title"=>"Testing ", "body"=>"This is a test to see if the protein attribute is the cause of the bug", "transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mAnnotation Create (21.3ms)[0m  [1m[32mINSERT INTO "annotations" ("gene_id", "begin", "end", "title", "body", "created_at", "updated_at", "transcript", "protein") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["gene_id", 5], ["begin", 594], ["end", 599], ["title", "Testing "], ["body", "This is a test to see if the protein attribute is the cause of the bug"], ["created_at", "2022-10-26 21:45:51.125512"], ["updated_at", "2022-10-26 21:45:51.125512"], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 70ms (Views: 0.8ms | ActiveRecord: 26.8ms | Allocations: 6631)
+
+
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:45:51 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mGene Load (0.8ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.7ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 13ms (Views: 4.0ms | ActiveRecord: 1.8ms | Allocations: 2538)
+
+
+Started POST "/api/newannotation" for 127.0.0.1 at 2022-10-26 15:51:03 -0600
+  
+SyntaxError (C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/annotations_controller.rb:6: syntax error, unexpected `end', expecting ')'
+..., protein: params[:protein] end: params[:end], transcript: p...
+...                            ^~~
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/annotations_controller.rb:6: syntax error, unexpected tLABEL, expecting '='
+... end: params[:end], transcript: params[:transcript])
+...                    ^~~~~~~~~~~
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/annotations_controller.rb:6: syntax error, unexpected ')', expecting `end'
+...ranscript: params[:transcript])
+...                              ^
+):
+  
+app/controllers/annotations_controller.rb:6: syntax error, unexpected `end', expecting ')'
+app/controllers/annotations_controller.rb:6: syntax error, unexpected tLABEL, expecting '='
+app/controllers/annotations_controller.rb:6: syntax error, unexpected ')', expecting `end'
+app/controllers/annotations_controller.rb:6: syntax error, unexpected `end', expecting ')'
+app/controllers/annotations_controller.rb:6: syntax error, unexpected tLABEL, expecting '='
+app/controllers/annotations_controller.rb:6: syntax error, unexpected ')', expecting `end'
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:51:04 -0600
+  
+SyntaxError (C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/annotations_controller.rb:6: syntax error, unexpected `end', expecting ')'
+..., protein: params[:protein] end: params[:end], transcript: p...
+...                            ^~~
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/annotations_controller.rb:6: syntax error, unexpected tLABEL, expecting '='
+... end: params[:end], transcript: params[:transcript])
+...                    ^~~~~~~~~~~
+C:/Users/micha/OneDrive/Documents/Code/helix-app/app/controllers/annotations_controller.rb:6: syntax error, unexpected ')', expecting `end'
+...ranscript: params[:transcript])
+...                              ^
+):
+  
+app/controllers/annotations_controller.rb:6: syntax error, unexpected `end', expecting ')'
+app/controllers/annotations_controller.rb:6: syntax error, unexpected tLABEL, expecting '='
+app/controllers/annotations_controller.rb:6: syntax error, unexpected ')', expecting `end'
+app/controllers/annotations_controller.rb:6: syntax error, unexpected `end', expecting ')'
+app/controllers/annotations_controller.rb:6: syntax error, unexpected tLABEL, expecting '='
+app/controllers/annotations_controller.rb:6: syntax error, unexpected ')', expecting `end'
+Started POST "/api/newannotation" for 127.0.0.1 at 2022-10-26 15:51:41 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "title"=>"sdfs", "body"=>"sdgsdgv", "begin"=>186, "end"=>191, "annotation"=>{"begin"=>186, "end"=>191, "title"=>"sdfs", "body"=>"sdgsdgv", "transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mAnnotation Create (0.7ms)[0m  [1m[32mINSERT INTO "annotations" ("gene_id", "begin", "end", "title", "body", "created_at", "updated_at", "transcript", "protein") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["gene_id", 5], ["begin", 186], ["end", 191], ["title", "sdfs"], ["body", "sdgsdgv"], ["created_at", "2022-10-26 21:51:41.218501"], ["updated_at", "2022-10-26 21:51:41.218501"], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 75ms (Views: 0.9ms | ActiveRecord: 14.7ms | Allocations: 16537)
+
+
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:51:41 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.3ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 11ms (Views: 4.2ms | ActiveRecord: 0.9ms | Allocations: 2724)
+
+
+Started POST "/api/newannotation" for 127.0.0.1 at 2022-10-26 15:52:38 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "title"=>"testing protein", "body"=>"this is to test protein validation", "begin"=>573, "end"=>577, "annotation"=>{"begin"=>573, "end"=>577, "title"=>"testing protein", "body"=>"this is to test protein validation", "transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 59ms (ActiveRecord: 11.2ms | Allocations: 16162)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Protein can't be blank):
+  
+app/controllers/annotations_controller.rb:6:in `create'
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:52:38 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 11ms (Views: 3.5ms | ActiveRecord: 1.1ms | Allocations: 2596)
+
+
+Started POST "/api/newannotation" for 127.0.0.1 at 2022-10-26 15:53:09 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "title"=>"sdgs", "body"=>"sdgxdgd", "begin"=>472, "end"=>478, "annotation"=>{"begin"=>472, "end"=>478, "title"=>"sdgs", "body"=>"sdgxdgd", "transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 67ms (ActiveRecord: 13.2ms | Allocations: 16159)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Protein can't be blank):
+  
+app/controllers/annotations_controller.rb:6:in `create'
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:53:09 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 10ms (Views: 3.4ms | ActiveRecord: 0.9ms | Allocations: 2597)
+
+
+Started POST "/api/newannotation" for 127.0.0.1 at 2022-10-26 15:55:54 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "title"=>"test", "body"=>"lksdjflksjdf", "begin"=>148, "end"=>153, "annotation"=>{"begin"=>148, "end"=>153, "title"=>"test", "body"=>"lksdjflksjdf", "transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:7:in `create'
+  [1m[36mGene Load (0.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/annotations_controller.rb:7:in `create'
+Completed 422 Unprocessable Entity in 60ms (ActiveRecord: 12.0ms | Allocations: 16219)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Protein can't be blank):
+  
+app/controllers/annotations_controller.rb:7:in `create'
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:55:54 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:18:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:20:in `show_gene_annotations'
+Completed 200 OK in 11ms (Views: 3.6ms | ActiveRecord: 1.1ms | Allocations: 2592)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-26 15:59:29 -0600
+Started GET "/api/me" for 127.0.0.1 at 2022-10-26 15:59:29 -0600
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:59:29 -0600
+Processing by UsersController#show as */*
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `show'
+Completed 200 OK in 254ms (Views: 1.0ms | ActiveRecord: 23.3ms | Allocations: 15241)
+
+
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (1.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (1.3ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", ""], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+Completed 500 Internal Server Error in 273ms (ActiveRecord: 25.2ms | Allocations: 18717)
+
+
+  
+NoMethodError (undefined method `annotations' for nil:NilClass):
+  
+app/controllers/annotations_controller.rb:18:in `show_gene_annotations'
+  [1m[36mGene Load (6.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 89ms (Views: 38.8ms | ActiveRecord: 60.5ms | Allocations: 20887)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-26 15:59:30 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.5ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 18ms (Views: 7.5ms | ActiveRecord: 1.6ms | Allocations: 2648)
+
+
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:59:31 -0600
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-26 15:59:31 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+Processing by LibrariesController#show as */*
+  Parameters: {"library"=>{}}
+  [1m[36mGene Load (1.6ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mAnnotation Load (1.0ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+  [1m[36mLibrary Load (0.9ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 26ms (Views: 8.6ms | ActiveRecord: 5.6ms | Allocations: 6301)
+
+
+  [1m[36mGene Load (5.9ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 24ms (Views: 6.2ms | ActiveRecord: 8.1ms | Allocations: 6559)
+
+
+Started GET "/api/genelibrary" for 127.0.0.1 at 2022-10-26 15:59:32 -0600
+Processing by LibrariesController#show as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:3:in `show'
+  [1m[36mLibrary Load (0.3ms)[0m  [1m[34mSELECT "libraries".* FROM "libraries" WHERE "libraries"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+  [1m[36mGene Load (0.7ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."library_id" = $1[0m  [["library_id", 1]]
+  ↳ app/controllers/libraries_controller.rb:5:in `show'
+Completed 200 OK in 15ms (Views: 7.9ms | ActiveRecord: 1.4ms | Allocations: 2655)
+
+
+Started POST "/api/newannotation" for 127.0.0.1 at 2022-10-26 15:59:55 -0600
+Processing by AnnotationsController#create as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "title"=>"Testing Boolean", "body"=>"This is to test if boolean validation is functioning properly", "begin"=>183, "end"=>191, "annotation"=>{"begin"=>183, "end"=>191, "title"=>"Testing Boolean", "body"=>"This is to test if boolean validation is functioning properly", "transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:4:in `create'
+  [1m[36mGene Load (0.5ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" WHERE "genes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mAnnotation Create (0.6ms)[0m  [1m[32mINSERT INTO "annotations" ("gene_id", "begin", "end", "title", "body", "created_at", "updated_at", "transcript", "protein") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["gene_id", 5], ["begin", 183], ["end", 191], ["title", "Testing Boolean"], ["body", "This is to test if boolean validation is functioning properly"], ["created_at", "2022-10-26 21:59:55.857090"], ["updated_at", "2022-10-26 21:59:55.857090"], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/annotations_controller.rb:6:in `create'
+Completed 200 OK in 22ms (Views: 1.0ms | ActiveRecord: 3.0ms | Allocations: 4577)
+
+
+Started POST "/api/annotations" for 127.0.0.1 at 2022-10-26 15:59:56 -0600
+Processing by AnnotationsController#show_gene_annotations as */*
+  Parameters: {"symbol"=>"BRCA2", "transcript"=>-1, "protein"=>false, "annotation"=>{"transcript"=>-1, "protein"=>false}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:16:in `show_gene_annotations'
+  [1m[36mGene Load (0.4ms)[0m  [1m[34mSELECT "genes".* FROM "genes" INNER JOIN "libraries" ON "genes"."library_id" = "libraries"."id" WHERE "libraries"."user_id" = $1 AND "genes"."symbol" = $2 LIMIT $3[0m  [["user_id", 1], ["symbol", "BRCA2"], ["LIMIT", 1]]
+  ↳ app/controllers/annotations_controller.rb:17:in `show_gene_annotations'
+  [1m[36mAnnotation Load (0.4ms)[0m  [1m[34mSELECT "annotations".* FROM "annotations" WHERE "annotations"."gene_id" = $1 AND "annotations"."transcript" = $2 AND "annotations"."protein" = $3[0m  [["gene_id", 5], ["transcript", -1], ["protein", false]]
+  ↳ app/controllers/annotations_controller.rb:19:in `show_gene_annotations'
+Completed 200 OK in 11ms (Views: 4.3ms | ActiveRecord: 1.1ms | Allocations: 2642)
+
+

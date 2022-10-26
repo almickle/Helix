@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import DNA_Features from '../../assets/DNA_Features.png'
 
-export default function FeaturesHandler ( { transcriptOptions, selectedRegion, geneData } ) {
+export default function FeaturesHandler ( { transcriptIdentifier, isProtein, transcriptOptions, selectedRegion, geneData } ) {
 
     const [featuresColor, setFeaturesColor] = useState()
     const [isFeatures, setIsFeatures] = useState(false)
@@ -47,7 +47,45 @@ export default function FeaturesHandler ( { transcriptOptions, selectedRegion, g
             node.style.backgroundColor = 'unset'
         })
 
-        if(transcripts[featuresIndex].exons && isFeatures === true) {
+        let type
+        if(transcriptIdentifier === -1) {
+            type = 'DNA'
+        }
+        if(transcriptIdentifier !== -1 && isProtein === false) {
+            type = 'RNA'
+        }
+        if(isProtein === true) {
+            type = 'Protein'
+        }
+        if(isFeatures === true) {
+            switch (type) {
+                case 'DNA':
+                    showFeaturesDNA()
+                    break
+                case 'RNA':
+                    showFeaturesRNA()
+                    break
+                case 'Protein':
+                    showFeaturesProtein()
+                    break
+                default:
+                    break
+            }
+        }
+        
+        // eslint-disable-next-line
+    }, [featuresIndex, isFeatures, selectedRegion])
+
+    
+    const selectOptions = transcriptOptions.transcripts.map((transcript, index) => {
+        return (
+            <option key={index} id={`Transcript: ${index}`} style={{ color: 'black' }}>Transcript {index+1}</option>
+        )
+    })
+
+
+    function showFeaturesDNA() {
+        if(transcripts[featuresIndex].exons) {
             const exonRangesRaw = transcripts[featuresIndex].exons.range
             const exonRanges = exonRangesRaw.map((range) => {
                 return (
@@ -71,15 +109,25 @@ export default function FeaturesHandler ( { transcriptOptions, selectedRegion, g
                 }
             })
         }
-        // eslint-disable-next-line
-    }, [featuresIndex, isFeatures, selectedRegion])
+    }
 
-    
-    const selectOptions = transcriptOptions.transcripts.map((transcript, index) => {
-        return (
-            <option key={index} id={`Transcript: ${index}`} style={{ color: 'black' }}>Transcript {index+1}</option>
-        )
-    })
+    function showFeaturesRNA() {
+        const rangeCDS = [parseInt(geneData.transcripts[transcriptIdentifier].cds.range[0].begin), parseInt(geneData.transcripts[transcriptIdentifier].cds.range[0].end)]
+        console.log(rangeCDS)
+        const CDS = []
+        for(let i=rangeCDS[0]; i <= rangeCDS[1]; i++) {
+            CDS.push(i)
+        }
+        if(rangeCDS[0] >= selectedRegion[0] && rangeCDS[1] <= selectedRegion[1]) {
+            CDS.forEach((bp) => {
+                document.getElementById(bp).style.backgroundColor = '#7FFFD4'
+            })
+        }
+    }
+
+    function showFeaturesProtein() {
+        
+    }
 
 
 
