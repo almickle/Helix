@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { Engine, Scene } from "@babylonjs/core"
 
-export default function Canvas ( { antialias, engineOptions, adaptToDeviceRatio, sceneOptions, onRender, onSceneReady, pdb, ...rest }) {
+export default function Canvas ( { antialias, engineOptions, adaptToDeviceRatio, sceneOptions, onRender, onSceneReady, canvasHeight, canvasWidth, pdb, ...rest }) {
 
     const reactCanvas = useRef(null)
 
@@ -41,5 +41,5 @@ export default function Canvas ( { antialias, engineOptions, adaptToDeviceRatio,
       }
     }, [antialias, engineOptions, adaptToDeviceRatio, sceneOptions, onRender, onSceneReady, pdb])
 
-    return <canvas style={{ height: '100vh', width: '100%' }} ref={reactCanvas} {...rest} />
+    return <canvas style={{ height: `${canvasHeight}%`, width: `${canvasWidth}%` }} ref={reactCanvas} {...rest} />
 }

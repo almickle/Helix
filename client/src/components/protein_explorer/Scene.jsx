@@ -14,6 +14,10 @@ import renderDelauney from "./render functions/debug/renderDelauney";
 import surfaceTriangulation from "./render functions/debug/surfaceTriangulation";
 import fibonacciSphere from "./render functions/utilities/fibonacciSphere";
 import renderSurface from "./render functions/renderSurface";
+import Main from "./gui/Main";
+import Sidebar from "./gui/Sidebar";
+import Footer from "./gui/Footer";
+import Header from "./gui/Header";
 
 
 
@@ -81,10 +85,6 @@ export default function Scene() {
         camera.setTarget(centroid)
         camera.attachControl(canvas, true)
 
-        // const origin = new Vector3(0, 0, 0)
-        // const camera = new ArcRotateCamera('camera', 45, 0.1, 20, origin, scene)
-        // camera.setTarget(origin)
-        // camera.attachControl(canvas, true)
 
         const backboneKeys = Object.keys(backbones)
 
@@ -99,27 +99,6 @@ export default function Scene() {
                 })
             )
         })
-
-       
-        const testPoints = []
-        for(let i=1; i < 20; i++) {
-            testPoints.push([Math.random()*5-2.5, Math.random()*5-2.5, Math.random()*5-2.5])
-        }
-        const testVectors = testPoints.map((point) => new Vector3(point[0], point[1], point[2]))
-
-        // surfaceTriangulation(testVectors, 3, scene)
-        // renderSurface(atoms, 0.2, scene)
-
-        // const meshWorker = new Worker("./render functions/renderSurface.js")
-        // meshWorker.postMessage({command: 'run'})
-        // meshWorker.addEventListener('message', (message) => {
-        //     const surfaceMesh = new Mesh('surface', scene)
-        //     const vertexData = new VertexData()
-        //         vertexData.positions = message.data.positions
-        //         vertexData.indices = message.data.indices
-        //         vertexData.applyToMesh(surfaceMesh)
-        //         surfaceMesh.forceSharedVertices()
-        // })
 
 
         // renderMesh(atomVectors, 0.5, scene)
@@ -146,13 +125,50 @@ export default function Scene() {
         document.getElementById('pdb-input').value = ''
     }
 
+    const headerHeight = 5
+    const canvasHeight = 100 - headerHeight
+    const sidebarWidth = 2.8
+    const canvasWidth = 100 - sidebarWidth
+
     return (
-        <div style={{ height: '100vh', overflow: 'hidden' }}>
-            <Canvas antialias onSceneReady={onSceneReady} onRender={onRender} id="my-canvas" />
-            <Ramachandran proteinData={proteinData}/>
-            <form onSubmit={handleSubmit}>
-                <input id="pdb-input" type='text' placeholder="PDB ID.." style={{ position: 'absolute', width: 100, height: 20, right: 40, bottom: 20 }}></input>
-            </form>
+        <div style={{ height: '100vh', width: '100%', overflow: 'hidden' }}>
+            <Header headerHeight={headerHeight}/>
+            <div style={{ height: '100%', display: 'flex', flexDirection: 'row'}}>
+                {/* <Main /> */}
+                <Sidebar sidebarWidth={sidebarWidth} />
+                <Footer />
+                <Canvas antialias onSceneReady={onSceneReady} onRender={onRender} id="my-canvas" canvasHeight={canvasHeight} canvasWidth={canvasWidth} />
+                {/* <Ramachandran proteinData={proteinData}/> */}
+                <form onSubmit={handleSubmit}>
+                    <input id="pdb-input" type='text' placeholder="PDB ID.." style={{ position: 'absolute', width: 100, height: 20, right: 40, bottom: 20 }}></input>
+                </form>
+            </div>
         </div>
     )
 }
+
+
+// surfaceTriangulation(testVectors, 3, scene)
+        // renderSurface(atoms, 0.2, scene)
+
+        // const meshWorker = new Worker("./render functions/renderSurface.js")
+        // meshWorker.postMessage({command: 'run'})
+        // meshWorker.addEventListener('message', (message) => {
+        //     const surfaceMesh = new Mesh('surface', scene)
+        //     const vertexData = new VertexData()
+        //         vertexData.positions = message.data.positions
+        //         vertexData.indices = message.data.indices
+        //         vertexData.applyToMesh(surfaceMesh)
+        //         surfaceMesh.forceSharedVertices()
+        // })
+
+        // const testPoints = []
+        // for(let i=1; i < 20; i++) {
+        //     testPoints.push([Math.random()*5-2.5, Math.random()*5-2.5, Math.random()*5-2.5])
+        // }
+        // const testVectors = testPoints.map((point) => new Vector3(point[0], point[1], point[2]))
+
+        // const origin = new Vector3(0, 0, 0)
+        // const camera = new ArcRotateCamera('camera', 45, 0.1, 20, origin, scene)
+        // camera.setTarget(origin)
+        // camera.attachControl(canvas, true)
