@@ -12,6 +12,11 @@ export default function FeaturesHandler ( { transcriptIdentifier, isProtein, tra
     const {transcripts} = geneData
     const geneStart = parseInt(geneData.genomic_ranges[0].range[0].begin)
 
+
+    useEffect(() => {
+        setIsFeatures(false)
+    }, [geneData, transcriptIdentifier, isProtein])
+
     useEffect(() => {
         if(isFeatures === true) {
             setFeaturesColor('white')

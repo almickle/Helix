@@ -75,7 +75,7 @@ export default function Panel ( { panelWidth, config, geneData, setGeneData, set
 
     return (
         <div id='panel' style={{ height: '100%', width: `${panelWidth}%`, backgroundColor: 'rgb(250, 250, 250', display: 'flex', justifyContent: 'flex-end', borderRight: 'solid', borderWidth: 1 }}>
-            <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', overflowY: 'scroll', overflowX: 'hidden' }}>
+            <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', overflowY: 'scroll', overflowX: 'hidden', backgroundColor: 'white', paddingLeft: 5, paddingTop: 5 }}>
                 <Bookmark label='Current Selection' handleClick={handleClick} />
                     {currentSelection()}
                 <Bookmark label='Library' handleClick={handleClick} />

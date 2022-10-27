@@ -3,16 +3,18 @@ import Console from "./console/Console"
 import Panel from "./panel/Panel"
 import Main from "./Main"
 import Header from "./header/Header"
+import Navbar from "./Navbar"
 
 
 export default function Home () {
 
 
     const consoleHeight = 24
-    const mainWidth = 84
     const mainHeight = 100 - consoleHeight
-    const panelWidth = 100 - mainWidth
     const headerHeight = 5
+    const navbarWidth = 3
+    const mainWidth = 88 - navbarWidth
+    const panelWidth = 100 - mainWidth
 
     const [user, setUser] = useState({username: 'guest'})
 
@@ -110,15 +112,30 @@ export default function Home () {
     
 
     return (
-        <div id="home" style={{ height: '100vh', width: '100%', display: "flex", flexDirection: 'column', overflow: 'hidden', userSelect: 'none' }}>
+        <div style={{ display: "flex", flexDirection: "row", overflow: "hidden", userSelect: 'none', height: '100vh', width: '100%' }}>
+            <Navbar navbarWidth={navbarWidth}/>
+            <div id="home" style={{ height: '100vh', width: '100%', display: "flex", flexDirection: 'column', overflow: 'hidden', userSelect: 'none' }}>
+                <Header headerHeight={headerHeight} handleSearchSubmit={handleSearchSubmit} setUser={setUser} user={user}/>
+                <div style={{ height: `${100-headerHeight}%`, width: '100%', display: "flex", flexDirection: 'row' }}>
+                    <Panel panelWidth={panelWidth} geneData={geneData} setGeneData={setGeneData} setSequenceID={setSequenceID} setReload={setReload} reload={reload} setPresentView={setPresentView} setTranscriptIndex={setTranscriptIndex} user={user} config={config} libraryConfig={libraryConfig} setInputData={setInputData}/>
+                    <div style={{ width: `${mainWidth}%`, display: 'flex', flexDirection: 'column' }}>
+                        <Main mainHeight={mainHeight} inputData={inputData} reload={reload} setReload={setReload} setPeptideSequence={setPeptideSequence} geneData={geneData} setGeneData={setGeneData} setSequenceID={setSequenceID} sequenceID={sequenceID} setTranscriptIndex={setTranscriptIndex} presentView={presentView} transcriptIndex={transcriptIndex} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary} />
+                        <Console consoleHeight={consoleHeight} presentView={presentView} peptideSequence={peptideSequence}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+{/* <div id="home" style={{ height: '100vh', width: '100%', display: "flex", flexDirection: 'column', overflow: 'hidden', userSelect: 'none' }}>
             <Header headerHeight={headerHeight} handleSearchSubmit={handleSearchSubmit} setUser={setUser} user={user}/>
             <div style={{ height: `${100-headerHeight}%`, width: '100%', display: "flex", flexDirection: 'row' }}>
+                <Navbar navbarWidth={navbarWidth}/>
                 <Panel panelWidth={panelWidth} geneData={geneData} setGeneData={setGeneData} setSequenceID={setSequenceID} setReload={setReload} reload={reload} setPresentView={setPresentView} setTranscriptIndex={setTranscriptIndex} user={user} config={config} libraryConfig={libraryConfig} setInputData={setInputData}/>
                 <div style={{ width: `${mainWidth}%`, display: 'flex', flexDirection: 'column' }}>
                     <Main mainHeight={mainHeight} inputData={inputData} reload={reload} setReload={setReload} setPeptideSequence={setPeptideSequence} geneData={geneData} setGeneData={setGeneData} setSequenceID={setSequenceID} sequenceID={sequenceID} setTranscriptIndex={setTranscriptIndex} presentView={presentView} transcriptIndex={transcriptIndex} rerenderLibrary={rerenderLibrary} setRerenderLibrary={setRerenderLibrary} />
                     <Console consoleHeight={consoleHeight} presentView={presentView} peptideSequence={peptideSequence}/>
                 </div>
             </div>
-        </div>
-    )
-}
+        </div> */}
