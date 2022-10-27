@@ -22,7 +22,7 @@ export default function SearchBar ( { handleSearchSubmit } ) {
 
     return (
         <form onSubmit={handleSearchSubmit} autoComplete='off'>
-            <div style={{height: height, width: 200, backgroundColor: 'white', borderRadius: radius, marginLeft: 20, display: 'flex', flexDirection: 'row', position: 'relative', zIndex: 3 }}>
+            <div style={{height: height, width: 200, backgroundColor: 'white', borderRadius: radius, marginLeft: 30, display: 'flex', flexDirection: 'row', position: 'relative', zIndex: 3 }}>
                 <img src={searchIcon} style={{ height: height+offset, marginTop: -offset/2, borderRadius: radius }} alt='search icon'/>
                 <input id='gene-search' type='text' placeholder='FOXP2...' style={{ height: height-2, width: 100, backgroundColor: 'white', borderRadius: radius, border: 'none' }} onFocus={(event) => handleFocus(event)}></input>
                 <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: 35, marginLeft: 22 }}>
