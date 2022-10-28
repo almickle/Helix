@@ -1,7 +1,7 @@
 // import { Curve3, MeshBuilder } from "@babylonjs/core"
 
 
-// export default function renderMissing (backboneVectors, scene) {
+export default function renderMissing (backboneVectors, scene) {
 
 //     const peptidePoints = backboneVectors.map((chain) => {
 //         const empties = []
@@ -66,7 +66,7 @@
 //             }
 //         })
 //     })
-// }
+}
 
 
 // // range.forEach((group) => {
