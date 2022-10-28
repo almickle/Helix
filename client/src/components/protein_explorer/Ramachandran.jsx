@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Chart from "react-apexcharts"
-import parse_mmCIF from "mmcif-parser"
 import { useEffect } from "react"
 
 export default function Ramachandran ( { proteinData } ) {
@@ -9,9 +8,9 @@ export default function Ramachandran ( { proteinData } ) {
     const [torsionAngles, setTorsionAngles] = useState()
 
 
-    useEffect(() => {
+    useEffect(() => { // needs work
         const ta = Object.keys(proteinData.torsion_angles)
-        const keys = Object.keys(proteinData.torsion_angles)
+        // const keys = Object.keys(proteinData.torsion_angles)
         const angles = proteinData.torsion_angles[ta[0]].map((residue) => [residue.phi, residue.psi])
         setTorsionAngles(angles)
     }, [proteinData])

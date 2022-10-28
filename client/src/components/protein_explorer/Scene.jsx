@@ -1,20 +1,20 @@
-import { Vector3, HemisphericLight, Color3, StandardMaterial, ArcRotateCamera, VertexData, Mesh } from "@babylonjs/core"
+import { Vector3, HemisphericLight, Color3, ArcRotateCamera } from "@babylonjs/core"
 import { useState } from "react";
 import Canvas from "./Canvas"
 import parse_mmCIF from 'mmcif-parser'
-import Ramachandran from "./Ramachandran";
+// import Ramachandran from "./Ramachandran";
 import { useEffect } from "react";
-import renderPointcloud from "./render functions/renderPointcloud";
+// import renderPointcloud from "./render functions/renderPointcloud";
 import renderTube from "./render functions/renderTube";
 import renderMissing from "./render functions/renderMissing";
-import renderSpheres from "./render functions/renderSpheres";
+// import renderSpheres from "./render functions/renderSpheres";
 import renderAminos from "./render functions/renderAminos";
-import renderMesh from "./render functions/renderMesh";
-import renderDelauney from "./render functions/debug/renderDelauney";
-import surfaceTriangulation from "./render functions/debug/surfaceTriangulation";
-import fibonacciSphere from "./render functions/utilities/fibonacciSphere";
-import renderSurface from "./render functions/renderSurface";
-import Main from "./gui/Main";
+// import renderMesh from "./render functions/renderMesh";
+// import renderDelauney from "./render functions/debug/renderDelauney";
+// import surfaceTriangulation from "./render functions/debug/surfaceTriangulation";
+// import fibonacciSphere from "./render functions/utilities/fibonacciSphere";
+// import renderSurface from "./render functions/renderSurface";
+// import Main from "./gui/Main";
 import Sidebar from "./gui/Sidebar";
 import Footer from "./gui/Footer";
 import Header from "./gui/Header";
@@ -52,7 +52,7 @@ export default function Scene() {
 
         scene.clearColor = new Color3(0.05, 0.05, 0.05)
 
-        const {backbones, chains, chain_info, torsion_angles, atoms} = proteinData
+        const {backbones, chains, atoms} = proteinData // chain_info, torsion_angles
 
         let total_X = 0
         let total_Y = 0
@@ -65,7 +65,9 @@ export default function Scene() {
              return new Vector3(atom.x, atom.y, atom.z)
         })
 
-        const atomPoints = atoms.map((atom) => [atom.x, atom.y, atom.z])
+        console.log(atomVectors)
+
+        // const atomPoints = atoms.map((atom) => [atom.x, atom.y, atom.z])
 
         const atomsX = atoms.map((atom) => atom.x)
         const atomsY = atoms.map((atom) => atom.y)

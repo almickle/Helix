@@ -1,5 +1,4 @@
 import { Vector3 } from "@babylonjs/core"
-import renderPointcloud from "../renderPointcloud"
 
 
 export default function fibonacciSphere(point, number, radius) {

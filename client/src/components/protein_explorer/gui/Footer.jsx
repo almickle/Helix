@@ -1,6 +1,6 @@
 
 
-export default function Footer ( {  } ) {
+export default function Footer ( ) {
 
     const footerStyle = { 
         height: '5.2%', width: '40%', 
