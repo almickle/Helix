@@ -1,4 +1,4 @@
-<div syle="display: flex, align-items: center">
+<div syle="display: flex, flex-direction: row, align-items: center, height: fit-content">
   <img src="./client/src/components/genome_explorer/assets/DNAIcon.png" width="40" />
   <span style="margin-bottom:20px">Helix Genomes</span>
 </div>
