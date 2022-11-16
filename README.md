@@ -1,6 +1,6 @@
 <div syle="display: flex, flex-direction: row, align-items: center, height: fit-content">
   <img src="./client/src/components/genome_explorer/assets/DNAIcon.png" width="40" />
-  <span style="margin-bottom:20px, font-weight: 600">Helix Genomes</span>
+  <span style="margin-bottom:20px, font-weight: 600, color: red">Helix Genomes</span>
 </div>
 
 Helix Genomes is an application designed to provide an intuitive way to interface with genetic information. This includes gene sequences, transcripts, and protein sequences. Additionally, navigating to the protein viewing tab displays a 3-dimensional representation of a given protein structure located via PDB ID. Functionality to be added in the future includes: BLAST sequence alignment, a sequence edititor, and more 3D functionality.
